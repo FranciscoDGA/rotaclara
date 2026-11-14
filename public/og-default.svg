@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="RotaClara — Viajar melhor começa com decisões melhores">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#16304f"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0v48" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Fundo navy com grade sutil -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Horizonte dourado -->
+  <path d="M0 470 Q300 430 600 460 T1200 440 L1200 630 L0 630 Z" fill="#0d1d33"/>
+  <path d="M0 512 Q350 480 700 505 T1200 495 L1200 630 L0 630 Z" fill="#0f2138"/>
+
+  <!-- Sol / bússola -->
+  <circle cx="1010" cy="180" r="74" fill="none" stroke="#c9952f" stroke-width="3" stroke-opacity="0.85"/>
+  <circle cx="1010" cy="180" r="58" fill="#dfb45c" fill-opacity="0.14"/>
+  <path d="M1010 132 L1026 180 L1010 228 L994 180 Z" fill="#dfb45c"/>
+  <circle cx="1010" cy="180" r="6" fill="#ffffff"/>
+
+  <!-- Rota pontilhada -->
+  <path d="M90 470 C260 430 330 520 520 470 S800 400 950 440"
+        fill="none" stroke="#2fb8c4" stroke-width="4"
+        stroke-linecap="round" stroke-dasharray="2 18"/>
+  <circle cx="90" cy="470" r="9" fill="#2fb8c4"/>
+  <circle cx="950" cy="440" r="9" fill="#ffffff"/>
+
+  <!-- Marca -->
+  <g transform="translate(80 96)">
+    <path d="M0 34 L26 0 L52 34 L26 68 Z" fill="none" stroke="#dfb45c" stroke-width="3"/>
+    <path d="M26 14 L34 34 L26 54 L18 34 Z" fill="#dfb45c"/>
+    <text x="72" y="46" font-family="Georgia, 'Times New Roman', serif"
+          font-size="52" fill="#ffffff" letter-spacing="0.5">RotaClara</text>
+  </g>
+
+  <!-- Chamada -->
+  <text x="80" y="300" font-family="Georgia, 'Times New Roman', serif"
+        font-size="66" fill="#ffffff">Viajar melhor começa</text>
+  <text x="80" y="380" font-family="Georgia, 'Times New Roman', serif"
+        font-size="66" fill="#dfb45c">com decisões melhores.</text>
+
+  <text x="80" y="438" font-family="Arial, Helvetica, sans-serif"
+        font-size="27" fill="#ffffff" fill-opacity="0.74">
+    Destinos, comparação, orçamento e roteiro — com estimativas transparentes.
+  </text>
+
+  <!-- Rodapé -->
+  <rect x="0" y="576" width="1200" height="54" fill="#08121f" fill-opacity="0.55"/>
+  <text x="80" y="611" font-family="Arial, Helvetica, sans-serif"
+        font-size="22" fill="#ffffff" fill-opacity="0.6">
+    rotaclara.com.br
+  </text>
+  <text x="1120" y="611" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="22" fill="#ffffff" fill-opacity="0.6">
+    Brasil primeiro · pt-BR
+  </text>
+</svg>
