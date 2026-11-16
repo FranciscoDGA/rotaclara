@@ -139,7 +139,12 @@ export interface Destination {
   bestTimeNotes: string;
   /** Duração recomendada em dias. */
   recommendedDays: { min: number; max: number };
-  /** Distância e tempo de deslocamento aéreo desde São Paulo (referência). */
+  /**
+   * Distância e tempo de deslocamento desde São Paulo (referência).
+   * Convenção: distância **aérea** quando o destino tem voo comercial;
+   * para destinos sem voo próprio (ex.: Gramado, Paraty), a distância
+   * **rodoviária**, com `flightMinutes: null` — `notes` informa a métrica.
+   */
   referenceFromSaoPaulo: {
     distanceKm: number | null;
     flightMinutes: number | null;
@@ -160,6 +165,17 @@ export interface Destination {
   warnings: string[];
   /** Alimentação: características e sugestões de comportamento de preço. */
   food: string;
+  /** Imagem fotográfica opcional (com atribuição e licença documentada). */
+  image?: {
+    src: string;
+    alt: string;
+    credit: {
+      author: string;
+      source: string;
+      sourceUrl: string;
+      license: string;
+    };
+  };
   /** Imagem vetorial decorativa (paleta do destino). */
   palette: DestinationPalette;
   /** Índice de qualidade editorial — 0 a 1. */

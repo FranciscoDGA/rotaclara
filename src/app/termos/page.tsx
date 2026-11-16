@@ -100,7 +100,7 @@ export default function TermosPage() {
           aqui, você aceita as condições abaixo — em especial o fato de que
           trabalhamos com estimativas de planejamento, não com reservas.
         </p>
-        <p className="mt-3 text-sm text-[#8c8471]">
+        <p className="mt-3 text-sm text-[#736b5b]">
           Última atualização: <time dateTime="2026-11-13">13/11/2026</time>.
         </p>
       </header>
@@ -150,7 +150,7 @@ export default function TermosPage() {
               <li>
                 <Link
                   href="/privacidade"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   Política de privacidade
                 </Link>
@@ -158,7 +158,7 @@ export default function TermosPage() {
               <li>
                 <Link
                   href="/cookies"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   Política de cookies
                 </Link>
@@ -166,7 +166,7 @@ export default function TermosPage() {
               <li>
                 <Link
                   href="/afiliados"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   Política de afiliados
                 </Link>
@@ -174,7 +174,7 @@ export default function TermosPage() {
               <li>
                 <Link
                   href="/metodologia"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   Metodologia
                 </Link>
@@ -188,7 +188,7 @@ export default function TermosPage() {
             </h2>
             <Link
               href="/contato"
-              className="mt-3 inline-block text-sm font-medium text-[#17827c] underline underline-offset-2"
+              className="mt-3 inline-block text-sm font-medium text-[#0f6f69] underline underline-offset-2"
             >
               Falar com a equipe →
             </Link>

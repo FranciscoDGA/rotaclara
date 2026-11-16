@@ -50,13 +50,23 @@ export const destinationsGroupOne: Destination[] = [
     region: "Sudeste",
     country: "Brasil",
     tagline: "Montanha, mar e urbanidade no mesmo horizonte.",
+    image: {
+      src: "/destinations/rio-de-janeiro.jpg",
+      alt: "Pão de Açúcar e Praia de Botafogo no Rio de Janeiro",
+      credit: {
+        author: "Agustin Diaz Gargiulo",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/rio-de-janeiro",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "O Rio de Janeiro é o destino urbano de praia mais referenciado do Brasil. " +
       "A cidade concentra paisagens de montanha encostadas no mar, parques nacionais " +
       "dentro da malha urbana e uma vida cultural ativa. É uma escolha adequada para " +
       "quem quer combinar praia, trilhas leves, museus e gastronomia em uma mesma viagem.",
     tags: ["praia", "cidade", "cultura", "gastronomia", "vida_noturna", "familia"],
-    bestMonths: [3, 4, 9, 10, 11],
+    bestMonths: [2, 3, 4, 8, 9, 10],
     bestTimeNotes:
       "Primavera e outono concentram temperaturas amenas e menor volume de " +
       "chuva que o verão. Dezembro e janeiro são os meses mais quentes e " +
@@ -66,8 +76,9 @@ export const destinationsGroupOne: Destination[] = [
       distanceKm: 360,
       flightMinutes: 70,
       notes:
-        "Trecho aéreo mais curto entre capitais brasileiras; também é " +
-        "possível ir de carro ou ônibus pela Rodovia dos Bandeirantes/Régis Bittencourt.",
+        "Por terra, o acesso a partir de São Paulo é pela Dutra (BR-116), " +
+        "pela Rodovia Anchieta ou pela Rodovia dos Imigrantes. De avião, " +
+        "o trecho dura cerca de 1 hora.",
     },
     cost: {
       minPerDayBRL: 260,
@@ -100,8 +111,8 @@ export const destinationsGroupOne: Destination[] = [
     howToArrive:
       "Aeroporto Internacional do Galeão (GIG) recebe voos de todo o Brasil e " +
       "internacionais. O Santos Dumont (SDU) fica no centro e atende voos " +
-      "domésticos de curta distância. Do aeroporto, há táxi, aplicativos e " +
-      "conexões de trem e BRT.",
+      "domésticos de curta distância. Do aeroporto, há táxi, aplicativos, " +
+      "BRT e ônibus.",
     localTransport:
       "Metrô, VLT, BRT, ônibus e barcas cobrem a cidade. Para praias afastadas " +
       "e bairros como Santa Teresa e o Jardim Botânico, vale combinar metrô com " +
@@ -142,8 +153,8 @@ export const destinationsGroupOne: Destination[] = [
           "com vista panorâmica da cidade e da Baía de Guanabara.",
         tags: ["cultura", "cidade", "familia", "natureza"],
         suggestedMinutes: 150,
-        admissionFeeBRL: { min: 0, max: 0 },
-        isFree: true,
+        admissionFeeBRL: { min: 60, max: 139 },
+        isFree: false,
         area: "Corcovado — Tijuca",
         sources: [
           {
@@ -151,10 +162,17 @@ export const destinationsGroupOne: Destination[] = [
             url: "https://www.gov.br/ibama/pt-br",
             consultedAt: REFERENCE_DATE,
           },
+          {
+            name: "Trem do Corcovado (site oficial)",
+            url: "https://www.tremdocorcovado.rio/",
+            consultedAt: "2026-11-14",
+          },
         ],
         notes:
-          "Acesso por trem funicular ou veículo. O ingresso do trem é cobrado " +
-          "à parte do parque; confirme valores e horários no site oficial antes de ir.",
+          "O acesso ao monumento é pago e obrigatoriamente com transporte " +
+          "oficial: a pé ou de van a partir das Paineiras (cerca de R$ 60) ou " +
+          "pelo trem funicular (cerca de R$ 139). Valores consultados em " +
+          "14/11/2026 e sujeitos a alteração; confirme no site oficial antes de ir.",
       },
       {
         id: "rio-pao-de-acucar",
@@ -249,8 +267,8 @@ export const destinationsGroupOne: Destination[] = [
         area: "Jardim Botânico",
         sources: [
           {
-            name: "Jardim Botânico do Rio de Janeiro",
-            url: "https://www.jardimbotanico.jbrj.gov.br/",
+            name: "Instituto de Pesquisas Jardim Botânico do Rio de Janeiro",
+            url: "https://www.gov.br/jbrj/pt-br",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -352,6 +370,16 @@ export const destinationsGroupOne: Destination[] = [
     region: "Sudeste",
     country: "Brasil",
     tagline: "Cultura, gastronomia e oferta intensa o ano inteiro.",
+    image: {
+      src: "/destinations/sao-paulo.jpg",
+      alt: "Avenida Paulista e skyline iluminado de São Paulo",
+      credit: {
+        author: "Sergio Souza",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/sao-paulo",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "São Paulo é o maior centro econômico e cultural do Brasil. Não é destino " +
       "de praia: a proposta é museus, bairros com identidade própria, gastronomia " +
@@ -359,7 +387,7 @@ export const destinationsGroupOne: Destination[] = [
       "curtas, viagens de negócios combinadas com lazer e para quem viaja com " +
       "crianças em busca de museus interativos.",
     tags: ["cidade", "cultura", "gastronomia", "vida_noturna", "familia"],
-    bestMonths: [3, 4, 8, 9, 10],
+    bestMonths: [2, 3, 4, 8, 9, 10],
     bestTimeNotes:
       "Março a maio e setembro a novembro trazem temperaturas mais amenas. " +
       "O verão (dezembro a fevereiro) é quente e chuvoso, com pancadas " +
@@ -400,7 +428,7 @@ export const destinationsGroupOne: Destination[] = [
     howToArrive:
       "Aeroporto Internacional de Guarulhos (GRU) é o principal hub do país, " +
       "com voos domésticos e internacionais. O Congonhas (CGH) atende voos " +
-      "domésticos e fica mais perto do centro. Há trem, metrô, BRT, ônibus " +
+      "domésticos e fica mais perto do centro. Há trem, metrô, ônibus " +
       "intermunicipais e rodovias em várias direções.",
     localTransport:
       "Metrô, CPTM, trem, ônibus municipal e aplicativos. O bilhete único " +
@@ -517,8 +545,8 @@ export const destinationsGroupOne: Destination[] = [
         area: "Centro",
         sources: [
           {
-            name: "Mercado Municipal de São Paulo",
-            url: "https://www.mercadomunicipal.com.br/",
+            name: "Mercado Municipal de São Paulo (site oficial)",
+            url: "https://www.mercadomunicipalsp.com/",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -596,6 +624,16 @@ export const destinationsGroupOne: Destination[] = [
     region: "Nordeste",
     country: "Brasil",
     tagline: "Centro histórico, cultura afro-brasileira e orla atlântica.",
+    image: {
+      src: "/destinations/salvador.jpg",
+      alt: "Centro Histórico do Pelourinho com casario colorido em Salvador",
+      credit: {
+        author: "Raphael Nogueira",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/salvador",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "Salvador foi a primeira capital do Brasil e concentra um dos maiores " +
       "conjuntos de centro histórico do país. A cidade combina arquitetura " +
@@ -603,7 +641,7 @@ export const destinationsGroupOne: Destination[] = [
       "e praias urbanas. É uma escolha forte para quem prioriza cultura, " +
       "música e patrimônio, com opções de praia em bairros próximos.",
     tags: ["cultura", "historico", "gastronomia", "praia", "familia", "vida_noturna"],
-    bestMonths: [9, 10, 11, 12, 1, 2, 3],
+    bestMonths: [8, 9, 10, 11, 0, 1, 2],
     bestTimeNotes:
       "A estação chuvosa local se concentra entre abril e julho. Os meses " +
       "secos, do fim do ano ao início do ano seguinte, são os mais indicados " +
@@ -732,8 +770,8 @@ export const destinationsGroupOne: Destination[] = [
         area: "Barra",
         sources: [
           {
-            name: "Instituto Histórico e Geográfico da Bahia",
-            url: "https://www.ihgbahia.org.br/",
+            name: "Instituto do Patrimônio Artístico e Cultural da Bahia (IPAC)",
+            url: "https://www.ipac.ba.gov.br/",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -860,6 +898,16 @@ export const destinationsGroupOne: Destination[] = [
     region: "Nordeste",
     country: "Brasil",
     tagline: "Cidade colonial em morro, com arte, ofícios e vista para o mar.",
+    image: {
+      src: "/destinations/olinda.jpg",
+      alt: "Casario colonial histórico e ladeiras do Alto da Sé em Olinda",
+      credit: {
+        author: "Carlos Fabal",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/olinda",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "Olinda é um conjunto histórico colonial erguido sobre morros, com " +
       "igrejas, casas de taipa, ateliês e mirantes. A cidade é referência " +
@@ -867,17 +915,18 @@ export const destinationsGroupOne: Destination[] = [
       "música. Funciona bem para viagens culturais, para casais e para quem " +
       "quer uma base tranquila perto do litoral pernambucano.",
     tags: ["cultura", "historico", "gastronomia", "romantico", "familia"],
-    bestMonths: [9, 10, 11, 12, 1, 2, 3],
+    bestMonths: [8, 9, 10, 11, 0, 1, 2],
     bestTimeNotes:
       "O período seco local vai de setembro a março. Dezembro e janeiro são " +
       "os meses mais quentes. O carnaval concentra o maior fluxo do ano e " +
       "requer planejamento antecipado.",
     recommendedDays: { min: 2, max: 4 },
     referenceFromSaoPaulo: {
-      distanceKm: 1660,
+      distanceKm: 2130,
       flightMinutes: 165,
       notes:
-        "Voo até Recife (Recife/Caruaru) com conexão terrestre curta até Olinda. " +
+        "Voo até Recife (aeroporto Recife/Guararapes–Gilberto Freyre, REC) " +
+        "com conexão terrestre curta até Olinda. " +
         "Também é possível voar até João Pessoa e seguir por rodovia.",
     },
     cost: {
@@ -893,18 +942,18 @@ export const destinationsGroupOne: Destination[] = [
       max: [32, 32, 32, 31, 30, 29, 28, 28, 29, 31, 31, 32],
       min: [24, 24, 24, 24, 23, 23, 22, 22, 23, 24, 24, 24],
       rain: [
-        "intermediario",
-        "intermediario",
-        "intermediario",
-        "intermediario",
+        "seco",
+        "seco",
+        "seco",
         "intermediario",
         "chuvoso",
         "chuvoso",
         "chuvoso",
         "chuvoso",
-        "intermediario",
-        "intermediario",
-        "intermediario",
+        "seco",
+        "seco",
+        "seco",
+        "seco",
       ],
       sea: [28, 28, 28, 28, 28, 27, 27, 27, 27, 28, 28, 28],
     }),
@@ -991,7 +1040,7 @@ export const destinationsGroupOne: Destination[] = [
         sources: [
           {
             name: "Prefeitura de Olinda",
-            url: "https://www.olinda.pe.gov.br/",
+            url: "https://olinda.pe.gov.br/",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -1009,9 +1058,9 @@ export const destinationsGroupOne: Destination[] = [
         area: "Bairro do Amparo",
         sources: [
           {
-            name: "Fundação Joaquim Nabuco",
-            url: "https://www.funj.gov.br/",
-            consultedAt: REFERENCE_DATE,
+            name: "UNIMA — Enciclopédia de Marionetes (WEPa)",
+            url: "https://wepa.unima.org/en/museu-do-mamulengo-espaco-tirida/",
+            consultedAt: "2026-11-14",
           },
         ],
         notes: "Confirme horários com a instituição antes da visita.",
@@ -1030,7 +1079,7 @@ export const destinationsGroupOne: Destination[] = [
         sources: [
           {
             name: "Prefeitura de Olinda",
-            url: "https://www.olinda.pe.gov.br/",
+            url: "https://olinda.pe.gov.br/",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -1088,6 +1137,16 @@ export const destinationsGroupOne: Destination[] = [
     region: "Sudeste",
     country: "Brasil",
     tagline: "Centro colonial intacto, cachoeiras e baía de ilhas.",
+    image: {
+      src: "/destinations/paraty.jpg",
+      alt: "Casas coloniais com portas coloridas no centro histórico de Paraty",
+      credit: {
+        author: "Marcos Paulo Prado",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/paraty",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "Paraty preserva um centro histórico colonial com ruas pedregosas e " +
       "casas de fachada branca, cercado por montanhas, cachoeiras e uma baía " +
@@ -1095,18 +1154,19 @@ export const destinationsGroupOne: Destination[] = [
       "gastronomia e cachaçarias no entorno. É uma escolha bem equilibrada " +
       "para casais, famílias e viagens de média duração.",
     tags: ["cultura", "historico", "natureza", "praia", "gastronomia", "romantico", "familia"],
-    bestMonths: [4, 5, 6, 7, 8, 9],
+    bestMonths: [3, 4, 5, 6, 7, 8],
     bestTimeNotes:
       "Inverno e primavera trazem menos chuva e temperaturas amenas, ideais " +
       "para trilhas e cachoeiras. O verão é quente e chuvoso, com maior " +
       "fluxo turístico nas praias.",
     recommendedDays: { min: 3, max: 5 },
     referenceFromSaoPaulo: {
-      distanceKm: 400,
+      distanceKm: 270,
       flightMinutes: null,
       notes:
-        "Sem aeroporto próprio: acesso por rodovia (BR-101/RJ) a partir de " +
-        "São Paulo ou do Rio de Janeiro, com viagem de carro, ônibus ou van.",
+        "Sem aeroporto próprio: acesso por rodovia (Rio-Santos/BR-101 e " +
+        "Imigrantes), com cerca de 270 km de São Paulo por estrada — cerca " +
+        "de 205 km em linha reta. A distância declarada é a rodoviária.",
     },
     cost: {
       minPerDayBRL: 230,
@@ -1187,10 +1247,10 @@ export const destinationsGroupOne: Destination[] = [
       },
       {
         id: "par-baia-das-ilhas",
-        name: "Baía das Ilhas",
+        name: "Ilhas da Baía de Paraty",
         description:
-          "Passeio de barco por ilhas com paradas de banho, mergulho de " +
-          "snorkel e praias de água calma.",
+          "Passeio de barco por ilhas da baía com paradas de banho, mergulho " +
+          "de snorkel e praias de água calma.",
         tags: ["praia", "natureza", "aventura", "familia"],
         suggestedMinutes: 420,
         admissionFeeBRL: { min: 150, max: 500 },
@@ -1198,9 +1258,9 @@ export const destinationsGroupOne: Destination[] = [
         area: "Baía de Paraty",
         sources: [
           {
-            name: "Secretaria de Turismo do Estado do Rio de Janeiro",
-            url: "https://www.visitorio.rj.gov.br/",
-            consultedAt: REFERENCE_DATE,
+            name: "Prefeitura de Paraty",
+            url: "https://paraty.rj.gov.br/",
+            consultedAt: "2026-11-14",
           },
         ],
         notes:
@@ -1220,14 +1280,16 @@ export const destinationsGroupOne: Destination[] = [
         area: "Estrada da Graúna e região",
         sources: [
           {
-            name: "Instituto Estadual de Florestas — RJ",
-            url: "https://www.iel.rj.gov.br/",
-            consultedAt: REFERENCE_DATE,
+            name: "Prefeitura de Paraty",
+            url: "https://paraty.rj.gov.br/",
+            consultedAt: "2026-11-14",
           },
         ],
         notes:
           "Algumas cachoeiras ficam em área protegida com entrada cobrada e " +
-          "capacidade limitada; em época de chuva o acesso pode ser suspenso.",
+          "capacidade limitada; em época de chuva o acesso pode ser suspenso. " +
+          "Fonte oficial específica pendente de verificação — confirme a " +
+          "abertura com a prefeitura ou com o operador local antes de ir.",
       },
       {
         id: "par-trindade",

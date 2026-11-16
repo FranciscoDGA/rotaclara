@@ -70,7 +70,7 @@ export const guidesGroupOne: Guide[] = [
             "pode mudar rápido — consulte o boletim antes de sair.",
         ],
         bullets: [
-          "Primavera e outuno: melhor equilíbrio entre clima e movimento.",
+          "Primavera e outono: melhor equilíbrio entre clima e movimento.",
           "Verão: mais quente, mais chuva e mais público.",
           "Inverno (junho a agosto): menos chuva, dias mais curtos e mar mais fria.",
         ],
@@ -80,7 +80,7 @@ export const guidesGroupOne: Guide[] = [
         heading: "Quantos dias ficar",
         paragraphs: [
           "Nossa referência editorial é de 4 a 7 dias. Com 4 dias é possível " +
-            "cobre a Zona Sul, o Centro e um mirante. Com 6 ou 7 dias, entra " +
+            "cobrir a Zona Sul, o Centro e um mirante. Com 6 ou 7 dias, entra " +
             "uma trilha na Tijuca, o Jardim Botânico e tempo para bairros como " +
             "Santa Teresa e Botafogo sem aperto.",
           "Se a viagem for combinada com Búzios, Paraty ou a Costa Verde, " +
@@ -205,9 +205,9 @@ export const guidesGroupOne: Guide[] = [
       {
         question: "Qual a melhor época para visitar o Rio?",
         answer:
-          "Abril, maio, outubro e novembro oferecem temperaturas amenas e menor " +
-          "chuva que o verão. Dezembro a fevereiro são os meses mais quentes e " +
-          "com maior movimento turístico.",
+          "Março a maio e de setembro a novembro oferecem temperaturas amenas " +
+          "e menor chuva que o verão. Dezembro a fevereiro são os meses " +
+          "mais quentes e com maior movimento turístico.",
       },
       {
         question: "Dá para fazer a viagem sem carro?",
@@ -332,7 +332,7 @@ export const guidesGroupOne: Guide[] = [
           "O Aeroporto Internacional de Guarulhos (GRU) é o principal hub do " +
             "país, com voos domésticos e internacionais. O Congonhas (CGH) " +
             "atende voos domésticos e fica mais perto do centro.",
-          "Há trem, metrô, BRT, ônibus intermunicipais e rodovias em várias " +
+          "Há trem, metrô, ônibus intermunicipais e rodovias em várias " +
             "direções — o acesso rodoviário é denso para o interior paulista " +
             "e para cidades vizinhas.",
         ],
@@ -348,7 +348,7 @@ export const guidesGroupOne: Guide[] = [
         paragraphs: [
           "Metrô, CPTM, trem, ônibus municipal e aplicativos cobrem a cidade. " +
             "O bilhete único integra metrô e ônibus, o que reduz custo por trajeto.",
-          "O trânsito é intenso nos horários de pico: para eventos e showmecos " +
+          "O trânsito é intenso nos horários de pico: para eventos e shows " +
             "com horário marcado, chegue com folga e evite cruzar a cidade no " +
             "mesmo período.",
         ],
@@ -390,7 +390,7 @@ export const guidesGroupOne: Guide[] = [
         ],
         bullets: [
           "Estimativa diária por pessoa: R$ 240 a R$ 700 (referência de planejamento).",
-          "Masp, Pinacoteca e Museu do Amanhã têm ingresso cobrado.",
+          "Masp e Pinacoteca têm ingresso cobrado.",
           "Parque Ibirapuera e bairros são de acesso livre.",
         ],
       },
@@ -654,7 +654,7 @@ export const guidesGroupOne: Guide[] = [
       {
         question: "Quantos dias ficam em Salvador?",
         answer:
-          "Nossa referência é de 3 a a 5 dias. Com 3 dias cobrem-se o Pelourinho, " +
+          "Nossa referência é de 3 a 5 dias. Com 3 dias cobrem-se o Pelourinho, " +
           "o Elevador Lacerda e a Barra; com 5 dias entram igrejas históricas e " +
           "uma excursão à Praia do Forte.",
       },
@@ -717,8 +717,9 @@ export const guidesGroupOne: Guide[] = [
         heading: "Apresentação do destino",
         paragraphs: [
           "Olinda é um conjunto histórico colonial erguido sobre morros, com " +
-            "igrejas, casas de taipa, ateliês e mirantes que abrem vista para a " +
-            "Baía de Todos-os-Santos.",
+            "igrejas, casas de taipa, ateliês e mirantes que abrem vista para " +
+            "o Oceano Atlântico e para a orla da Região Metropolitana do " +
+            "Recife.",
           "A cidade é referência nacional no carnaval de rua e mantém forte " +
             "tradição de artesanato, música e ofícios. O sítio histórico é " +
             "voltado para pedestres, com ruas íngremes e escadarias.",
@@ -785,7 +786,9 @@ export const guidesGroupOne: Guide[] = [
           "O ponto de entrada é o Aeroporto Internacional do Recife (REC). " +
             "Olinda fica a cerca de 20 km do aeroporto, com acesso por rodovia, " +
             "táxi, aplicativo ou ônibus com conexão no centro do Recife.",
-          "Há terminal rodoviário com conexões para outras capitais do Nordeste.",
+          "Olinda tem terminais integrados de ônibus no circuito metropolitano " +
+            "do Grande Recife. Para conexões para outras capitais, o ponto de " +
+            "referência é o terminal rodoviário do Recife.",
         ],
         bullets: [
           "Recife (REC): aeroporto internacional de referência.",
@@ -1025,7 +1028,7 @@ export const guidesGroupOne: Guide[] = [
           "O centro histórico é feito para pedestres — ruas são de pedra e não " +
             "circulam carros. Para praias, cachoeiras e cachaçarias do entorno, " +
             "são usados aluguel de veículo, bicicleta, van ou tour contratado.",
-          "A Baía das Ilhas depende de passeio de barco contratado com operador local.",
+          "O passeio pelas ilhas da Baía de Paraty depende de barco contratado com operador local.",
         ],
         bullets: [
           "Centro: a pé, exclusivamente.",

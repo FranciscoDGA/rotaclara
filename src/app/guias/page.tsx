@@ -94,7 +94,7 @@ export default function GuiasPage() {
             >
               {group.region}
             </h2>
-            <span className="text-sm text-[#8c8471]">
+            <span className="text-sm text-[#736b5b]">
               {group.items.length}{" "}
               {group.items.length === 1 ? "guia" : "guias"}
             </span>
@@ -109,16 +109,31 @@ export default function GuiasPage() {
                 <Link
                   key={d.slug}
                   href={`/destinos/${d.slug}`}
-                  className="rc-card rc-card-hover group flex h-full flex-col focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+                  className="rc-card rc-card-hover group flex h-full flex-col overflow-hidden focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
                 >
+                  {d.image && (
+                    <div className="relative -mx-6 -mt-6 mb-4 aspect-[16/9] overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={d.image.src}
+                        alt={d.image.alt}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                      />
+                      <div className="absolute top-3 right-3">
+                        <Badge tone="gold">{d.stateUF}</Badge>
+                      </div>
+                    </div>
+                  )}
+
                   <span className="flex items-start justify-between gap-3">
-                    <span className="text-base font-semibold text-[#0a1628] group-hover:text-[#17827c]">
+                    <span className="text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
                       {d.name}
                     </span>
-                    <Badge tone="gold">{d.stateUF}</Badge>
+                    {!d.image && <Badge tone="gold">{d.stateUF}</Badge>}
                   </span>
 
-                  <span className="mt-1.5 block text-xs text-[#8c8471]">
+                  <span className="mt-1.5 block text-xs text-[#736b5b]">
                     {d.region} · {guide.sections.length}{" "}
                     {guide.sections.length === 1 ? "seção" : "seções"} ·{" "}
                     {guide.faq.length}{" "}
@@ -130,13 +145,13 @@ export default function GuiasPage() {
                   </span>
 
                   <span className="mt-4 flex items-center justify-between border-t border-[#f4f1ea] pt-3.5">
-                    <span className="text-[11px] text-[#8c8471]">
+                    <span className="text-[11px] text-[#736b5b]">
                       Atualizado em{" "}
                       <time dateTime={guide.updatedAt}>
                         {formatDateISO(guide.updatedAt)}
                       </time>
                     </span>
-                    <span className="text-xs font-medium text-[#17827c]">
+                    <span className="text-xs font-medium text-[#0f6f69]">
                       Abrir guia →
                     </span>
                   </span>
@@ -158,7 +173,7 @@ export default function GuiasPage() {
           >
             Em produção
           </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#8c8471]">
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#736b5b]">
             Estes destinos já têm página na base, mas o guia completo ainda
             está em revisão. Preferimos publicar com a qualidade certa a
             completar a lista às pressas.
@@ -236,7 +251,7 @@ export default function GuiasPage() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl border border-[#e8e3d8] bg-white p-4">
-      <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
         {label}
       </p>
       <p className="mt-1.5 text-2xl font-semibold text-[#0a1628]">{value}</p>

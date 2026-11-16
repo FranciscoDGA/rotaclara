@@ -9,6 +9,14 @@
  *  4. A camada fica pronta para credenciais futuras sem simular conexão.
  *
  * Referência oficial Stay22: https://www.stay22.com/
+ * Documentação de integração (developers): https://dev.stay22.com/docs
+ *   - Allez (endpoint universal de redirecionamento): /docs/allez
+ *   - Parâmetros: /docs/allez/parameters — `aid` é obrigatório
+ *   - Roam (seleção de provedor): /docs/allez/roam — requer destino
+ *     resolvível (`address` ou `lat`/`lng`)
+ * Formato verificado em 15/11/2026: `https://www.stay22.com/allez/roam?
+ * aid=<AID>&address=<destino>` responde 302 → Booking.com com o `aid`
+ * rastreado (sem `address`, redireciona para a home do provedor).
  * =====================================================================
  */
 
@@ -59,8 +67,11 @@ export const PARTNERS: readonly PartnerConfig[] = [
     id: "stay22",
     name: "Stay22",
     enabled: isPartnerEnabled("stay22"),
-    baseUrl: "https://www.stay22.com/",
-    trackingParam: null,
+    // Endpoint oficial Allez/Roam (doc: dev.stay22.com/docs/allez).
+    // `aid` é o parâmetro obrigatório de rastreamento; sem ele o link
+    // seria apenas a home do Stay22 (sem conversão rastreada).
+    baseUrl: "https://www.stay22.com/allez/roam",
+    trackingParam: "aid",
   },
   {
     id: "booking",
@@ -170,6 +181,12 @@ export function buildOfferLink({
               : "STAY22_PUBLISHER_ID",
     );
     if (id) params.set(config.trackingParam, id);
+    // Stay22/Roam exige um destino resolvível (`address` ou lat/lng):
+    // sem ele o redirect cai na home do provedor. Usa o slug do destino
+    // como endereço — parâmetro oficial documentado em /docs/allez.
+    if (partner === "stay22" && destinationSlug && !query?.address) {
+      params.set("address", destinationSlug);
+    }
     for (const [key, value] of Object.entries(query ?? {})) {
       params.set(key, value);
     }

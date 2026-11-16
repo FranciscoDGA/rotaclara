@@ -180,9 +180,10 @@ export const lodgingListings: readonly LodgingListing[] = [
     area: "Vale dos Vinhedos",
     destinationSlug: "gramado",
     description:
-      "Bases em Bento Gonçalves e cidades vizinhas, mais próximas das " +
-      "vinícolas e com valor geralmente menor que o centro de Gramado. " +
-      "Exige veículo ou tour.",
+      "O Vale dos Vinhedos fica em Bento Gonçalves, Garibaldi e Monte Belo " +
+      "do Sul — localidades distintas de Gramado, a uma curta viagem dali. " +
+      "Bases nessas cidades ficam mais próximas das vinícolas e com valor " +
+      "geralmente menor que o centro de Gramado. Exige veículo ou tour.",
     priceLevel: "moderado",
     tags: ["gastronomia", "natureza", "romantico"],
     editorialPath: "/destinos/gramado",
@@ -340,9 +341,11 @@ export const lodgingListings: readonly LodgingListing[] = [
     area: "Vale dos Vinhedos",
     destinationSlug: "gramado",
     description:
-      "Visitas a produtores com degustação de vinho e uva integral. A " +
-      "degustação pode ser gratuita ou cobrada conforme a vinícola; considere " +
-      "motorista ou tour se houver degustação.",
+      "Visitas a produtores com degustação de vinho e uva integral. O " +
+      "passeio parte de Gramado com deslocamento até Bento Gonçalves e " +
+      "cidades vizinhas do vale — outra localidade. A degustação pode ser " +
+      "gratuita ou cobrada conforme a vinícola; considere motorista ou " +
+      "tour se houver degustação.",
     priceLevel: "moderado",
     tags: ["gastronomia", "cultura", "romantico"],
     editorialPath: "/destinos/gramado",

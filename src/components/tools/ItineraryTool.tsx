@@ -26,7 +26,9 @@ import {
   DAY_PARTS,
   exportItineraryText,
   itineraryFilename,
+  itineraryJsonFilename,
   overloadedDays,
+  parseItinerary,
   removeActivity,
   removeDay,
   renameDay,
@@ -101,6 +103,7 @@ function SetupForm({
 
   const dayCount = Number(setup.dayCount);
   const invalidDays = !Number.isFinite(dayCount) || dayCount < 1 || dayCount > 60;
+  const selectedDest = destinations.find((d) => d.slug === setup.destinationSlug);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -124,7 +127,7 @@ function SetupForm({
       noValidate
     >
       <h2 className="text-base font-semibold text-[#0a1628]">Nova viagem</h2>
-      <p className="mt-1.5 text-sm leading-relaxed text-[#8c8471]">
+      <p className="mt-1.5 text-sm leading-relaxed text-[#736b5b]">
         Preencha os dados para abrir os dias do roteiro. Você poderá adicionar
         atividades em seguida.
       </p>
@@ -156,6 +159,22 @@ function SetupForm({
             ))}
           </Select>
         </Field>
+
+        {selectedDest?.image && (
+          <div className="relative aspect-[16/6] w-full overflow-hidden rounded-xl border border-[#e8e3d8]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={selectedDest.image.src}
+              alt={selectedDest.image.alt}
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute top-2.5 left-2.5">
+              <Badge tone="teal">
+                {selectedDest.name} · {selectedDest.stateUF}
+              </Badge>
+            </div>
+          </div>
+        )}
 
         <div className="grid gap-4 sm:grid-cols-3">
           <Field label="Origem" htmlFor="it-origem">
@@ -379,7 +398,7 @@ function ActivityForm({
           type="checkbox"
           checked={draft.isTransit}
           onChange={(e) => setDraft({ ...draft, isTransit: e.target.checked })}
-          className="h-4 w-4 rounded border-[#d6cfc0] accent-[#17827c]"
+          className="h-4 w-4 rounded border-[#d6cfc0] accent-[#0f6f69]"
         />
         É um deslocamento (não conta como tempo de visita)
       </label>
@@ -432,25 +451,25 @@ function ActivityRow({
           <p className="text-sm font-medium text-[#0a1628]">
             {activity.title}
             {activity.isTransit && (
-              <span className="ml-2 text-xs font-normal text-[#8c8471]">
+              <span className="ml-2 text-xs font-normal text-[#736b5b]">
                 (deslocamento)
               </span>
             )}
           </p>
           {activity.address && (
-            <p className="mt-0.5 text-xs text-[#8c8471]">{activity.address}</p>
+            <p className="mt-0.5 text-xs text-[#736b5b]">{activity.address}</p>
           )}
-          <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-[#8c8471]">
+          <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-[#736b5b]">
             <span>≈ {formatDuration(activity.estimatedMinutes)}</span>
             {activity.estimatedCostBRL > 0 && (
               <span className="font-medium text-[#16304f]">
                 {formatBRL(activity.estimatedCostBRL)}
               </span>
             )}
-            <span className="text-[#b3ab99]">estimativa</span>
+            <span className="text-[#7a7162]">estimativa</span>
           </div>
           {activity.notes && (
-            <p className="mt-1.5 text-xs leading-relaxed text-[#8c8471]">
+            <p className="mt-1.5 text-xs leading-relaxed text-[#736b5b]">
               {activity.notes}
             </p>
           )}
@@ -511,6 +530,7 @@ export function ItineraryTool({
   const [formForDay, setFormForDay] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [copyFailed, setCopyFailed] = useState(false);
+  const [importError, setImportError] = useState<string | null>(null);
 
   /** Grava uma alteração no store (persistência automática). */
   const commit = useCallback((next: Itinerary | null) => {
@@ -563,6 +583,46 @@ export function ItineraryTool({
     URL.revokeObjectURL(url);
   }
 
+  function handleExportJson() {
+    if (!itinerary) return;
+    const json = JSON.stringify(itinerary, null, 2);
+    const blob = new Blob([json], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = itineraryJsonFilename(itinerary);
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function handleImportJson(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImportError(null);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        const parsed = parseItinerary(content);
+        if (parsed && Array.isArray(parsed.days) && parsed.days.length > 0) {
+          commit(parsed);
+          setFormForDay(null);
+          setImportError(null);
+        } else {
+          setImportError("O arquivo selecionado não contém um formato de roteiro válido da RotaClara.");
+        }
+      } catch {
+        setImportError("Não foi possível ler o arquivo. Certifique-se de que é um arquivo .json válido.");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  }
+
+  function handlePrint() {
+    window.print();
+  }
+
   async function handleCopy() {
     if (!itinerary) return;
     try {
@@ -601,11 +661,42 @@ export function ItineraryTool({
   if (!itinerary) {
     return (
       <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-        <SetupForm
-          destinations={destinations}
-          initialDestinationSlug={initialDestinationSlug}
-          onCreate={handleCreate}
-        />
+        <div className="space-y-6">
+          <SetupForm
+            destinations={destinations}
+            initialDestinationSlug={initialDestinationSlug}
+            onCreate={handleCreate}
+          />
+
+          <section
+            aria-labelledby="importar-roteiro"
+            className="rounded-2xl border border-[#e8e3d8] bg-white p-5 sm:p-6"
+          >
+            <h2 id="importar-roteiro" className="text-base font-semibold text-[#0a1628]">
+              Já tem um roteiro salvo?
+            </h2>
+            <p className="mt-1 text-xs leading-relaxed text-[#736b5b]">
+              Se você exportou seu roteiro em arquivo .json anteriormente, importe-o aqui para continuar planejando.
+            </p>
+            <div className="mt-4">
+              <label className="inline-flex cursor-pointer items-center justify-center rounded-xl border border-[#d6cfc0] bg-[#faf8f4] px-4 py-2.5 text-xs font-semibold text-[#16304f] transition-colors hover:border-[#16304f] hover:bg-white">
+                <span>Selecionar arquivo (.json)</span>
+                <input
+                  type="file"
+                  accept=".json,application/json"
+                  onChange={handleImportJson}
+                  className="sr-only"
+                />
+              </label>
+            </div>
+            {importError && (
+              <p role="alert" className="mt-2 text-xs text-[#a32b2b]">
+                {importError}
+              </p>
+            )}
+          </section>
+        </div>
+
         <EmptyState
           title="Nenhum roteiro aberto"
           description="Crie uma viagem ao lado para abrir os dias e começar a adicionar atividades. O roteiro fica salvo apenas neste navegador."
@@ -627,54 +718,73 @@ export function ItineraryTool({
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
       {/* ============================================================
-          Coluna esquerda — resumo e controles
+          Coluna esquerda — resumo e controles (oculto na impressão)
           ============================================================ */}
-      <div className="space-y-5 lg:sticky lg:top-[calc(var(--rc-header-h)+1.5rem)] lg:self-start">
+      <div className="space-y-5 lg:sticky lg:top-[calc(var(--rc-header-h)+1.5rem)] lg:self-start rc-no-print">
         <section
           aria-labelledby="resumo-roteiro"
-          className="rounded-2xl border border-[#0f2138] bg-[#0a1628] p-6 text-white"
+          className="overflow-hidden rounded-2xl border border-[#0f2138] bg-[#0a1628] text-white"
         >
-          <p className="text-xs font-semibold uppercase tracking-wider text-[#4fcdd6]">
-            Roteiro em edição
-          </p>
-          <h2
-            id="resumo-roteiro"
-            className="mt-2 text-2xl font-semibold tracking-tight"
-          >
-            {itinerary.title}
-          </h2>
-          <p className="mt-1 text-sm text-white/60">
-            {destination
-              ? `${destination.name} · ${destination.stateUF}`
-              : "Destino fora da base editorial"}
-            {itinerary.origin ? ` · saindo de ${itinerary.origin}` : ""}
-          </p>
-
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            <MiniStat label="Dias" value={String(itinerary.days.length)} />
-            <MiniStat label="Atividades" value={String(totals.activities)} />
-            <MiniStat label="Visitas" value={formatDuration(totals.minutes)} />
-          </div>
-
-          <div className="mt-4 rounded-xl bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-wide text-white/60">
-              Custo previsto no roteiro
-            </p>
-            <p className="mt-1 text-2xl font-semibold text-[#dfb45c]">
-              {formatBRL(totals.cost)}
-            </p>
-            <p className="mt-1.5 text-xs leading-relaxed text-white/50">
-              Soma dos valores que você informou em cada atividade. Não é uma
-              cotação.
-            </p>
-          </div>
-
-          {itinerary.startDate && (
-            <p className="mt-4 text-xs text-white/50">
-              Período: {formatDateISO(itinerary.startDate)}
-              {itinerary.endDate && ` a ${formatDateISO(itinerary.endDate)}`}
-            </p>
+          {destination?.image && (
+            <div className="relative aspect-[16/7] w-full overflow-hidden border-b border-white/10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={destination.image.src}
+                alt={destination.image.alt}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
+              <div className="absolute top-2.5 left-2.5">
+                <Badge tone="gold">
+                  {destination.name} · {destination.stateUF}
+                </Badge>
+              </div>
+            </div>
           )}
+
+          <div className="p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#4fcdd6]">
+              Roteiro em edição
+            </p>
+            <h2
+              id="resumo-roteiro"
+              className="mt-2 text-2xl font-semibold tracking-tight"
+            >
+              {itinerary.title}
+            </h2>
+            <p className="mt-1 text-sm text-white/60">
+              {destination
+                ? `${destination.name} · ${destination.stateUF}`
+                : "Destino fora da base editorial"}
+              {itinerary.origin ? ` · saindo de ${itinerary.origin}` : ""}
+            </p>
+
+            <div className="mt-4 grid grid-cols-3 gap-3">
+              <MiniStat label="Dias" value={String(itinerary.days.length)} />
+              <MiniStat label="Atividades" value={String(totals.activities)} />
+              <MiniStat label="Visitas" value={formatDuration(totals.minutes)} />
+            </div>
+
+            <div className="mt-4 rounded-xl bg-white/5 p-4">
+              <p className="text-xs uppercase tracking-wide text-white/60">
+                Custo previsto no roteiro
+              </p>
+              <p className="mt-1 text-2xl font-semibold text-[#dfb45c]">
+                {formatBRL(totals.cost)}
+              </p>
+              <p className="mt-1.5 text-xs leading-relaxed text-white/50">
+                Soma dos valores que você informou em cada atividade. Não é uma
+                cotação.
+              </p>
+            </div>
+
+            {itinerary.startDate && (
+              <p className="mt-4 text-xs text-white/50">
+                Período: {formatDateISO(itinerary.startDate)}
+                {itinerary.endDate && ` a ${formatDateISO(itinerary.endDate)}`}
+              </p>
+            )}
+          </div>
         </section>
 
         {/* Alertas de sobrecarga */}
@@ -706,12 +816,36 @@ export function ItineraryTool({
             Exportar e gerenciar
           </h2>
           <div className="mt-3.5 flex flex-col gap-2">
-            <Button type="button" onClick={handleExport}>
+            <Button type="button" onClick={handleExportJson}>
+              Baixar roteiro (.json)
+            </Button>
+            <Button type="button" variant="secondary" onClick={handleExport}>
               Baixar roteiro (.txt)
+            </Button>
+            <Button type="button" variant="secondary" onClick={handlePrint}>
+              Imprimir / Salvar PDF
             </Button>
             <Button type="button" variant="secondary" onClick={handleCopy}>
               {copied ? "Copiado!" : "Copiar roteiro em texto"}
             </Button>
+
+            <div className="pt-2 border-t border-[#e8e3d8]">
+              <label className="flex w-full cursor-pointer items-center justify-center rounded-xl border border-dashed border-[#d6cfc0] bg-[#faf8f4] px-4 py-2 text-xs font-medium text-[#16304f] transition-colors hover:border-[#16304f] hover:bg-white">
+                <span>Importar outro roteiro (.json)</span>
+                <input
+                  type="file"
+                  accept=".json,application/json"
+                  onChange={handleImportJson}
+                  className="sr-only"
+                />
+              </label>
+              {importError && (
+                <p role="alert" className="mt-2 text-xs text-[#a32b2b]">
+                  {importError}
+                </p>
+              )}
+            </div>
+
             <Button
               type="button"
               variant="secondary"
@@ -728,7 +862,7 @@ export function ItineraryTool({
               Apagar roteiro
             </Button>
           </div>
-          <p className="mt-3 text-xs leading-relaxed text-[#8c8471]">
+          <p className="mt-3 text-xs leading-relaxed text-[#736b5b]">
             Salvo automaticamente apenas neste navegador. Nada é enviado para
             servidores.
           </p>
@@ -802,10 +936,10 @@ export function ItineraryTool({
                     onChange={(e) =>
                       commit(renameDay(itinerary, day.id, e.target.value))
                     }
-                    className="rounded-lg border border-transparent bg-transparent px-2 py-1 text-base font-semibold text-[#0a1628] transition-colors hover:border-[#e8e3d8] focus:border-[#17827c] focus:outline-none"
+                    className="rounded-lg border border-transparent bg-transparent px-2 py-1 text-base font-semibold text-[#0a1628] transition-colors hover:border-[#e8e3d8] focus:border-[#0f6f69] focus:outline-none"
                   />
                   {day.date && (
-                    <p className="text-xs text-[#8c8471]">
+                    <p className="text-xs text-[#736b5b]">
                       <time dateTime={day.date}>{formatDateISO(day.date)}</time>
                     </p>
                   )}
@@ -835,7 +969,7 @@ export function ItineraryTool({
 
                 return (
                   <div key={part} className="mt-4">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
                       {DAY_PART_LABELS[part]}
                     </p>
 
@@ -865,7 +999,7 @@ export function ItineraryTool({
                         ))}
                       </ul>
                     ) : (
-                      <p className="mt-2 rounded-lg border border-dashed border-[#e8e3d8] px-3 py-2.5 text-xs text-[#b3ab99]">
+                      <p className="mt-2 rounded-lg border border-dashed border-[#e8e3d8] px-3 py-2.5 text-xs text-[#7a7162]">
                         Sem atividades neste período.
                       </p>
                     )}

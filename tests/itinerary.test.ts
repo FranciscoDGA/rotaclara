@@ -17,6 +17,7 @@ import {
   DAY_PARTS,
   exportItineraryText,
   itineraryFilename,
+  itineraryJsonFilename,
   overloadedDays,
   parseItinerary,
   removeActivity,
@@ -291,6 +292,7 @@ describe("exportação", () => {
   it("gera nome de arquivo a partir do título", () => {
     const it = makeItinerary(1);
     expect(itineraryFilename(it)).toBe("ferias-de-teste-rotaclara.txt");
+    expect(itineraryJsonFilename(it)).toBe("ferias-de-teste-rotaclara.json");
   });
 
   it("o texto contém título, dias e aviso de estimativa", () => {

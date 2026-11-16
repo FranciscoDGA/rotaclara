@@ -24,6 +24,7 @@ import type {
   TravelTag,
 } from "@/lib/domain/types";
 import { addDaysISO, daysBetweenISO, todayISO } from "@/lib/format/format";
+import { tagLabel } from "@/lib/seo/seo";
 
 /* =====================================================================
    Distribuição de orçamento
@@ -208,7 +209,7 @@ const DAY_FOCUS: TravelTag[][] = [
 /** Título padrão do dia quando não há foco definido. */
 function dayTitle(index: number, focus: TravelTag[]): string {
   if (focus.length === 0) return `Dia ${index + 1}`;
-  const label = focus.join(" e ");
+  const label = focus.map(tagLabel).join(" e ");
   return `Dia ${index + 1} — ${label}`;
 }
 

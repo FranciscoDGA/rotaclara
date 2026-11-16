@@ -124,7 +124,7 @@ export function ContactForm() {
       </div>
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs leading-relaxed text-[#8c8471]">
+        <p className="text-xs leading-relaxed text-[#736b5b]">
           Ao enviar, seu aplicativo de e-mail será aberto com a mensagem
           pronta. Nenhum dado passa por este site.
         </p>

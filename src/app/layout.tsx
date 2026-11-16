@@ -30,10 +30,11 @@ const siteName = getSiteName();
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
-  title: {
-    default: `${siteName} — Viajar melhor começa com decisões melhores`,
-    template: `%s · ${siteName}`,
-  },
+  // String simples (em Next 16 o objeto `title` exige `template` junto
+  // com `default`). Sem `title.template`: todas as páginas passam por
+  // `buildMetadata()`, que já acrescenta "· <siteName>" uma única vez —
+  // um template aqui duplicava o sufixo ("… · RotaClara · RotaClara").
+  title: `${siteName} — Viajar melhor começa com decisões melhores`,
   description:
     "Descubra destinos, compare custos, monte roteiros e calcule o orçamento " +
     "da sua viagem. Ferramentas de planejamento com estimativas transparentes " +
@@ -96,6 +97,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${fraunces.variable}`}
     >
       <body className="flex min-h-screen flex-col antialiased">

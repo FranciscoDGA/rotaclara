@@ -37,14 +37,27 @@ export const destinationsGroupTwo: Destination[] = [
     region: "Sul",
     country: "Brasil",
     tagline: "Serra, clima frio e agenda gastronômica o ano inteiro.",
+    image: {
+      src: "/destinations/gramado.jpg",
+      alt: "Lago Negro e pinheiros na Serra Gaúcha em Gramado",
+      credit: {
+        author: "Felipe Tofani",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/gramado",
+        license: "Unsplash License",
+      },
+    },
     intro:
-      "Gramado é um município de serra no Vale dos Vinhedos conhecido pelo " +
-      "clima frio, pela arquitetura de inspiração europeia e por uma agenda " +
-      "cultural constante, com destaque para o Natal Luz. É uma escolha " +
-      "frequente para viagens românticas, para famílias com crianças e para " +
-      "quem quer frio sem sair do Brasil.",
+      "Gramado é um município de serra na Serra Gaúcha, no Rio Grande do " +
+      "Sul, conhecido pelo clima frio, pela arquitetura de inspiração " +
+      "europeia e por uma agenda cultural constante, com destaque para o " +
+      "Natal Luz. Fica a uma curta viagem do Vale dos Vinhedos — região " +
+      "turística e vitivinícola de Bento Gonçalves, Garibaldi e Monte Belo " +
+      "do Sul —, que é um passeio entre localidades distintas, não parte " +
+      "do município. É uma escolha frequente para viagens românticas, para " +
+      "famílias com crianças e para quem quer frio sem sair do Brasil.",
     tags: ["familia", "romantico", "gastronomia", "cultura", "natureza", "cidade"],
-    bestMonths: [4, 5, 6, 7, 11],
+    bestMonths: [3, 4, 5, 6, 10, 11],
     bestTimeNotes:
       "O inverno (junho a agosto) é a estação mais fria e a de maior " +
       "movimento, especialmente em julho. Dezembro traz o Natal Luz. " +
@@ -54,9 +67,10 @@ export const destinationsGroupTwo: Destination[] = [
       distanceKm: 1100,
       flightMinutes: null,
       notes:
-        "Acesso principalmente rodoviário a partir de Porto Alegre (cerca de " +
-        "2 horas) ou por voo até o aeroporto regional mais próximo, com " +
-        "transfer terrestre.",
+        "Distância rodoviária desde São Paulo (cerca de 1.100 km). Gramado " +
+        "não tem aeroporto: voe até Porto Alegre (POA), a cerca de 120 km, " +
+        "ou até Caxias do Sul (CXJ), a cerca de 66 km, e faça transfer " +
+        "terrestre.",
     },
     cost: {
       minPerDayBRL: 300,
@@ -87,7 +101,7 @@ export const destinationsGroupTwo: Destination[] = [
     }),
     howToArrive:
       "Não há aeroporto em Gramado. O acesso é por rodovia a partir de " +
-      "Porto Alegre, pela Aeroporto Salgado Filho (POA), com cerca de 2 " +
+      "Porto Alegre, pelo Aeroporto Salgado Filho (POA), com cerca de 2 " +
       "horas de carro ou ônibus. Há terminal rodoviário com conexões de " +
       "outras cidades da serra.",
     localTransport:
@@ -109,10 +123,17 @@ export const destinationsGroupTwo: Destination[] = [
         cons: "Exige transporte para os principais atrativos.",
       },
       {
-        name: "Cidades vizinhas (Bento Gonçalves, Canela, Praia do Lino)",
-        profile: "Base alternativa no mesmo vale, com valor mais acessível.",
-        pros: "Menor custo e acesso às vinícolas e atrações da região.",
-        cons: "Maior deslocamento para o centro de Gramado.",
+        name: "Cidades vizinhas (Bento Gonçalves, Garibaldi, Canela)",
+        profile:
+          "Base alternativa em outra localidade da região, com valor mais " +
+          "acessível.",
+        pros:
+          "Menor custo e acesso às vinícolas do Vale dos Vinhedos, em " +
+          "Bento Gonçalves e Garibaldi.",
+        cons:
+          "São localidades distintas de Gramado: há deslocamento entre " +
+          "cidades e convém veículo ou tour. Canela fica na Rota Romântica, " +
+          "fora do Vale dos Vinhedos.",
       },
     ],
     attractions: [
@@ -221,8 +242,8 @@ export const destinationsGroupTwo: Destination[] = [
         area: "Bento Gonçalves e região",
         sources: [
           {
-            name: "Instituto Gaúcho do Vinho",
-            url: "https://www.vinhorgs.com.br/",
+            name: "Vale dos Vinhedos (site oficial do destino)",
+            url: "https://valedosvinhedos.com.br/",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -286,6 +307,16 @@ export const destinationsGroupTwo: Destination[] = [
     region: "Centro-Oeste",
     country: "Brasil",
     tagline: "Água transparente, flutuação e ecoturismo organizado.",
+    image: {
+      src: "/destinations/bonito.jpg",
+      alt: "Águas cristalinas e vida aquática transparente em Bonito",
+      credit: {
+        author: "David Clode",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/bonito",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "Bonito é referência nacional em ecoturismo, conhecido pelas águas " +
       "transparentes, pelas flutuações em rios de nascente e pelas grutas " +
@@ -294,7 +325,7 @@ export const destinationsGroupTwo: Destination[] = [
       "locais. É uma escolha forte para famílias e para viajantes que " +
       "priorizam natureza.",
     tags: ["natureza", "aventura", "familia", "praia"],
-    bestMonths: [3, 4, 5, 6, 7, 8, 9],
+    bestMonths: [3, 4, 5, 6, 7, 8],
     bestTimeNotes:
       "A estação seca local vai de abril a setembro, com menor volume de " +
       "chuva e melhor visibilidade nas águas. Dezembro a março é o período " +
@@ -525,6 +556,16 @@ export const destinationsGroupTwo: Destination[] = [
     region: "Nordeste",
     country: "Brasil",
     tagline: "Cachoeiras altas, cânions e trilhas no planalto baiano.",
+    image: {
+      src: "/destinations/chapada-diamantina.jpg",
+      alt: "Vista panorâmica dos cânions e chapadas ao pôr do sol",
+      credit: {
+        author: "Austin Schmid",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/chapada-diamantina",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "A Chapada Diamantina é um conjunto de áreas protegidas na Bahia " +
       "conhecido por cachoeiras de grande queda, cânions, grutas e trilhas " +
@@ -532,14 +573,14 @@ export const destinationsGroupTwo: Destination[] = [
       "É destino para quem procura natureza e caminhada, com acesso por " +
       "rodovia e esforço físico em alguns percursos.",
     tags: ["natureza", "aventura", "familia"],
-    bestMonths: [4, 5, 6, 7, 8, 9],
+    bestMonths: [4, 5, 6, 7, 8],
     bestTimeNotes:
       "O período seco local vai de maio a setembro, com céu mais limpo e " +
       "trilhas com melhor condição. De outubro a abril aumenta a chuva, o " +
       "que pode fechar atrativos e alterar o nível das cachoeiras.",
     recommendedDays: { min: 4, max: 7 },
     referenceFromSaoPaulo: {
-      distanceKm: 1600,
+      distanceKm: 1360,
       flightMinutes: 160,
       notes:
         "Voo até Salvador (SSA) seguido de conexão rodoviária ou aérea " +
@@ -614,11 +655,11 @@ export const destinationsGroupTwo: Destination[] = [
         suggestedMinutes: 300,
         admissionFeeBRL: { min: 20, max: 80 },
         isFree: false,
-        area: "Vão do Gavião — região de Lençóis",
+        area: "Vale do Capão — Palmeiras/BA",
         sources: [
           {
-            name: "Prefeitura de Lençóis",
-            url: "https://www.lencois.ba.gov.br/",
+            name: "ICMBio — Parque Nacional da Chapada Diamantina",
+            url: "https://www.gov.br/icmbio/pt-br",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -656,12 +697,12 @@ export const destinationsGroupTwo: Destination[] = [
         suggestedMinutes: 120,
         admissionFeeBRL: { min: 40, max: 120 },
         isFree: false,
-        area: "Andaraí",
+        area: "Nova Redenção",
         sources: [
           {
-            name: "Prefeitura de Andaraí",
-            url: "https://www.andarai.ba.gov.br/",
-            consultedAt: REFERENCE_DATE,
+            name: "Poço Azul (site oficial)",
+            url: "https://pocoazul.com.br/",
+            consultedAt: "2026-11-14",
           },
         ],
         notes: "Visitação com entrada em horários específicos e número limitado de pessoas.",
@@ -759,6 +800,16 @@ export const destinationsGroupTwo: Destination[] = [
     region: "Norte",
     country: "Brasil",
     tagline: "Encontro das águas, floresta urbana e teatro histórico.",
+    image: {
+      src: "/destinations/manaus.jpg",
+      alt: "O Teatro Amazonas sob céu iluminado no centro de Manaus",
+      credit: {
+        author: "Nathalia Segato",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/manaus",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "Manaus é a capital da Amazônia e serve de base para conhecer a floresta " +
       "e o encontro dos rios Solimões e Negro. A cidade combina um centro " +
@@ -766,7 +817,7 @@ export const destinationsGroupTwo: Destination[] = [
       "excursões fluviais e de floresta. É um destino de longa duração, " +
       "com logística própria.",
     tags: ["natureza", "cultura", "cidade", "aventura", "familia"],
-    bestMonths: [5, 6, 7, 8, 9, 10],
+    bestMonths: [5, 6, 7, 8],
     bestTimeNotes:
       "O período de menor chuva local vai de junho a setembro, com níveis " +
       "de água mais estáveis para navegação. Dezembro a maio concentra a " +
@@ -874,8 +925,8 @@ export const destinationsGroupTwo: Destination[] = [
         area: "Centro",
         sources: [
           {
-            name: "Teatro Amazonas",
-            url: "https://www.teatroamazonas.am.gov.br/",
+            name: "Secretaria de Estado da Cultura do Amazonas",
+            url: "https://cultura.am.gov.br/",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -894,12 +945,15 @@ export const destinationsGroupTwo: Destination[] = [
         area: "Centro",
         sources: [
           {
-            name: "Fundação Nacional dos Povos Indígenas (FUNAI)",
-            url: "https://www.gov.br/funai/pt-br",
-            consultedAt: REFERENCE_DATE,
+            name: "Arquidiocese de Manaus — Irmãs Salesianas (mantenedoras)",
+            url: "https://arquidiocesedemanaus.org.br/2019/04/11/irmas-salesianas-mantem-memoria-cultural-de-indigenas-do-amazonas/",
+            consultedAt: "2026-11-14",
           },
         ],
-        notes: "Confirme horário de funcionamento com a instituição.",
+        notes:
+          "Mantido pelas Irmãs Salesianas (Filhas de Maria Auxiliadora), " +
+          "não pela FUNAI — a FUNAI administra outro Museu do Índio, no Rio " +
+          "de Janeiro. Confirme horário de funcionamento com a instituição.",
       },
       {
         id: "man-palacio-rio-negro",
@@ -915,7 +969,7 @@ export const destinationsGroupTwo: Destination[] = [
         sources: [
           {
             name: "Governo do Estado do Amazonas",
-            url: "https://www.am.gov.br/",
+            url: "https://www.amazonas.am.gov.br/",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -934,7 +988,7 @@ export const destinationsGroupTwo: Destination[] = [
         sources: [
           {
             name: "Instituto Nacional de Pesquisas da Amazônia (INPA)",
-            url: "https://www.inpa.gov.br/",
+            url: "https://www.gov.br/inpa/pt-br",
             consultedAt: REFERENCE_DATE,
           },
         ],
@@ -994,6 +1048,16 @@ export const destinationsGroupTwo: Destination[] = [
     region: "Nordeste",
     country: "Brasil",
     tagline: "Ponta do Seixas, coqueiros e orla tranquila no extremo do Brasil.",
+    image: {
+      src: "/destinations/joao-pessoa.jpg",
+      alt: "Praias tropicais de águas calmas e coqueirais da orla de João Pessoa",
+      credit: {
+        author: "Sean Oulashin",
+        source: "Unsplash",
+        sourceUrl: "https://unsplash.com/photos/joao-pessoa",
+        license: "Unsplash License",
+      },
+    },
     intro:
       "João Pessoa é a capital da Paraíba e o ponto mais oriental das " +
       "Américas. A cidade tem orla com coqueiros, centros históricos, " +
@@ -1001,15 +1065,15 @@ export const destinationsGroupTwo: Destination[] = [
       "procura praia com menor movimento que outras capitais do Nordeste, " +
       "com boa relação entre custo e estrutura.",
     tags: ["praia", "cidade", "cultura", "gastronomia", "familia", "economico"],
-    bestMonths: [9, 10, 11, 12, 1, 2, 3],
+    bestMonths: [8, 9, 10, 11, 0, 1, 2],
     bestTimeNotes:
       "A estação seca local vai de setembro a março. Dezembro e janeiro são " +
       "os meses mais quentes e de maior movimento. O período chuvoso se " +
       "concentra de abril a junho.",
     recommendedDays: { min: 3, max: 5 },
     referenceFromSaoPaulo: {
-      distanceKm: 1750,
-      flightMinutes: 175,
+      distanceKm: 2210,
+      flightMinutes: 195,
       notes:
         "Voo até João Pessoa (JPA) com voos diretos e conexões a partir de " +
         "grandes centros.",
@@ -1147,24 +1211,27 @@ export const destinationsGroupTwo: Destination[] = [
         ],
       },
       {
-        id: "jp-banco-imobiliario",
+        id: "jp-jose-lins-do-rego",
         name: "Espaço Cultural José Lins do Rego",
         description:
-          "Espaço cultural em antigo casarão, com programação de exposições, " +
-          "música e literatura.",
+          "Centro de convenções e complexo cultural moderno, com seis " +
+          "espaços para exposições, shows, teatro e cinema, além do museu " +
+          "de mesmo nome.",
         tags: ["cultura", "familia"],
         suggestedMinutes: 90,
         admissionFeeBRL: { min: 0, max: 20 },
         isFree: false,
-        area: "Centro",
+        area: "Tambauzinho",
         sources: [
           {
-            name: "Secretaria de Cultura da Paraíba",
-            url: "https://www.cultura.pb.gov.br/",
-            consultedAt: REFERENCE_DATE,
+            name: "Fundação Espaço Cultural da Paraíba (Funesc)",
+            url: "https://funesc.pb.gov.br/",
+            consultedAt: "2026-11-14",
           },
         ],
-        notes: "Programação variável; confirme horário com a instituição.",
+        notes:
+          "Av. Abdias Gomes de Almeida, 800, bairro Tambauzinho. Programação " +
+          "variável; confirme horário com a instituição.",
       },
     ],
     warnings: [

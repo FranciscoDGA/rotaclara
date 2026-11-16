@@ -5,9 +5,17 @@
  * Gera uma paisagem abstrata em SVG a partir da paleta do destino.
  * Vantagens: zero requisição externa, peso mínimo, nenhuma alegação
  * de foto real do local. É decoração, não documentação do lugar.
+ *
+ * Componente CLIENTE: `useId()` garante IDs únicos por instância —
+ * sem isso, duas artes com a mesma semente (mesmo destino aparecendo
+ * duas vezes, ou slug/estado com o mesmo código) gerariam IDs
+ * duplicados no HTML e o `url(#…)` apontaria para o gradiente errado.
  * =====================================================================
  */
 
+"use client";
+
+import { useId } from "react";
 import type { DestinationPalette } from "@/lib/domain/types";
 
 interface DestinationArtProps {
@@ -48,15 +56,21 @@ export function DestinationArt({
   alt,
 }: DestinationArtProps) {
   const v = variant(seed);
-  const id = `art-${Math.abs(seed)}`;
+  // ID único por instância (SSR/hidratação estáveis via useId).
+  // Remove caracteres não alfanuméricos para uso seguro em `url(#…)`.
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
+  const id = `art${uid}`;
 
   return (
     <svg
       viewBox="0 0 400 225"
       preserveAspectRatio="xMidYMid slice"
       className={className}
-      role="img"
-      aria-label={alt}
+      /* Arte sem rótulo é decorativa (o link já nomeia o destino):
+         `role="img"` + `aria-label=""` violaria svg-img-alt. */
+      {...(alt.trim()
+        ? { role: "img" as const, "aria-label": alt }
+        : { "aria-hidden": true as const })}
     >
       <defs>
         <linearGradient id={`${id}-sky`} x1="0" y1="0" x2="0" y2="1">

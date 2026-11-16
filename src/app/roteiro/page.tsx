@@ -19,8 +19,8 @@ export const metadata: Metadata = buildMetadata({
   title: "Construtor de roteiro",
   description:
     "Monte seu roteiro dia a dia: atividades por período, tempos estimados, " +
-    "custos previstos e alertas de dias sobrecarregados. Salvo apenas no " +
-    "seu navegador, com exportação em texto.",
+    "custos e alertas de sobrecarga. Salvo só no seu navegador, com " +
+    "exportação em texto.",
   path: "/roteiro",
 });
 

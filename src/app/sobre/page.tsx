@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Navigation";
 import { ButtonLink, Card } from "@/components/ui/primitives";
-import { getDestinationStats } from "@/data/destinations";
+import { getDestinationStats, allDestinations } from "@/data/destinations";
 import { allGuides } from "@/data/guides";
 import { buildMetadata } from "@/lib/seo/seo";
 
@@ -64,6 +64,41 @@ export default function SobrePage() {
         <Stat label="Estados cobertos" value={String(stats.states)} />
         <Stat label="Guias editoriais" value={String(allGuides.length)} />
       </div>
+
+      {/* Mosaico fotográfico de destinos */}
+      <section aria-labelledby="galeria-sobre" className="mt-12">
+        <h2 id="galeria-sobre" className="sr-only">
+          Destinos brasileiros documentados na plataforma
+        </h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {allDestinations.slice(0, 4).map((d) => (
+            <Link
+              key={d.slug}
+              href={`/destinos/${d.slug}`}
+              className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#0a1628] focus-visible:outline-3 focus-visible:outline-[#2fb8c4]"
+            >
+              {d.image && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={d.image.src}
+                  alt={d.image.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3">
+                <span className="block text-sm font-semibold text-white">
+                  {d.name}
+                </span>
+                <span className="text-xs text-white/80">
+                  {d.stateUF} · {d.region}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section aria-labelledby="principios" className="mt-14 max-w-4xl">
         <h2
@@ -136,7 +171,7 @@ export default function SobrePage() {
             detalhes na nossa página de{" "}
             <Link
               href="/afiliados"
-              className="font-medium text-[#17827c] underline underline-offset-2"
+              className="font-medium text-[#0f6f69] underline underline-offset-2"
             >
               política de afiliados
             </Link>
@@ -148,7 +183,7 @@ export default function SobrePage() {
             apenas no armazenamento local do seu navegador. Veja a{" "}
             <Link
               href="/privacidade"
-              className="font-medium text-[#17827c] underline underline-offset-2"
+              className="font-medium text-[#0f6f69] underline underline-offset-2"
             >
               política de privacidade
             </Link>
@@ -172,7 +207,7 @@ export default function SobrePage() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl border border-[#e8e3d8] bg-white p-4">
-      <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
         {label}
       </p>
       <p className="mt-1.5 text-2xl font-semibold text-[#0a1628]">{value}</p>
@@ -197,7 +232,7 @@ function Item({
       <p className="mt-2 text-sm leading-relaxed text-[#16304f]/85">{body}</p>
       <Link
         href={href}
-        className="mt-3 inline-block text-sm font-medium text-[#17827c] underline underline-offset-2"
+        className="mt-3 inline-block text-sm font-medium text-[#0f6f69] underline underline-offset-2"
       >
         {cta} →
       </Link>

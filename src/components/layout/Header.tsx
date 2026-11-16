@@ -22,6 +22,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { href: "/destinos", label: "Descobrir" },
+  { href: "/diagnostico", label: "Diagnóstico" },
   { href: "/planejador", label: "Planejar" },
   { href: "/calculadora", label: "Calculadora" },
   { href: "/comparador", label: "Comparar" },
@@ -68,7 +69,6 @@ export function Header() {
         <Link
           href="/"
           className="shrink-0 rounded-lg focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
-          aria-label="RotaClara — página inicial"
         >
           <Logo size={34} />
         </Link>
@@ -191,7 +191,7 @@ export function Header() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       aria-hidden="true"
-                      className="text-[#b3ab99]"
+                      className="text-[#7a7162]"
                     >
                       <path d="m9 18 6-6-6-6" />
                     </svg>

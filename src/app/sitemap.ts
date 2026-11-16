@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     [
       { path: "/", priority: 1, changefreq: "weekly" },
       { path: "/destinos", priority: 0.9, changefreq: "weekly" },
+      { path: "/diagnostico", priority: 0.9, changefreq: "weekly" },
       { path: "/guias", priority: 0.8, changefreq: "weekly" },
       { path: "/comparador", priority: 0.8, changefreq: "monthly" },
       { path: "/planejador", priority: 0.8, changefreq: "monthly" },

@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/primitives";
 import { getDestination } from "@/data/destinations";
 import { lodgingListings } from "@/data/listings";
+import { AffiliateLink } from "@/components/affiliate/AffiliateLink";
 import type { LodgingListing, TravelTag } from "@/lib/domain/types";
 import { tagLabel } from "@/lib/seo/seo";
 import { buildMetadata } from "@/lib/seo/seo";
@@ -29,9 +30,9 @@ import { buildMetadata } from "@/lib/seo/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Hospedagens e experiências",
   description:
-    "Vitrine editorial de áreas para se hospedar e experiências no Brasil. " +
-    "Sem preço falso, sem disponibilidade inventada — apenas perfil " +
-    "relativo, contexto e links claramente rotulados.",
+    "Vitrine editorial de áreas para se hospedar no Brasil. Sem preço falso " +
+    "nem disponibilidade inventada — apenas perfil relativo, contexto e " +
+    "links rotulados.",
   path: "/hospedagens",
 });
 
@@ -152,7 +153,14 @@ export default async function HospedagensPage({
         </div>
       </form>
 
-      <p className="mt-5 text-sm text-[#8c8471]">
+      <h2
+        id="lista-vitrine"
+        className="mt-10 text-xl font-semibold tracking-tight text-[#0a1628]"
+      >
+        Opções de hospedagem
+      </h2>
+
+      <p className="mt-5 text-sm text-[#736b5b]">
         {filtered.length === 0
           ? "Nenhuma opção corresponde aos filtros."
           : `${filtered.length} ${
@@ -217,7 +225,7 @@ export default async function HospedagensPage({
           </p>
         </div>
 
-        <p className="mt-5 text-xs text-[#8c8471]">
+        <p className="mt-5 text-xs text-[#736b5b]">
           Data de referência editorial:{" "}
           <time dateTime="2026-11-13">13/11/2026</time>. Consulte sempre o
           provedor antes de reservar.
@@ -238,65 +246,95 @@ function ListingCard({ listing }: { listing: LodgingListing }) {
   const monetizedLinks = listing.links.filter((l) => l.kind === "monetized");
 
   return (
-    <Card className="flex h-full flex-col">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-base font-semibold leading-snug text-[#0a1628]">
-          {listing.name}
-        </h3>
-        <Badge tone="default">{TYPE_LABEL[listing.type]}</Badge>
-      </div>
+    <Card flush className="flex h-full flex-col overflow-hidden">
+      {destination?.image && (
+        <div className="relative aspect-[16/8] w-full overflow-hidden bg-[#0a1628]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={destination.image.src}
+            alt={destination.image.alt}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+          />
+          <div className="absolute top-3 left-3">
+            <Badge tone="teal">
+              {destination.name} · {destination.stateUF}
+            </Badge>
+          </div>
+          <div className="absolute top-3 right-3">
+            <Badge tone="default">{TYPE_LABEL[listing.type]}</Badge>
+          </div>
+        </div>
+      )}
 
-      <p className="mt-1 text-xs text-[#8c8471]">
-        {destination ? `${destination.name} · ${destination.stateUF}` : listing.area}
-        {" · "}
-        <span className="font-medium text-[#16304f]">
-          {PRICE_LABEL[listing.priceLevel] ?? listing.priceLevel}
-        </span>
-      </p>
-
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-[#16304f]/85">
-        {listing.description}
-      </p>
-
-      <div className="mt-3.5 flex flex-wrap gap-1.5">
-        {listing.tags.map((tag: TravelTag) => (
-          <span
-            key={tag}
-            className="rounded-full border border-[#e8e3d8] bg-[#faf8f4] px-2.5 py-0.5 text-[11px] text-[#16304f]"
-          >
-            {tagLabel(tag)}
-          </span>
-        ))}
-      </div>
-
-      <p className="mt-3.5 rounded-lg bg-[#faf8f4] px-3 py-2 text-[11px] leading-relaxed text-[#8c8471]">
-        Sem preço em tempo real · perfil relativo da área
-      </p>
-
-      <div className="mt-4 space-y-2 border-t border-[#f4f1ea] pt-3.5">
-        {editorialLink && (
-          <Link
-            href={editorialLink.href}
-            className="block text-sm font-medium text-[#17827c] underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
-          >
-            {destination ? `Ver guia de ${destination.name}` : "Ver guia da área"} →
-          </Link>
+      <div className="flex flex-1 flex-col p-5">
+        {!destination?.image && (
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="text-base font-semibold leading-snug text-[#0a1628]">
+              {listing.name}
+            </h3>
+            <Badge tone="default">{TYPE_LABEL[listing.type]}</Badge>
+          </div>
+        )}
+        {destination?.image && (
+          <h3 className="text-base font-semibold leading-snug text-[#0a1628]">
+            {listing.name}
+          </h3>
         )}
 
-        {monetizedLinks.map((link) => (
-          <a
-            key={link.partner}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="block text-sm font-medium text-[#0a1628] underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
-          >
-            {link.label}{" "}
-            <span className="text-[11px] font-normal text-[#9a6206]">
-              (afiliado)
+        <p className="mt-1 text-xs text-[#736b5b]">
+          {destination ? `${destination.name} · ${destination.stateUF}` : listing.area}
+          {" · "}
+          <span className="font-medium text-[#16304f]">
+            {PRICE_LABEL[listing.priceLevel] ?? listing.priceLevel}
+          </span>
+        </p>
+
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-[#16304f]/85">
+          {listing.description}
+        </p>
+
+        <div className="mt-3.5 flex flex-wrap gap-1.5">
+          {listing.tags.map((tag: TravelTag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-[#e8e3d8] bg-[#faf8f4] px-2.5 py-0.5 text-[11px] text-[#16304f]"
+            >
+              {tagLabel(tag)}
             </span>
-          </a>
-        ))}
+          ))}
+        </div>
+
+        <p className="mt-3.5 rounded-lg bg-[#faf8f4] px-3 py-2 text-[11px] leading-relaxed text-[#736b5b]">
+          Sem preço em tempo real · perfil relativo da área
+        </p>
+
+        <div className="mt-4 space-y-2 border-t border-[#f4f1ea] pt-3.5">
+          {editorialLink && (
+            <Link
+              href={editorialLink.href}
+              className="block text-sm font-medium text-[#0f6f69] underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+            >
+              {destination ? `Ver guia de ${destination.name}` : "Ver guia da área"} →
+            </Link>
+          )}
+
+          {monetizedLinks.map((link) => (
+            <AffiliateLink
+              key={link.partner}
+              partner={link.partner}
+              kind={link.kind}
+              destinationSlug={listing.destinationSlug}
+              href={link.href}
+              className="block text-sm font-medium text-[#0a1628] underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+            >
+              {link.label}{" "}
+              <span className="text-[11px] font-normal text-[#9a6206]">
+                (afiliado)
+              </span>
+            </AffiliateLink>
+          ))}
+        </div>
       </div>
     </Card>
   );

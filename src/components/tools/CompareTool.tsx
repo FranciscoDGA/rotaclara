@@ -74,7 +74,7 @@ export function CompareTool({ destinations }: CompareToolProps) {
           <h2 id="selecao" className="text-base font-semibold text-[#0a1628]">
             Destinos comparados
           </h2>
-          <p className="text-xs text-[#8c8471]">
+          <p className="text-xs text-[#736b5b]">
             {filled} de até {MAX_SELECTION} selecionados
           </p>
         </div>
@@ -138,26 +138,36 @@ export function CompareTool({ destinations }: CompareToolProps) {
                 href={`/destinos/${d.slug}`}
                 className="rc-card rc-card-hover group overflow-hidden focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
               >
-                <span className="block h-28 w-full overflow-hidden">
-                  <DestinationArt
-                    palette={d.palette}
-                    seed={d.slug.length + 3}
-                    alt=""
-                    className="h-full w-full"
-                  />
+                <span className="block h-36 w-full overflow-hidden">
+                  {d.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={d.image.src}
+                      alt={d.image.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <DestinationArt
+                      palette={d.palette}
+                      seed={d.slug.length + 3}
+                      alt=""
+                      className="h-full w-full"
+                    />
+                  )}
                 </span>
                 <span className="block p-4">
                   <span className="flex items-center justify-between gap-2">
-                    <span className="text-base font-semibold text-[#0a1628] group-hover:text-[#17827c]">
+                    <span className="text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
                       {d.name}
                     </span>
                     <Badge tone="gold">{d.stateUF}</Badge>
                   </span>
-                  <span className="mt-1 block text-xs text-[#8c8471]">
+                  <span className="mt-1 block text-xs text-[#736b5b]">
                     {d.region} · {d.tagline.slice(0, 60)}
                     {d.tagline.length > 60 ? "…" : ""}
                   </span>
-                  <span className="mt-2 block text-xs font-medium text-[#17827c]">
+                  <span className="mt-2 block text-xs font-medium text-[#0f6f69]">
                     Ver guia completo →
                   </span>
                 </span>
@@ -199,7 +209,7 @@ export function CompareTool({ destinations }: CompareToolProps) {
             >
               Critério a critério
             </h2>
-            <p className="mt-2 text-sm text-[#8c8471]">
+            <p className="mt-2 text-sm text-[#736b5b]">
               A coluna marcada como “vantagem” indica apenas critérios
               mensuráveis declarados — custo, distância, duração e volume de
               conteúdo verificado.
@@ -274,7 +284,7 @@ export function CompareTool({ destinations }: CompareToolProps) {
               </table>
             </div>
 
-            <p className="mt-4 text-xs text-[#8c8471]">
+            <p className="mt-4 text-xs text-[#736b5b]">
               Critérios exibidos na tabela: {COMPARE_CRITERIA.length}. Quando não
               há base para comparar, o valor aparece como “Sem dado disponível” —
               em vez de uma estimativa inventada.

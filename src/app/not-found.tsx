@@ -90,10 +90,10 @@ export default function NotFound() {
               href={p.href}
               className="rc-card rc-card-hover group focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
             >
-              <span className="block text-base font-semibold text-[#0a1628] group-hover:text-[#17827c]">
+              <span className="block text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
                 {p.title}
               </span>
-              <span className="mt-1.5 block text-sm leading-relaxed text-[#8c8471]">
+              <span className="mt-1.5 block text-sm leading-relaxed text-[#736b5b]">
                 {p.description}
               </span>
             </Link>
@@ -108,22 +108,34 @@ export default function NotFound() {
         >
           Destinos em destaque
         </h2>
-        <div className="mt-5 flex flex-wrap gap-2.5">
-          {suggestions.map((d) => (
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {suggestions.slice(0, 3).map((d) => (
             <Link
               key={d.slug}
               href={`/destinos/${d.slug}`}
-              className="rounded-xl border border-[#e8e3d8] bg-white px-4 py-2.5 text-sm font-medium text-[#0a1628] transition-colors hover:bg-[#faf8f4] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+              className="group flex items-center gap-3.5 rounded-2xl border border-[#e8e3d8] bg-white p-3 transition-colors hover:border-[#16304f]/40 hover:bg-[#faf8f4] focus-visible:outline-3 focus-visible:outline-[#2fb8c4]"
             >
-              {d.name} — {d.stateUF}
+              {d.image && (
+                <div className="h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-[#0a1628]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={d.image.src}
+                    alt={d.image.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+              )}
+              <div className="min-w-0">
+                <span className="block text-sm font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
+                  {d.name}
+                </span>
+                <span className="text-xs text-[#736b5b]">
+                  {d.stateUF} · {d.region}
+                </span>
+              </div>
             </Link>
           ))}
-          <Link
-            href="/destinos"
-            className="rounded-xl border border-transparent px-4 py-2.5 text-sm font-medium text-[#17827c] underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
-          >
-            Ver todos →
-          </Link>
         </div>
       </section>
     </div>

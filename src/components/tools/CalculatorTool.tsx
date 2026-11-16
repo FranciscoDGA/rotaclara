@@ -21,6 +21,7 @@ import {
   createExpense,
   validate,
 } from "@/lib/domain/calculator";
+import type { ValidationIssue } from "@/lib/domain/calculator";
 import { categoryLabel } from "@/lib/seo/seo";
 import { formatBRL, formatPercent, todayISO } from "@/lib/format/format";
 import { EstimateDisclosure } from "@/components/ui/Notice";
@@ -118,7 +119,37 @@ export function CalculatorTool({
     [destination, days, people, items, budget, months],
   );
 
-  const issues = useMemo(() => validate(input), [input]);
+  /**
+   * Issues de campo que o domínio não enxerga: o `validate` do domínio
+   * recebe apenas as despesas já filtradas. Aqui recusamos valores
+   * negativos, zero ou não numéricos em vez de descartá-los em silêncio.
+   */
+  const rowIssues = useMemo(() => {
+    const out: ValidationIssue[] = [];
+    rows.forEach((row, index) => {
+      if (row.amount.trim() !== "" && parseAmount(row.amount) <= 0) {
+        out.push({
+          field: `row-amount-${row.id}`,
+          message:
+            `Despesa ${index + 1}: informe um valor maior que zero em reais ` +
+            "(negativos, zero e textos não são aceitos).",
+        });
+      }
+    });
+    if (budget.trim() !== "" && parseAmount(budget) <= 0) {
+      out.push({
+        field: "calc-orcamento",
+        message:
+          "Orçamento: informe um valor maior que zero em reais ou deixe o campo vazio.",
+      });
+    }
+    return out;
+  }, [rows, budget]);
+
+  const issues = useMemo(
+    () => [...validate(input), ...rowIssues],
+    [input, rowIssues],
+  );
   const result = useMemo(() => calculate(input), [input]);
 
   function addRow() {
@@ -238,22 +269,40 @@ export function CalculatorTool({
           </div>
 
           {destination && (
-            <div className="mt-4 rounded-xl bg-[#faf8f4] p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
-                Faixa de referência do destino
-              </p>
-              <p className="mt-1.5 text-sm text-[#16304f]">
-                <strong>
-                  R$ {destination.cost.minPerDayBRL}–{destination.cost.maxPerDayBRL}
-                </strong>{" "}
-                por pessoa por dia · {destination.costLevel}
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-[#8c8471]">
-                {destination.cost.methodology}
-              </p>
-              <p className="mt-1.5 text-xs text-[#8c8471]">
-                Data de referência: {destination.cost.referenceDate.split("-").reverse().join("/")}
-              </p>
+            <div className="mt-4 overflow-hidden rounded-xl border border-[#e8e3d8] bg-[#faf8f4]">
+              {destination.image && (
+                <div className="relative aspect-[16/6] w-full overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={destination.image.src}
+                    alt={destination.image.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute top-2.5 left-2.5">
+                    <Badge tone="gold">
+                      {destination.name} · {destination.stateUF}
+                    </Badge>
+                  </div>
+                </div>
+              )}
+              <div className="p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
+                  Faixa de referência do destino
+                </p>
+                <p className="mt-1.5 text-sm text-[#16304f]">
+                  <strong>
+                    R$ {destination.cost.minPerDayBRL}–{destination.cost.maxPerDayBRL}
+                  </strong>{" "}
+                  por pessoa por dia · {destination.costLevel}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-[#736b5b]">
+                  {destination.cost.methodology}
+                </p>
+                <p className="mt-1.5 text-xs text-[#736b5b]">
+                  Data de referência: {destination.cost.referenceDate.split("-").reverse().join("/")}
+                </p>
+              </div>
             </div>
           )}
         </section>
@@ -274,7 +323,7 @@ export function CalculatorTool({
 
           <div className="mt-4 space-y-3">
             {rows.length === 0 && (
-              <p className="rounded-xl border border-dashed border-[#d6cfc0] p-6 text-center text-sm text-[#8c8471]">
+              <p className="rounded-xl border border-dashed border-[#d6cfc0] p-6 text-center text-sm text-[#736b5b]">
                 Nenhuma despesa adicionada. Clique em “Adicionar despesa”.
               </p>
             )}
@@ -471,7 +520,7 @@ export function CalculatorTool({
                         </span>
                         <span className="font-medium text-[#0a1628]">
                           {formatBRL(cat.amountBRL)}{" "}
-                          <span className="text-[#8c8471]">
+                          <span className="text-[#736b5b]">
                             ({formatPercent(cat.share)})
                           </span>
                         </span>
@@ -480,7 +529,7 @@ export function CalculatorTool({
                         <span
                           style={{
                             width: `${Math.max(2, cat.share * 100)}%`,
-                            background: CATEGORY_COLORS[cat.category] ?? "#17827c",
+                            background: CATEGORY_COLORS[cat.category] ?? "#0f6f69",
                           }}
                         />
                       </div>
@@ -501,7 +550,7 @@ export function CalculatorTool({
               >
                 Metodologia do cálculo
               </h2>
-              <div className="mt-2 space-y-1.5 text-xs leading-relaxed text-[#8c8471]">
+              <div className="mt-2 space-y-1.5 text-xs leading-relaxed text-[#736b5b]">
                 <p>
                   <strong className="text-[#16304f]">Total:</strong> soma
                   aritmética de todas as despesas informadas ({items.length}{" "}
@@ -525,7 +574,7 @@ export function CalculatorTool({
                   exclusivamente do que você informou.
                 </p>
               </div>
-              <p className="mt-3 text-xs text-[#8c8471]">
+              <p className="mt-3 text-xs text-[#736b5b]">
                 Data de referência do cálculo:{" "}
                 <time dateTime={todayISO()} className="font-medium text-[#16304f]">
                   {todayISO().split("-").reverse().join("/")}
@@ -563,7 +612,7 @@ export function CalculatorTool({
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
-              className="mx-auto text-[#b3ab99]"
+              className="mx-auto text-[#7a7162]"
             >
               <rect x="4" y="2" width="16" height="20" rx="2" />
               <path d="M8 6h8M8 10h8M8 14h3M8 18h3" />
@@ -571,7 +620,7 @@ export function CalculatorTool({
             <p className="mt-3 text-sm font-medium text-[#0a1628]">
               Preencha as despesas e clique em calcular
             </p>
-            <p className="mt-1.5 text-xs leading-relaxed text-[#8c8471]">
+            <p className="mt-1.5 text-xs leading-relaxed text-[#736b5b]">
               Já há valores de exemplo no formulário. Ajuste para a sua
               realidade antes de calcular.
             </p>
@@ -588,12 +637,12 @@ export function CalculatorTool({
 
 const CATEGORY_COLORS: Record<string, string> = {
   transporte: "#2a5583",
-  hospedagem: "#17827c",
+  hospedagem: "#0f6f69",
   alimentacao: "#c9952f",
   passeios: "#2fb8c4",
   combustivel: "#5b8aa6",
-  pedagios: "#8c8471",
-  estacionamento: "#8c8471",
+  pedagios: "#736b5b",
+  estacionamento: "#736b5b",
   seguro: "#a32b2b",
   outras: "#b3ab99",
 };

@@ -23,7 +23,7 @@ Implementado em `src/lib/affiliate/affiliate.ts`:
 
 | Parceiro | Variável de ambiente | Situação na v1 |
 | --- | --- | --- |
-| Stay22 (hospedagem) | `STAY22_PUBLISHER_ID` | Pronto; sem `trackingParam` configurado → aponta ao site oficial |
+| Stay22 (hospedagem) | `STAY22_PUBLISHER_ID` | Pronto; usa o endpoint oficial Allez/Roam (`/allez/roam?aid=…&address=…`) — doc: `dev.stay22.com/docs/allez`, verificado com HTTP 302 em 15/11/2026 |
 | Booking.com | `BOOKING_AFFILIATE_ID` | Pronto; monta `?aid=<id>` |
 | GetYourGuide | `GETYOURGUIDE_PARTNER_ID` | Pronto |
 | Viator | `VIATOR_AFFILIATE_ID` | Pronto |
@@ -38,8 +38,10 @@ buildOfferLink({ partner: "booking", kind: "monetized", ... })
 // com env  → { kind: "monetized", href: "https://www.booking.com/?aid=…" }
 ```
 
-Onde aparecem: página `/hospedagens` (listagens), página do destino (quando
-houver listagem) e qualquer bloco de "ofertas". O componente `Notice`
+Onde aparecem: página `/hospedagens` (listagens — é o único local com
+links monetizados na v1). Na página do destino os cartões de listagem
+são informativos, sem link de oferta; o convite é o "Ver todas as
+opções" para `/hospedagens`. O componente `Notice`
 (`AffiliateDisclosure`) explica comissão no topo das vitrines.
 
 ### 2.2 Afiliados de conteúdo (futuro próximo)

@@ -171,7 +171,7 @@ export function DestinationExplorer({
                 <button
                   type="button"
                   onClick={reset}
-                  className="text-xs font-medium text-[#17827c] underline underline-offset-2 rounded focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+                  className="text-xs font-medium text-[#0f6f69] underline underline-offset-2 rounded focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
                 >
                   Limpar
                 </button>
@@ -183,7 +183,7 @@ export function DestinationExplorer({
           <div className="mt-5">
             <label
               htmlFor="filtro-busca"
-              className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]"
+              className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]"
             >
               Buscar
             </label>
@@ -287,7 +287,7 @@ export function DestinationExplorer({
                 </Chip>
               ))}
             </div>
-            <p className="mt-2 text-[11px] leading-relaxed text-[#8c8471]">
+            <p className="mt-2 text-[11px] leading-relaxed text-[#736b5b]">
               Filtra destinos com boa época no mês selecionado.
             </p>
           </FilterGroup>
@@ -299,7 +299,7 @@ export function DestinationExplorer({
           ============================================================ */}
       <div>
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-[#8c8471]" role="status" aria-live="polite">
+          <p className="text-sm text-[#736b5b]" role="status" aria-live="polite">
             <span className="font-semibold text-[#0a1628]">
               {outcome.results.length}
             </span>{" "}
@@ -315,7 +315,7 @@ export function DestinationExplorer({
               title="Nenhum destino corresponde a todos os filtros"
               description={
                 outcome.unmatchedFilters.length > 0
-                  ? `Sem dados suficientes para: ${outcome.unmatchedFilters.join(
+                  ? `Nenhum destino corresponde a ${outcome.unmatchedFilters.join(
                       ", ",
                     )}. Nossa base tem ${outcome.total} destinos verificados — remova um filtro para ver alternativas.`
                   : `Nossa base tem ${outcome.total} destinos verificados. Remova um filtro para ampliar os resultados.`
@@ -347,7 +347,7 @@ export function DestinationExplorer({
               action={
                 <Link
                   href="/"
-                  className="text-sm font-medium text-[#17827c] underline underline-offset-2"
+                  className="text-sm font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   Voltar ao início
                 </Link>
@@ -358,7 +358,7 @@ export function DestinationExplorer({
 
         {/* Nota editorial */}
         {outcome.results.length > 0 && (
-          <p className="mt-8 rounded-xl border border-[#e8e3d8] bg-[#faf8f4] p-4 text-xs leading-relaxed text-[#8c8471]">
+          <p className="mt-8 rounded-xl border border-[#e8e3d8] bg-[#faf8f4] p-4 text-xs leading-relaxed text-[#736b5b]">
             Os valores de custo são <strong>estimativas de planejamento</strong>{" "}
             por pessoa por dia, com metodologia e data de referência em cada
             destino. Não exibimos preços de passagens, hotéis ou passeios em
@@ -384,7 +384,7 @@ function FilterGroup({
   return (
     <fieldset className="mt-5 border-t border-[#f4f1ea] pt-4">
       <legend className="sr-only">{title}</legend>
-      <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
         {title}
       </p>
       <div className="mt-2.5">{children}</div>

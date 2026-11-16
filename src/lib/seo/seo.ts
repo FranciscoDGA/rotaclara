@@ -167,7 +167,8 @@ export function destinationJsonLd(destination: Destination) {
           addressCountry: "BR",
         },
         touristType: destination.tags.map(tagLabel),
-        geo: undefined,
+        // Sem `geo`: a base não declara coordenadas verificadas —
+        // preferimos omitir a campo vazio a publicar localização imprecisa.
       },
       {
         "@type": "BreadcrumbList",

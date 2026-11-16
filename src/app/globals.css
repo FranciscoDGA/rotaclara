@@ -24,8 +24,8 @@
   --color-teal-900: #073230;
   --color-teal-800: #0b4744;
   --color-teal-700: #10635f;
-  --color-teal-600: #17827c;
-  --color-teal-500: #1fa39b;
+  --color-teal-600: #0f6f69;
+  --color-teal-500: #15908a;
 
   /* --- Verde-água (destaque de dados / descoberta) --- */
   --color-aqua-500: #2fb8c4;
@@ -33,7 +33,7 @@
   --color-aqua-300: #86e0e6;
 
   /* --- Dourado quente (destaque primário) --- */
-  --color-gold-600: #a8761f;
+  --color-gold-600: #8f6417;
   --color-gold-500: #c9952f;
   --color-gold-400: #dfb45c;
   --color-gold-300: #eed298;
@@ -44,10 +44,10 @@
   --color-sand-200: #e8e3d8;
   --color-sand-300: #d6cfc0;
   --color-sand-400: #b3ab99;
-  --color-sand-500: #8c8471;
+  --color-sand-500: #736b5b;
 
   /* --- Semânticos --- */
-  --color-success-600: #1a7f4b;
+  --color-success-600: #167043;
   --color-success-500: #22a05f;
   --color-success-100: #e3f6ec;
   --color-warning-600: #9a6206;
@@ -315,10 +315,17 @@
    ===================================================================== */
 
 @media print {
-  .rc-no-print {
+  header, footer, nav, .rc-no-print {
     display: none !important;
   }
   body {
-    background: #fff;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .rc-print-clean {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: transparent !important;
   }
 }

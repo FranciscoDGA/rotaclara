@@ -83,7 +83,7 @@ export default function ContatoPage() {
                   <p className="text-sm font-semibold text-[#0a1628]">
                     {t.title}
                   </p>
-                  <p className="mt-1 text-sm leading-relaxed text-[#8c8471]">
+                  <p className="mt-1 text-sm leading-relaxed text-[#736b5b]">
                     {t.body}
                   </p>
                 </li>
@@ -99,7 +99,7 @@ export default function ContatoPage() {
               Respondemos em até 5 dias úteis. Correções de conteúdo têm
               prioridade e costumam ser resolvidas mais rápido.
             </p>
-            <p className="mt-3 text-xs leading-relaxed text-[#8c8471]">
+            <p className="mt-3 text-xs leading-relaxed text-[#736b5b]">
               Este site não possui suporte de reserva ou atendimento de
               provedores de hospedagem — para isso, fale diretamente com o
               provedor indicado na página do destino.

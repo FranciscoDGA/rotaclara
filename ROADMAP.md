@@ -23,40 +23,36 @@
 | Responsividade | ✅ | Mobile-first, menu acessível (teclado, Esc, scroll lock) |
 | Identidade visual | ✅ | Navy + creme + dourado das referências; bússola; Inter + Fraunces |
 
-### Engenharia
+## ✅ Etapa 2 — Auditoria Geral, Correções e Confiabilidade (15/11/2026)
 
-| Item | Estado |
-| --- | --- |
-| TypeScript strict + `noUncheckedIndexedAccess` | ✅ |
-| ESLint 9 (inclui regras de hooks) | ✅ 0 erros |
-| 171 testes (7 arquivos) — domínio, formatação, afiliados | ✅ |
-| `npm run verify` (typecheck + lint + test + build) | ✅ |
-| Build: 29 páginas geradas | ✅ |
-| Documentação: README, ARCHITECTURE, SEO_STRATEGY, DATA_SOURCES, MONETIZATION, ROADMAP, `.env.example` | ✅ |
-| Camada de afiliados com fallback editorial | ✅ |
-| Persistência do roteiro via `useSyncExternalStore` | ✅ |
+| Auditoria & Correção | Estado | Observação |
+| --- | --- | --- |
+| **Auditoria Geográfica & Editorial** | ✅ | Gramado dissociado geograficamente do Vale dos Vinhedos (tratado como deslocamento intermunicipal); Cristo Redentor marcado como pago com faixas reais; Olinda vinculada ao Atlântico; Poço Azul retificado para Nova Redenção; Cachoeira da Fumaça no Vale do Capão (Palmeiras); José Lins do Rego em Tambauzinho (`DESTINATION_AUDIT.md`). |
+| **Metodologia de Custos** | ✅ | Formalizada transparência por perfil (econômico, moderado, confortável); distinção de valores estimados vs confirmados (`COST_METHODOLOGY.md`). |
+| **Fontes & Confiabilidade** | ✅ | 60 URLs auditadas; remoção de links mortos e substituição por órgãos governamentais/oficiais (`DATA_SOURCES.md`). |
+| **Robustez das Ferramentas** | ✅ | Calculadora valida valores negativos e textos com `rowIssues`; Comparador corrigido em off-by-one de meses (0–11) e concordância de texto; Planejador com rótulos acentuados (`TEST_REPORT.md`). |
+| **Monetização & Stay22** | ✅ | Integração Stay22 adaptada para o padrão oficial `/allez/roam?aid=...&address=...`; componente `AffiliateLink.tsx` com logging de clique compatível com LGPD; fallback editorial garantido sem credenciais (`MONETIZATION_AUDIT.md`). |
+| **SEO & Acessibilidade** | ✅ | Sitemap e robots auditados; eliminação de salto de cabeçalhos em `/hospedagens` (H1→H2→H3); páginas institucionais prontas para AdSense (`SEO_AUDIT.md`). |
+| **Suíte de Testes** | ✅ | Expandida para 178 testes unitários e de integração no Vitest, todos passando. |
+| **Documentação Técnica** | ✅ | `AUDIT_BEFORE.md`, `AUDIT_AFTER.md`, `DESTINATION_AUDIT.md`, `COST_METHODOLOGY.md`, `DATA_SOURCES.md`, `MONETIZATION_AUDIT.md`, `SEO_AUDIT.md`, `TEST_REPORT.md` e `ROADMAP.md`. |
 
-### Bugs reais corrigidos durante os testes
+## ✅ Preparação Avançada do Produto (Frentes Estratégicas Concluídas)
 
-- Parsing de valor `99.90` era lido como `9990` (formato brasileiro
-  assumido cegamente) → `parseBRLAmount` com regras declaradas.
-- `isPartnerEnabled` comparava com `!== null` e ativava parceiros **sem
-  nenhuma configuração** → correção para checagem de verdade (`Boolean`).
-- `addActivity` podia deixar atividades fora da ordem cronológica do dia
-  → inserção com sort estável por parte do dia.
-- `reorderActivities` com índice inválido criava objeto novo sem necessidade
-  → devolve a mesma referência.
+| Entrega | Estado | O que foi entregue |
+| --- | --- | --- |
+| **1. Diagnóstico Inteligente de Viagem** | ✅ | Rota dedicada `/diagnostico` e componente `DiagnosisTool.tsx`: cruza orçamento do grupo com diárias dos destinos, calcula compatibilidade, alerta despesas críticas esquecidas e sugere cortes de custos reais. |
+| **2. Integração Completa de Fotos Reais** | ✅ | Todas as 15 cidades agora possuem fotos reais em alta definição com créditos de autor, fonte e licença Unsplash, exibidas em cards, explorador, cabeçalhos, busca e comparador. |
+| **3. Exportação, Importação e Impressão de Roteiro** | ✅ | `/roteiro` agora exporta em `.json` e `.txt`, importa arquivos `.json` de outros dispositivos sem precisar de servidor/login e possui folha de estilos limpa `@media print` para salvar em PDF ou imprimir. |
+| **4. Expansão para 15 Destinos e Guias** | ✅ | Adicionados 5 polos de relevância internacional: Foz do Iguaçu (PR), Florianópolis (SC), Fernando de Noronha (PE), Lençóis Maranhenses (MA) e Ouro Preto (MG), com dados auditados e guias completos. |
 
 ## 🔜 Próximo — v1.1 (curto prazo)
 
 | Item | Por quê |
 | --- | --- |
-| Imagens reais por destino (com `alt` e crédito) | Hoje a arte é SVG de decoração; foto real aumenta CTR e confiança |
 | Busca na homepage com sugestões (`/destinos?q=`) | Conectar hero ao explorador |
-| Mais 10 destinos + guias | Cobertura Nordeste/Sul mais funda (Jalapão, Pipa, Florianópolis…) |
+| Mais 5 destinos + guias (Jalapão, Chapada dos Veadeiros, Tiradentes...) | Ampliar malha turística nacional |
 | Validação de JSON-LD no Rich Results Test | Depois do primeiro deploy |
 | Search Console + GA4 (via env) | Medir antes de especular |
-| Compartilhar roteiro por link (exportar/importar JSON) | Colaboração sem backend — arquivo local |
 | Modo offline do roteiro (PWA básica) | Ferramenta utilitária pede resiliência |
 
 ## 📅 v2 — Depois do produto validar

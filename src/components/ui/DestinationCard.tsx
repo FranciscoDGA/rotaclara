@@ -33,30 +33,43 @@ export function DestinationCard({
 
   return (
     <article className="rc-card rc-card-hover group flex h-full flex-col overflow-hidden">
-      <Link
-        href={`/destinos/${d.slug}`}
-        className="focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 rounded-t-xl"
-        aria-label={`Ver guia de ${d.name}`}
-      >
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <DestinationArt
-            palette={d.palette}
-            seed={d.slug.length + d.stateUF.charCodeAt(0)}
-            alt={`Arte ilustrativa representando ${d.name}`}
-            className="h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
-          />
-          <div className="absolute left-3 top-3">
-            <Badge tone="default" className="bg-white/90 backdrop-blur-sm">
-              {d.stateUF}
-            </Badge>
-          </div>
-          <div className="absolute right-3 top-3">
-            <Badge tone="gold" className="bg-white/90 backdrop-blur-sm">
-              {COST_LABEL[d.costLevel] ?? d.costLevel}
-            </Badge>
-          </div>
+      {/* Imagem é o link; badges ficam FORA do link (irmãos) para que o
+          texto visível deles não entre em conflito com o aria-label
+          — regra label-content-name-mismatch. */}
+      <div className="relative aspect-[16/9] overflow-hidden rounded-t-xl">
+        <Link
+          href={`/destinos/${d.slug}`}
+          className="focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 absolute inset-0 z-10"
+          aria-label={`Ver guia de ${d.name}`}
+        >
+          {d.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={d.image.src}
+              alt={d.image.alt}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+          ) : (
+            <DestinationArt
+              palette={d.palette}
+              seed={d.slug.length + d.stateUF.charCodeAt(0)}
+              alt={`Arte ilustrativa representando ${d.name}`}
+              className="h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+          )}
+        </Link>
+        <div className="absolute left-3 top-3 z-20">
+          <Badge tone="default" className="bg-white/90 backdrop-blur-sm">
+            {d.stateUF}
+          </Badge>
         </div>
-      </Link>
+        <div className="absolute right-3 top-3 z-20">
+          <Badge tone="gold" className="bg-white/90 backdrop-blur-sm">
+            {COST_LABEL[d.costLevel] ?? d.costLevel}
+          </Badge>
+        </div>
+      </div>
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
@@ -64,15 +77,15 @@ export function DestinationCard({
             <h3 className="text-lg font-semibold leading-tight text-[#0a1628]">
               <Link
                 href={`/destinos/${d.slug}`}
-                className="rounded transition-colors hover:text-[#17827c] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+                className="rounded transition-colors hover:text-[#0f6f69] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
               >
                 {d.name}
               </Link>
             </h3>
-            <p className="mt-0.5 text-sm text-[#8c8471]">{d.state}</p>
+            <p className="mt-0.5 text-sm text-[#736b5b]">{d.state}</p>
           </div>
           <div className="shrink-0 text-right">
-            <p className="text-xs uppercase tracking-wide text-[#8c8471]">
+            <p className="text-xs uppercase tracking-wide text-[#736b5b]">
               Melhor época
             </p>
             <p className="text-xs font-medium text-[#16304f]">
@@ -90,7 +103,7 @@ export function DestinationCard({
             {d.highlights.slice(0, 3).map((h) => (
               <li
                 key={h}
-                className="flex items-start gap-2 text-xs leading-relaxed text-[#8c8471]"
+                className="flex items-start gap-2 text-xs leading-relaxed text-[#736b5b]"
               >
                 <svg
                   width="14"
@@ -102,7 +115,7 @@ export function DestinationCard({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#1fa39b]"
+                  className="mt-0.5 shrink-0 text-[#15908a]"
                 >
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
@@ -122,15 +135,15 @@ export function DestinationCard({
 
         <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#f4f1ea] pt-4 mt-4">
           <div>
-            <p className="text-[11px] uppercase tracking-wide text-[#8c8471]">
+            <p className="text-[11px] uppercase tracking-wide text-[#736b5b]">
               Estimativa diária
             </p>
             <p className="text-sm font-semibold text-[#0a1628]">
               R$ {d.cost.minPerDayBRL}–{d.cost.maxPerDayBRL}
-              <span className="text-xs font-normal text-[#8c8471]"> /dia</span>
+              <span className="text-xs font-normal text-[#736b5b]"> /dia</span>
             </p>
           </div>
-          <span className="inline-flex items-center gap-1 text-sm font-medium text-[#17827c]">
+          <span className="inline-flex items-center gap-1 text-sm font-medium text-[#0f6f69]">
             Ver guia
             <svg
               width="14"

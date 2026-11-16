@@ -79,6 +79,43 @@ describe("modo com parceiro configurado", () => {
   });
 
   it("parceiro habilitado SEM parâmetro de rastreamento aponta ao site oficial", async () => {
+    vi.stubEnv("CIVITATIS_AFFILIATE_ID", "civ-77");
+    const mod = await loadAffiliateModule();
+
+    expect(mod.isPartnerEnabled("civitatis")).toBe(true);
+
+    const link = mod.buildOfferLink({
+      partner: "civitatis",
+      kind: "monetized",
+      label: "Ingressos",
+    });
+
+    // Civitatis tem env própria mas nenhum parâmetro de rastreamento
+    // documentado: aponta ao site oficial, sem URL de rastreio inventada.
+    expect(link.href).toBe("https://www.civitatis.com/");
+    expect(link.kind).toBe("monetized");
+  });
+
+  it("Stay22 habilitado usa o endpoint oficial Allez com aid e address", async () => {
+    vi.stubEnv("STAY22_PUBLISHER_ID", "pub-42");
+    const mod = await loadAffiliateModule();
+
+    const link = mod.buildOfferLink({
+      partner: "stay22",
+      kind: "monetized",
+      label: "Reservar estadia",
+      destinationSlug: "gramado",
+    });
+
+    // Formato documentado em dev.stay22.com/docs/allez/parameters
+    // (aid obrigatório; address exigido por /allez/roam).
+    expect(link.kind).toBe("monetized");
+    expect(link.href).toBe(
+      "https://www.stay22.com/allez/roam?aid=pub-42&address=gramado",
+    );
+  });
+
+  it("Stay22 sem destino não inventa address", async () => {
     vi.stubEnv("STAY22_PUBLISHER_ID", "pub-42");
     const mod = await loadAffiliateModule();
 
@@ -88,9 +125,7 @@ describe("modo com parceiro configurado", () => {
       label: "Reservar estadia",
     });
 
-    // Stay22 não tem trackingParam configurado: sem URL inventada.
-    expect(link.href).toBe("https://www.stay22.com/");
-    expect(link.kind).toBe("monetized");
+    expect(link.href).toBe("https://www.stay22.com/allez/roam?aid=pub-42");
   });
 
   it("só o parceiro da env habilita; os demais seguem editoriais", async () => {

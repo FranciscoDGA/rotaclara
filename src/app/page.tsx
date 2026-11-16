@@ -26,8 +26,8 @@ export const metadata: Metadata = buildMetadata({
   title: "RotaClara — Viajar melhor começa com decisões melhores",
   description:
     "Descubra destinos adequados ao seu perfil e orçamento, compare custos, " +
-    "monte roteiros e calcule o gasto da sua viagem. Ferramentas de " +
-    "planejamento com estimativas transparentes sobre o Brasil.",
+    "monte roteiros e calcule o gasto da viagem. Estimativas transparentes " +
+    "sobre o Brasil.",
   path: "/",
 });
 
@@ -39,7 +39,7 @@ const PROFILES = [
     description:
       "Destinos com faixa diária mais acessível, sem abrir mão de estrutura.",
     href: "/destinos?perfil=economico",
-    accent: "#17827c",
+    accent: "#0f6f69",
   },
   {
     tag: "romantico" as const,
@@ -129,6 +129,16 @@ export default function HomePage() {
           HERO
           ============================================================ */}
       <section className="rc-grain relative overflow-hidden bg-[#0a1628] text-white">
+        {/* Fotografia real de ambiência ao fundo */}
+        {allDestinations[0]?.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={allDestinations[0].image.src}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-15 blur-2xl scale-110"
+          />
+        )}
         {/* Padrão de linhas discretas */}
         <div
           aria-hidden="true"
@@ -184,11 +194,19 @@ export default function HomePage() {
               {/* CTAs */}
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink
-                  href="/planejador"
+                  href="/diagnostico"
                   size="lg"
                   className="bg-[#c9952f] text-[#0a1628] hover:bg-[#dfb45c]"
                 >
-                  Planejar minha viagem
+                  Diagnóstico de orçamento
+                </ButtonLink>
+                <ButtonLink
+                  href="/planejador"
+                  size="lg"
+                  variant="secondary"
+                  className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40"
+                >
+                  Planejar viagem
                 </ButtonLink>
                 <ButtonLink
                   href="/calculadora"
@@ -196,13 +214,40 @@ export default function HomePage() {
                   variant="secondary"
                   className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40"
                 >
-                  Calcular orçamento
+                  Calculadora
                 </ButtonLink>
               </div>
             </div>
 
-            {/* Painel de estatísticas */}
-            <div className="hidden lg:block">
+            {/* Painel lateral: Destaques visuais & Estatísticas */}
+            <div className="hidden lg:flex lg:flex-col lg:gap-5">
+              {/* Card fotográfico em destaque no Hero */}
+              {allDestinations[0]?.image && (
+                <Link
+                  href={`/destinos/${allDestinations[0].slug}`}
+                  className="group relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-white/15 bg-white/[0.04] shadow-2xl transition-transform duration-300 hover:scale-[1.02] focus-visible:outline-3 focus-visible:outline-[#4fcdd6]"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={allDestinations[0].image.src}
+                    alt={allDestinations[0].image.alt}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-black/30" />
+                  <div className="absolute top-4 left-4">
+                    <Badge tone="gold">Destino em destaque</Badge>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="text-xl font-bold text-white drop-shadow-sm">
+                      {allDestinations[0].name}
+                    </p>
+                    <p className="text-xs text-white/80">
+                      {allDestinations[0].tagline}
+                    </p>
+                  </div>
+                </Link>
+              )}
+
               <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-6 backdrop-blur-sm">
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#4fcdd6]">
                   Base editorial verificada
@@ -222,7 +267,7 @@ export default function HomePage() {
                   />
                   <MiniStat
                     label="Ferramentas funcionando"
-                    value="4 integradas"
+                    value="5 integradas"
                   />
                   <MiniStat
                     label="Preços em tempo real"
@@ -335,10 +380,10 @@ export default function HomePage() {
                     <h3 className="mt-4 text-base font-semibold text-[#0a1628]">
                       {profile.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#8c8471]">
+                    <p className="mt-2 text-sm leading-relaxed text-[#736b5b]">
                       {profile.description}
                     </p>
-                    <p className="mt-3 text-xs font-medium text-[#17827c]">
+                    <p className="mt-3 text-xs font-medium text-[#0f6f69]">
                       {items.length} {items.length === 1 ? "destino" : "destinos"} →
                     </p>
                   </Link>
@@ -351,18 +396,28 @@ export default function HomePage() {
                           className="flex items-center gap-3 rounded-xl p-1.5 transition-colors hover:bg-[#f4f1ea] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
                         >
                           <span className="h-9 w-12 shrink-0 overflow-hidden rounded-md">
-                            <DestinationArt
-                              palette={d.palette}
-                              seed={d.slug.length}
-                              alt=""
-                              className="h-full w-full"
-                            />
+                            {d.image ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={d.image.src}
+                                alt=""
+                                loading="lazy"
+                                className="h-full w-full object-cover"
+                              />
+                            ) : (
+                              <DestinationArt
+                                palette={d.palette}
+                                seed={d.slug.length}
+                                alt=""
+                                className="h-full w-full"
+                              />
+                            )}
                           </span>
                           <span className="min-w-0">
                             <span className="block truncate text-sm font-medium text-[#0a1628]">
                               {d.name}
                             </span>
-                            <span className="block text-xs text-[#8c8471]">
+                            <span className="block text-xs text-[#736b5b]">
                               {d.stateUF}
                             </span>
                           </span>
@@ -442,25 +497,35 @@ export default function HomePage() {
                 className="group overflow-hidden rounded-2xl border border-[#e8e3d8] bg-[#faf8f4] transition-all duration-200 hover:border-[#d6cfc0] hover:shadow-[0_8px_32px_rgb(10_22_40/0.08)] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
               >
                 <div className="aspect-[16/8] overflow-hidden">
-                  <DestinationArt
-                    palette={d.palette}
-                    seed={d.slug.length + 3}
-                    alt={`Arte ilustrativa representando ${d.name}`}
-                    className="h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
+                  {d.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={d.image.src}
+                      alt={d.image.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  ) : (
+                    <DestinationArt
+                      palette={d.palette}
+                      seed={d.slug.length + 3}
+                      alt={`Arte ilustrativa representando ${d.name}`}
+                      className="h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  )}
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2">
                     <Badge tone="teal">{d.region}</Badge>
-                    <span className="text-xs text-[#8c8471]">{d.stateUF}</span>
+                    <span className="text-xs text-[#736b5b]">{d.stateUF}</span>
                   </div>
-                  <h3 className="mt-3 text-base font-semibold text-[#0a1628] group-hover:text-[#17827c]">
+                  <h3 className="mt-3 text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
                     Guia de {d.name}
                   </h3>
-                  <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#8c8471]">
+                  <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#736b5b]">
                     {d.intro}
                   </p>
-                  <p className="mt-4 text-xs font-medium text-[#17827c]">
+                  <p className="mt-4 text-xs font-medium text-[#0f6f69]">
                     Ler guia completo →
                   </p>
                 </div>
@@ -507,7 +572,7 @@ export default function HomePage() {
               <h3 className="mt-4 text-base font-semibold text-[#0a1628]">
                 {b.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#8c8471]">
+              <p className="mt-2 text-sm leading-relaxed text-[#736b5b]">
                 {b.description}
               </p>
             </Card>
@@ -613,16 +678,16 @@ interface ToolCardProps {
 function ToolCard({ number, title, description, href, hrefLabel }: ToolCardProps) {
   return (
     <div className="rc-card rc-card-hover flex h-full flex-col p-6">
-      <span className="text-xs font-semibold tracking-widest text-[#c9952f]">
+      <span className="text-xs font-semibold tracking-widest text-[#8f6417]">
         {number}
       </span>
       <h3 className="mt-3 text-lg font-semibold text-[#0a1628]">{title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-[#8c8471]">
+      <p className="mt-2 flex-1 text-sm leading-relaxed text-[#736b5b]">
         {description}
       </p>
       <Link
         href={href}
-        className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#17827c] hover:text-[#0b4744] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 rounded"
+        className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[#0f6f69] hover:text-[#0b4744] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 rounded"
         aria-label={hrefLabel}
       >
         {hrefLabel}

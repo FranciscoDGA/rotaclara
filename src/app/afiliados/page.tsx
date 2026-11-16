@@ -115,7 +115,7 @@ export default function AfiliadosPage() {
         >
           Parceiros suportados
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-[#8c8471]">
+        <p className="mt-3 text-sm leading-relaxed text-[#736b5b]">
           A arquitetura já suporta os parceiros abaixo. A ativação depende da
           configuração da variável de ambiente correspondente — sem
           configuração, o link permanece editorial.
@@ -133,7 +133,7 @@ export default function AfiliadosPage() {
                   href={p.baseUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-0.5 block truncate text-xs text-[#17827c] underline underline-offset-2"
+                  className="mt-0.5 block truncate text-xs text-[#0f6f69] underline underline-offset-2"
                 >
                   {p.baseUrl}
                 </a>
@@ -142,7 +142,7 @@ export default function AfiliadosPage() {
                 className={
                   p.enabled
                     ? "rounded-full border border-[#bfe3e1] bg-[#e6f4f4] px-3 py-1 text-xs font-medium text-[#0b4744]"
-                    : "rounded-full border border-[#e8e3d8] bg-[#faf8f4] px-3 py-1 text-xs font-medium text-[#8c8471]"
+                    : "rounded-full border border-[#e8e3d8] bg-[#faf8f4] px-3 py-1 text-xs font-medium text-[#736b5b]"
                 }
               >
                 {p.enabled ? "Configurado" : "Não configurado"}
@@ -190,7 +190,7 @@ export default function AfiliadosPage() {
             Detalhes sobre o que fica gravado no seu navegador estão na{" "}
             <Link
               href="/privacidade"
-              className="font-medium text-[#17827c] underline underline-offset-2"
+              className="font-medium text-[#0f6f69] underline underline-offset-2"
             >
               política de privacidade
             </Link>
@@ -198,7 +198,7 @@ export default function AfiliadosPage() {
           </p>
         </div>
 
-        <p className="mt-6 text-xs text-[#8c8471]">
+        <p className="mt-6 text-xs text-[#736b5b]">
           Última atualização:{" "}
           <time dateTime="2026-11-13">13/11/2026</time>.
         </p>

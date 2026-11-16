@@ -43,7 +43,7 @@ export default function PrivacidadePage() {
           dados pessoais para os nossos servidores. O que você monta fica no
           seu navegador.
         </p>
-        <p className="mt-3 text-sm text-[#8c8471]">
+        <p className="mt-3 text-sm text-[#736b5b]">
           Última atualização: <time dateTime="2026-11-13">13/11/2026</time>.
         </p>
       </header>
@@ -148,7 +148,7 @@ export default function PrivacidadePage() {
                 política de privacidade do parceiro. Veja a{" "}
                 <Link
                   href="/afiliados"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   política de afiliados
                 </Link>{" "}
@@ -185,7 +185,7 @@ export default function PrivacidadePage() {
                 Encaminhe solicitações pelo{" "}
                 <Link
                   href="/contato"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   formulário de contato
                 </Link>{" "}
@@ -214,7 +214,7 @@ export default function PrivacidadePage() {
             <h2 className="text-base font-semibold text-[#0a1628]">
               Apagar tudo agora
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[#8c8471]">
+            <p className="mt-2 text-sm leading-relaxed text-[#736b5b]">
               Para remover o roteiro salvo neste navegador:
             </p>
             <ol className="mt-3 space-y-2 text-sm leading-relaxed text-[#16304f]">
@@ -222,7 +222,7 @@ export default function PrivacidadePage() {
                 1. Abra o{" "}
                 <Link
                   href="/roteiro"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   construtor de roteiro
                 </Link>{" "}
@@ -239,12 +239,12 @@ export default function PrivacidadePage() {
             <h2 className="text-base font-semibold text-[#0a1628]">
               Contato do titular
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[#8c8471]">
+            <p className="mt-2 text-sm leading-relaxed text-[#736b5b]">
               Dúvidas sobre esta política ou exercício de direitos:
             </p>
             <Link
               href="/contato"
-              className="mt-3 inline-block text-sm font-medium text-[#17827c] underline underline-offset-2"
+              className="mt-3 inline-block text-sm font-medium text-[#0f6f69] underline underline-offset-2"
             >
               Falar com a equipe →
             </Link>

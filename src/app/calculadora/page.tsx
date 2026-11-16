@@ -18,9 +18,9 @@ import { buildMetadata } from "@/lib/seo/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Calculadora de viagem",
   description:
-    "Calcule o total da viagem, o valor por pessoa, a distribuição por categoria " +
-    "e quanto guardar por mês. Estimativas geradas a partir dos seus próprios " +
-    "valores, com metodologia visível.",
+    "Calcule o total da viagem, o valor por pessoa, a distribuição por " +
+    "categoria e quanto guardar por mês — estimativas a partir dos seus " +
+    "próprios valores.",
   path: "/calculadora",
 });
 

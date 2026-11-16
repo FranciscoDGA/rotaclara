@@ -167,7 +167,7 @@ export default function MetodologiaPage() {
         >
           Fontes que consultamos
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-[#8c8471]">
+        <p className="mt-3 text-sm leading-relaxed text-[#736b5b]">
           Cada página de destino lista as fontes específicas com a data da
           consulta. As categorias abaixo são as famílias de fonte que
           usamos com mais frequência.
@@ -183,11 +183,11 @@ export default function MetodologiaPage() {
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-[#17827c] underline underline-offset-2"
+                className="text-sm font-medium text-[#0f6f69] underline underline-offset-2"
               >
                 {s.name}
               </a>
-              <p className="mt-1 text-sm text-[#8c8471]">{s.supports}</p>
+              <p className="mt-1 text-sm text-[#736b5b]">{s.supports}</p>
             </li>
           ))}
         </ul>
@@ -221,12 +221,12 @@ export default function MetodologiaPage() {
             Ver os guias publicados
           </ButtonLink>
         </div>
-        <p className="mt-6 text-xs text-[#8c8471]">
+        <p className="mt-6 text-xs text-[#736b5b]">
           Última atualização desta página:{" "}
           <time dateTime="2026-11-13">13/11/2026</time>. Veja também a{" "}
           <Link
             href="/sobre"
-            className="underline underline-offset-2 text-[#17827c]"
+            className="underline underline-offset-2 text-[#0f6f69]"
           >
             página institucional
           </Link>
@@ -254,7 +254,7 @@ function Tool({
       <p className="mt-2 text-sm leading-relaxed text-[#16304f]/85">{body}</p>
       <Link
         href={href}
-        className="mt-2.5 inline-block text-sm font-medium text-[#17827c] underline underline-offset-2"
+        className="mt-2.5 inline-block text-sm font-medium text-[#0f6f69] underline underline-offset-2"
       >
         Abrir a ferramenta →
       </Link>

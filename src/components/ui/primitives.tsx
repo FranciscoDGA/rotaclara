@@ -157,8 +157,8 @@ interface BadgeProps {
 const BADGE_TONES: Record<NonNullable<BadgeProps["tone"]>, string> = {
   default: "bg-[#f4f1ea] text-[#16304f] border-[#e8e3d8]",
   teal: "bg-[#e6f4f4] text-[#0b4744] border-[#bfe3e1]",
-  gold: "bg-[#fdf4e3] text-[#a8761f] border-[#f0dcb4]",
-  success: "bg-[#e3f6ec] text-[#1a7f4b] border-[#bfe6d1]",
+  gold: "bg-[#fdf4e3] text-[#8f6417] border-[#f0dcb4]",
+  success: "bg-[#e3f6ec] text-[#167043] border-[#bfe6d1]",
   warning: "bg-[#fdf1dd] text-[#9a6206] border-[#f3ddb8]",
   danger: "bg-[#fdeaea] text-[#a32b2b] border-[#f6c9c9]",
 };
@@ -217,14 +217,14 @@ export function Field({
       >
         {label}
         {optional && (
-          <span className="ml-1.5 text-xs font-normal text-[#8c8471]">
+          <span className="ml-1.5 text-xs font-normal text-[#736b5b]">
             (opcional)
           </span>
         )}
       </label>
       {children}
       {hint && (
-        <p className="text-xs text-[#8c8471] leading-relaxed">{hint}</p>
+        <p className="text-xs text-[#736b5b] leading-relaxed">{hint}</p>
       )}
     </div>
   );
@@ -232,9 +232,9 @@ export function Field({
 
 const INPUT_BASE =
   "w-full h-11 px-3.5 rounded-xl border bg-white text-[#0a1628] text-sm " +
-  "placeholder:text-[#b3ab99] transition-colors duration-150 " +
+  "placeholder:text-[#7a7162] transition-colors duration-150 " +
   "focus:outline-none focus:border-[#2fb8c4] focus:ring-4 focus:ring-[#2fb8c4]/15 " +
-  "disabled:bg-[#f4f1ea] disabled:text-[#8c8471]";
+  "disabled:bg-[#f4f1ea] disabled:text-[#736b5b]";
 
 const INPUT_STATES =
   "border-[#e8e3d8] hover:border-[#d6cfc0] aria-[invalid=true]:border-[#c33a3a] aria-[invalid=true]:focus:ring-[#c33a3a]/15";
@@ -356,7 +356,7 @@ export function EmptyState({ title, description, action, className }: EmptyState
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="mb-3 text-[#b3ab99]"
+        className="mb-3 text-[#7a7162]"
         aria-hidden="true"
       >
         <circle cx="11" cy="11" r="8" />
@@ -364,7 +364,7 @@ export function EmptyState({ title, description, action, className }: EmptyState
       </svg>
       <h3 className="text-base font-semibold text-[#0a1628]">{title}</h3>
       {description && (
-        <p className="mt-1.5 max-w-md text-sm leading-relaxed text-[#8c8471]">
+        <p className="mt-1.5 max-w-md text-sm leading-relaxed text-[#736b5b]">
           {description}
         </p>
       )}

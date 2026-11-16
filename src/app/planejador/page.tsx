@@ -16,8 +16,8 @@ export const metadata: Metadata = buildMetadata({
   title: "Planejador inteligente de viagem",
   description:
     "Monte a estrutura da viagem: duração, distribuição de orçamento, sugestão " +
-    "de atrações e alertas de transparência. Estimativas com metodologia e " +
-    "data de referência.",
+    "de atrações e alertas de transparência, com metodologia e data de " +
+    "referência visíveis.",
   path: "/planejador",
 });
 

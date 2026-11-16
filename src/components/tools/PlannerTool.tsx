@@ -378,7 +378,7 @@ export function PlannerTool({
               <legend className="text-sm font-medium text-[#0a1628]">
                 Interesses
               </legend>
-              <p className="mt-1 text-xs text-[#8c8471]">
+              <p className="mt-1 text-xs text-[#736b5b]">
                 Usados para sugerir atrações e foco de cada dia.
               </p>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
@@ -432,7 +432,7 @@ export function PlannerTool({
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
-              className="mx-auto text-[#b3ab99]"
+              className="mx-auto text-[#7a7162]"
             >
               <path d="M9 20l-5.5 2 1.5-6L21 4 9 20z" />
               <path d="M14 9l1 1" />
@@ -440,7 +440,7 @@ export function PlannerTool({
             <p className="mt-4 text-sm font-medium text-[#0a1628]">
               Preencha os dados e gere o planejamento
             </p>
-            <p className="mx-auto mt-2 max-w-md text-xs leading-relaxed text-[#8c8471]">
+            <p className="mx-auto mt-2 max-w-md text-xs leading-relaxed text-[#736b5b]">
               O resultado mostrará a estrutura de dias, a distribuição do
               orçamento, atrações sugeridas e os alertas do seu caso.
             </p>
@@ -515,55 +515,75 @@ export function PlannerTool({
             {/* Resumo */}
             <section
               aria-labelledby="resumo-planner"
-              className="rounded-2xl border border-[#0f2138] bg-[#0a1628] p-6 text-white"
+              className="overflow-hidden rounded-2xl border border-[#0f2138] bg-[#0a1628] text-white"
             >
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#4fcdd6]">
-                Planejamento gerado
-              </p>
-              <h2
-                id="resumo-planner"
-                className="mt-2 text-2xl font-semibold tracking-tight"
-              >
-                {destination?.name ?? input.destinationLabel ?? "Viagem"}
-              </h2>
-              <p className="mt-1 text-sm text-white/60">{result.summary.label}</p>
-
-              <div className="mt-5 grid grid-cols-3 gap-3">
-                <MiniStat label="Dias" value={String(result.summary.totalDays)} />
-                <MiniStat label="Noites" value={String(result.summary.nights)} />
-                <MiniStat
-                  label="Viajantes"
-                  value={String(result.summary.travelers)}
-                />
-              </div>
-
-              {result.estimatedTotalBRL > 0 ? (
-                <div className="mt-5 rounded-xl bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-wide text-white/60">
-                    Custo total estimado
-                  </p>
-                  <p className="mt-1 text-3xl font-semibold text-[#dfb45c]">
-                    {formatBRL(result.estimatedTotalBRL)}
-                  </p>
-                  <p className="mt-1.5 text-xs text-white/50">
-                    {destination
-                      ? `Faixa base: R$ ${destination.cost.minPerDayBRL}–${destination.cost.maxPerDayBRL}/dia por pessoa`
-                      : "Sem destino na base"}
-                  </p>
-                </div>
-              ) : (
-                <div className="mt-5 rounded-xl bg-white/5 p-4">
-                  <p className="text-sm text-white/70">
-                    Sem estimativa de custo — destino fora da base editorial.
-                  </p>
-                  <Link
-                    href="/calculadora"
-                    className="mt-2 inline-block text-sm font-medium text-[#86e0e6] underline underline-offset-2"
-                  >
-                    Use a Calculadora com seus próprios valores →
-                  </Link>
+              {destination?.image && (
+                <div className="relative aspect-[16/7] w-full overflow-hidden border-b border-white/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={destination.image.src}
+                    alt={destination.image.alt}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
+                  <div className="absolute top-3 left-3">
+                    <Badge tone="gold">{destination.name} · {destination.stateUF}</Badge>
+                  </div>
+                  <div className="absolute bottom-2 right-3 text-[10px] text-white/70">
+                    Foto: {destination.image.credit.author}
+                  </div>
                 </div>
               )}
+
+              <div className="p-6">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#4fcdd6]">
+                  Planejamento gerado
+                </p>
+                <h2
+                  id="resumo-planner"
+                  className="mt-2 text-2xl font-semibold tracking-tight"
+                >
+                  {destination?.name ?? input.destinationLabel ?? "Viagem"}
+                </h2>
+                <p className="mt-1 text-sm text-white/60">{result.summary.label}</p>
+
+                <div className="mt-5 grid grid-cols-3 gap-3">
+                  <MiniStat label="Dias" value={String(result.summary.totalDays)} />
+                  <MiniStat label="Noites" value={String(result.summary.nights)} />
+                  <MiniStat
+                    label="Viajantes"
+                    value={String(result.summary.travelers)}
+                  />
+                </div>
+
+                {result.estimatedTotalBRL > 0 ? (
+                  <div className="mt-5 rounded-xl bg-white/5 p-4">
+                    <p className="text-xs uppercase tracking-wide text-white/60">
+                      Custo total estimado
+                    </p>
+                    <p className="mt-1 text-3xl font-semibold text-[#dfb45c]">
+                      {formatBRL(result.estimatedTotalBRL)}
+                    </p>
+                    <p className="mt-1.5 text-xs text-white/50">
+                      {destination
+                        ? `Faixa base: R$ ${destination.cost.minPerDayBRL}–${destination.cost.maxPerDayBRL}/dia por pessoa`
+                        : "Sem destino na base"}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="mt-5 rounded-xl bg-white/5 p-4">
+                    <p className="text-sm text-white/70">
+                      Sem estimativa de custo — destino fora da base editorial.
+                    </p>
+                    <Link
+                      href="/calculadora"
+                      className="mt-2 inline-block text-sm font-medium text-[#86e0e6] underline underline-offset-2"
+                    >
+                      Use a Calculadora com seus próprios valores →
+                    </Link>
+                  </div>
+                )}
+              </div>
             </section>
 
             {/* Distribuição do orçamento */}
@@ -575,6 +595,11 @@ export function PlannerTool({
                 <h2 id="fatias" className="text-base font-semibold text-[#0a1628]">
                   Distribuição sugerida do orçamento
                 </h2>
+                <p className="mt-1.5 text-xs text-[#736b5b]">
+                  Modelo editorial de divisão por estilo de viagem — não é
+                  média de mercado coletada. O total vem da faixa do destino;
+                  use a Calculadora para dividir com seus próprios valores.
+                </p>
                 <ul className="mt-4 space-y-3.5">
                   {result.budgetSlices.map((slice) => (
                     <li key={slice.category}>
@@ -590,7 +615,7 @@ export function PlannerTool({
                         <span
                           style={{
                             width: `${Math.max(2, slice.share * 100)}%`,
-                            background: "#17827c",
+                            background: "#0f6f69",
                           }}
                         />
                       </div>
@@ -625,7 +650,7 @@ export function PlannerTool({
                             {day.title}
                           </p>
                           {day.date && (
-                            <p className="text-xs text-[#8c8471]">
+                            <p className="text-xs text-[#736b5b]">
                               <time dateTime={day.date}>
                                 {formatDateISO(day.date)}
                               </time>
@@ -655,14 +680,14 @@ export function PlannerTool({
                                   className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9952f]"
                                 />
                                 {a.name}
-                                <span className="ml-auto shrink-0 text-xs text-[#8c8471]">
+                                <span className="ml-auto shrink-0 text-xs text-[#736b5b]">
                                   {a.isFree ? "gratuita" : "com ingresso"}
                                 </span>
                               </li>
                             ))}
                           </ul>
                         ) : (
-                          <p className="mt-2 text-xs leading-relaxed text-[#8c8471]">
+                          <p className="mt-2 text-xs leading-relaxed text-[#736b5b]">
                             {day.notes ||
                               "Sem atrações sugeridas — adicione manualmente no construtor de roteiro."}
                           </p>
@@ -685,10 +710,10 @@ export function PlannerTool({
               >
                 Metodologia da estimativa
               </h2>
-              <p className="mt-2 text-xs leading-relaxed text-[#8c8471]">
+              <p className="mt-2 text-xs leading-relaxed text-[#736b5b]">
                 {result.methodology}
               </p>
-              <p className="mt-2.5 text-xs text-[#8c8471]">
+              <p className="mt-2.5 text-xs text-[#736b5b]">
                 Data de referência:{" "}
                 <time
                   dateTime={result.referenceDate}

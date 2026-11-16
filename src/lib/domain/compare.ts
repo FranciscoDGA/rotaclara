@@ -15,7 +15,7 @@ import type {
   Destination,
   Region,
 } from "@/lib/domain/types";
-import { formatMonthsShort, formatDuration } from "@/lib/format/format";
+import { formatMonthsShort, formatDuration, plural } from "@/lib/format/format";
 
 /** Ordem dos critérios na exibição. */
 export const COMPARE_CRITERIA: readonly CompareCriterion[] = [
@@ -159,7 +159,7 @@ function determineAdvantage(
     }
 
     case "distance": {
-      // Menor distância aérea desde a referência = menos tempo de deslocamento.
+      // Menor distância de referência desde a origem = menos tempo em deslocamento.
       const distances = destinations.map(
         (d) => d.referenceFromSaoPaulo?.distanceKm ?? null,
       );
@@ -276,8 +276,10 @@ function buildDifferences(destinations: readonly Destination[]): string[] {
     const short = destinations.find((d) => d.recommendedDays.min === minDays);
     if (long && short && long.slug !== short.slug) {
       diffs.push(
-        `${long.name} pede até ${maxDays} dias para ser bem aproveitado; ` +
-          `${short.name} pode ser visto em ${minDays} dia(s).`,
+        `${long.name} pede até ${maxDays} ${plural(maxDays, "dia", "dias")} ` +
+          "para ser bem aproveitado; " +
+          `${short.name} pode ser visto em ${minDays} ` +
+          `${plural(minDays, "dia", "dias")}.`,
       );
     }
   }

@@ -45,7 +45,7 @@ export default function CookiesPage() {
           perfilamento. O que existe é armazenamento local do navegador, que
           fica no seu dispositivo.
         </p>
-        <p className="mt-3 text-sm text-[#8c8471]">
+        <p className="mt-3 text-sm text-[#736b5b]">
           Última atualização: <time dateTime="2026-11-13">13/11/2026</time>.
         </p>
       </header>
@@ -138,7 +138,7 @@ export default function CookiesPage() {
                 Identificadores de dispositivo ou de publicidade.
               </li>
             </ul>
-            <p className="mt-4 text-sm leading-relaxed text-[#8c8471]">
+            <p className="mt-4 text-sm leading-relaxed text-[#736b5b]">
               Por não usarmos cookies não precisamos de um banner de
               consentimento — e preferimos não incomodar você com um aviso
               que não diria nada de verdade.
@@ -159,7 +159,7 @@ export default function CookiesPage() {
               necessário, um aviso adequado será apresentado. Veja também a{" "}
               <Link
                 href="/privacidade"
-                className="font-medium text-[#17827c] underline underline-offset-2"
+                className="font-medium text-[#0f6f69] underline underline-offset-2"
               >
                 política de privacidade
               </Link>
@@ -173,7 +173,7 @@ export default function CookiesPage() {
             <h2 className="text-base font-semibold text-[#0a1628]">
               Como remover o armazenamento
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[#8c8471]">
+            <p className="mt-2 text-sm leading-relaxed text-[#736b5b]">
               Duas formas:
             </p>
             <ol className="mt-3 space-y-2 text-sm leading-relaxed text-[#16304f]">
@@ -181,7 +181,7 @@ export default function CookiesPage() {
                 1. No{" "}
                 <Link
                   href="/roteiro"
-                  className="font-medium text-[#17827c] underline underline-offset-2"
+                  className="font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   construtor de roteiro
                 </Link>
@@ -198,12 +198,12 @@ export default function CookiesPage() {
             <h2 className="text-base font-semibold text-[#0a1628]">
               Dúvidas?
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[#8c8471]">
+            <p className="mt-2 text-sm leading-relaxed text-[#736b5b]">
               Fale com a gente pelo formulário de contato.
             </p>
             <Link
               href="/contato"
-              className="mt-3 inline-block text-sm font-medium text-[#17827c] underline underline-offset-2"
+              className="mt-3 inline-block text-sm font-medium text-[#0f6f69] underline underline-offset-2"
             >
               Abrir contato →
             </Link>

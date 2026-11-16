@@ -50,7 +50,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <nav aria-label="Você está em" className="rc-no-print">
-        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#8c8471]">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#736b5b]">
           {items.map((item, index) => {
             const isLast = index === items.length - 1;
             return (

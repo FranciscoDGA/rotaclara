@@ -17,11 +17,13 @@
 import type { Attraction, Destination } from "@/lib/domain/types";
 import { destinationsGroupOne } from "@/data/destinations/group-one";
 import { destinationsGroupTwo } from "@/data/destinations/group-two";
+import { destinationsGroupThree } from "@/data/destinations/group-three";
 
-/** Todos os destinos publicados na v1. */
+/** Todos os destinos publicados na base editorial (15 destinos). */
 export const allDestinations: readonly Destination[] = [
   ...destinationsGroupOne,
   ...destinationsGroupTwo,
+  ...destinationsGroupThree,
 ] as const;
 
 /** Mapa slug → destino, para acesso O(1). */

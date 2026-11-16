@@ -107,6 +107,15 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
           Cabeçalho
           ============================================================ */}
       <section className="rc-grain relative overflow-hidden bg-[#0a1628] text-white">
+        {d.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={d.image.src}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 blur-2xl scale-110"
+          />
+        )}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -173,13 +182,35 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
               </div>
             </div>
 
-            <div className="aspect-[16/9] overflow-hidden rounded-3xl border border-white/15">
-              <DestinationArt
-                palette={d.palette}
-                seed={d.slug.length + d.stateUF.charCodeAt(0)}
-                alt={`Arte ilustrativa representando ${d.name}`}
-                className="h-full w-full"
-              />
+            <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/15">
+              {d.image ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={d.image.src}
+                    alt={d.image.alt}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute bottom-2 right-2 rounded-md bg-black/60 px-2 py-0.5 text-[10px] text-white/80 backdrop-blur-xs">
+                    Foto:{" "}
+                    <a
+                      href={d.image.credit.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-white"
+                    >
+                      {d.image.credit.author} ({d.image.credit.source})
+                    </a>
+                  </div>
+                </>
+              ) : (
+                <DestinationArt
+                  palette={d.palette}
+                  seed={d.slug.length + d.stateUF.charCodeAt(0)}
+                  alt={`Arte ilustrativa representando ${d.name}`}
+                  className="h-full w-full"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -244,7 +275,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     aria-hidden="true"
-                    className="mt-0.5 shrink-0 text-[#1fa39b]"
+                    className="mt-0.5 shrink-0 text-[#15908a]"
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
@@ -261,7 +292,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                 <h2 id="guia" className="text-2xl font-semibold tracking-tight text-[#0a1628]">
                   Guia completo
                 </h2>
-                <p className="text-xs text-[#8c8471]">
+                <p className="text-xs text-[#736b5b]">
                   Atualizado em{" "}
                   <time dateTime={guide.updatedAt}>
                     {formatDateISO(guide.updatedAt)}
@@ -309,14 +340,14 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
             <h2 id="clima" className="text-2xl font-semibold tracking-tight text-[#0a1628]">
               Clima mês a mês
             </h2>
-            <p className="mt-2 text-sm text-[#8c8471]">
+            <p className="mt-2 text-sm text-[#736b5b]">
               Faixas de temperatura e padrão de chuva como referência. Boletins
               oficiais: consulte o{" "}
               <a
                 href="https://portal.inmet.gov.br/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#17827c] underline underline-offset-2"
+                className="text-[#0f6f69] underline underline-offset-2"
               >
                 INMET
               </a>
@@ -370,7 +401,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                           {isBest ? (
                             <Badge tone="gold">Boa época</Badge>
                           ) : (
-                            <span className="text-[#b3ab99]">—</span>
+                            <span className="text-[#7a7162]">—</span>
                           )}
                         </td>
                       </tr>
@@ -387,7 +418,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
               <h2 id="atracoes" className="text-2xl font-semibold tracking-tight text-[#0a1628]">
                 Atrações principais
               </h2>
-              <p className="mt-2 text-sm text-[#8c8471]">
+              <p className="mt-2 text-sm text-[#736b5b]">
                 {d.attractions.length} atrações mapeadas com fonte e tempo de
                 visita estimado.
               </p>
@@ -412,7 +443,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                     <p className="mt-2 text-sm leading-relaxed text-[#16304f]/85">
                       {a.description}
                     </p>
-                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#8c8471]">
+                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#736b5b]">
                       <span>{a.area}</span>
                       <span>≈ {formatDuration(a.suggestedMinutes)}</span>
                     </div>
@@ -426,7 +457,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                         href={a.sources[0].url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-3 inline-block text-xs text-[#17827c] underline underline-offset-2"
+                        className="mt-3 inline-block text-xs text-[#0f6f69] underline underline-offset-2"
                       >
                         Fonte: {a.sources[0].name}
                       </a>
@@ -483,7 +514,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                 </h2>
                 <Link
                   href="/hospedagens"
-                  className="text-sm font-medium text-[#17827c] underline underline-offset-2"
+                  className="text-sm font-medium text-[#0f6f69] underline underline-offset-2"
                 >
                   Ver todas as opções
                 </Link>
@@ -502,7 +533,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                       {l.description}
                     </p>
                     <div className="mt-4 flex items-center justify-between gap-3 border-t border-[#f4f1ea] pt-3.5">
-                      <span className="text-xs text-[#8c8471]">
+                      <span className="text-xs text-[#736b5b]">
                         Perfil:{" "}
                         <strong className="text-[#16304f]">
                           {COST_LABEL[l.priceLevel] ?? l.priceLevel}
@@ -541,7 +572,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           aria-hidden="true"
-                          className="shrink-0 text-[#8c8471] transition-transform group-open:rotate-45"
+                          className="shrink-0 text-[#736b5b] transition-transform group-open:rotate-45"
                         >
                           <path d="M12 5v14M5 12h14" />
                         </svg>
@@ -582,19 +613,19 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-[#17827c] underline underline-offset-2"
+                    className="text-sm font-medium text-[#0f6f69] underline underline-offset-2"
                   >
                     {s.name}
                   </a>
-                  <p className="mt-1 text-sm text-[#8c8471]">{s.supports}</p>
-                  <p className="mt-1 text-xs text-[#b3ab99]">
+                  <p className="mt-1 text-sm text-[#736b5b]">{s.supports}</p>
+                  <p className="mt-1 text-xs text-[#7a7162]">
                     Consultada em{" "}
                     <time dateTime={s.consultedAt}>{formatDateISO(s.consultedAt)}</time>
                   </p>
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-xs text-[#8c8471]">
+            <p className="mt-4 text-xs text-[#736b5b]">
               Última atualização editorial:{" "}
               <time dateTime={d.updatedAt}>{formatDateISO(d.updatedAt)}</time>.
               Nenhum preço, disponibilidade ou avaliação é apresentado como real
@@ -612,7 +643,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
             <h2 className="text-base font-semibold text-[#0a1628]">
               Planejar esta viagem
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[#8c8471]">
+            <p className="mt-2 text-sm leading-relaxed text-[#736b5b]">
               Gere uma estrutura de dias, distribuição de orçamento e sugestão
               de atrações — com estimativas explicadas.
             </p>
@@ -642,7 +673,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
             <h2 className="text-base font-semibold text-[#0a1628]">Transporte</h2>
             <div className="mt-3 space-y-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
                   Como chegar
                 </p>
                 <p className="mt-1.5 text-sm leading-relaxed text-[#16304f]/85">
@@ -650,7 +681,7 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                 </p>
               </div>
               <div className="border-t border-[#f4f1ea] pt-3.5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
                   Como se deslocar
                 </p>
                 <p className="mt-1.5 text-sm leading-relaxed text-[#16304f]/85">
@@ -672,10 +703,10 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                     <p className="text-sm font-semibold text-[#0a1628]">
                       {area.name}
                     </p>
-                    <p className="mt-1 text-sm leading-relaxed text-[#8c8471]">
+                    <p className="mt-1 text-sm leading-relaxed text-[#736b5b]">
                       {area.profile}
                     </p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-[#1a7f4b]">
+                    <p className="mt-1.5 text-xs leading-relaxed text-[#167043]">
                       <strong>Pró:</strong> {area.pros}
                     </p>
                     <p className="mt-1 text-xs leading-relaxed text-[#9a6206]">
@@ -716,21 +747,31 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                 className="rc-card rc-card-hover group flex gap-4 p-4 focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
               >
                 <span className="h-16 w-24 shrink-0 overflow-hidden rounded-lg">
-                  <DestinationArt
-                    palette={r.palette}
-                    seed={r.slug.length}
-                    alt=""
-                    className="h-full w-full"
-                  />
+                  {r.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={r.image.src}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <DestinationArt
+                      palette={r.palette}
+                      seed={r.slug.length}
+                      alt=""
+                      className="h-full w-full"
+                    />
+                  )}
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-base font-semibold text-[#0a1628] group-hover:text-[#17827c]">
+                  <span className="block text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
                     {r.name}
                   </span>
-                  <span className="mt-0.5 block text-xs text-[#8c8471]">
+                  <span className="mt-0.5 block text-xs text-[#736b5b]">
                     {r.state} · {r.region}
                   </span>
-                  <span className="mt-1.5 block text-xs font-medium text-[#17827c]">
+                  <span className="mt-1.5 block text-xs font-medium text-[#0f6f69]">
                     Ver guia →
                   </span>
                 </span>
@@ -773,13 +814,13 @@ function QuickFact({
 }) {
   return (
     <div className="rounded-xl border border-[#e8e3d8] bg-white p-4">
-      <p className="text-xs font-semibold uppercase tracking-wide text-[#8c8471]">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[#736b5b]">
         {label}
       </p>
       <p className="mt-1.5 text-sm font-semibold leading-snug text-[#0a1628]">
         {value}
       </p>
-      {hint && <p className="mt-1 text-xs leading-snug text-[#8c8471]">{hint}</p>}
+      {hint && <p className="mt-1 text-xs leading-snug text-[#736b5b]">{hint}</p>}
     </div>
   );
 }

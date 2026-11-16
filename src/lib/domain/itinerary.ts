@@ -346,10 +346,16 @@ export function parseItinerary(raw: string | null): Itinerary | null {
   }
 }
 
-/** Slug de arquivo para exportação. */
+/** Slug de arquivo para exportação em texto. */
 export function itineraryFilename(itinerary: Itinerary): string {
   const base = slugify(itinerary.title) || "roteiro";
   return `${base}-rotaclara.txt`;
+}
+
+/** Slug de arquivo para exportação em JSON. */
+export function itineraryJsonFilename(itinerary: Itinerary): string {
+  const base = slugify(itinerary.title) || "roteiro";
+  return `${base}-rotaclara.json`;
 }
 
 /** Exporta o roteiro em texto simples para cópia/impressão. */

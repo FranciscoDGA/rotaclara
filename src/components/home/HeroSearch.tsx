@@ -106,7 +106,7 @@ export function HeroSearch({ destinations }: HeroSearchProps) {
             strokeWidth="2"
             strokeLinecap="round"
             aria-hidden="true"
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8c8471]"
+            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#736b5b]"
           >
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.3-4.3" />
@@ -138,7 +138,7 @@ export function HeroSearch({ destinations }: HeroSearchProps) {
             }
             role="combobox"
             autoComplete="off"
-            className="h-14 w-full rounded-2xl border border-[#e8e3d8] bg-white pl-12 pr-4 text-[#0a1628] shadow-[0_2px_16px_rgb(10_22_40/0.08)] placeholder:text-[#b3ab99] focus:outline-none focus:border-[#2fb8c4] focus:ring-4 focus:ring-[#2fb8c4]/15 sm:text-base"
+            className="h-14 w-full rounded-2xl border border-[#e8e3d8] bg-white pl-12 pr-4 text-[#0a1628] shadow-[0_2px_16px_rgb(10_22_40/0.08)] placeholder:text-[#7a7162] focus:outline-none focus:border-[#2fb8c4] focus:ring-4 focus:ring-[#2fb8c4]/15 sm:text-base"
           />
         </div>
         <button
@@ -181,22 +181,32 @@ export function HeroSearch({ destinations }: HeroSearchProps) {
                     }`}
                   >
                     <span className="h-11 w-16 shrink-0 overflow-hidden rounded-lg">
-                      <DestinationArt
-                        palette={d.palette}
-                        seed={d.slug.length}
-                        alt=""
-                        className="h-full w-full"
-                      />
+                      {d.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={d.image.src}
+                          alt=""
+                          loading="lazy"
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <DestinationArt
+                          palette={d.palette}
+                          seed={d.slug.length}
+                          alt=""
+                          className="h-full w-full"
+                        />
+                      )}
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm font-medium text-[#0a1628]">
                         {d.name}
                       </span>
-                      <span className="block truncate text-xs text-[#8c8471]">
+                      <span className="block truncate text-xs text-[#736b5b]">
                         {d.state} · {d.region}
                       </span>
                     </span>
-                    <span className="shrink-0 text-xs text-[#17827c]">
+                    <span className="shrink-0 text-xs text-[#0f6f69]">
                       R$ {d.cost.minPerDayBRL}–{d.cost.maxPerDayBRL}/dia
                     </span>
                   </button>
@@ -208,13 +218,13 @@ export function HeroSearch({ destinations }: HeroSearchProps) {
               <p className="text-sm font-medium text-[#0a1628]">
                 Nenhum destino encontrado
               </p>
-              <p className="mt-1 text-xs leading-relaxed text-[#8c8471]">
+              <p className="mt-1 text-xs leading-relaxed text-[#736b5b]">
                 Nossa base tem {destinations.length} destinos verificados. Tente
                 outra cidade, estado ou perfil — ou explore a lista completa.
               </p>
               <Link
                 href="/destinos"
-                className="mt-3 inline-block text-sm font-medium text-[#17827c] underline underline-offset-2"
+                className="mt-3 inline-block text-sm font-medium text-[#0f6f69] underline underline-offset-2"
               >
                 Ver todos os destinos
               </Link>
@@ -222,7 +232,7 @@ export function HeroSearch({ destinations }: HeroSearchProps) {
           )}
 
           <div className="border-t border-[#f4f1ea] bg-[#faf8f4] px-4 py-2.5">
-            <p className="text-[11px] text-[#8c8471]">
+            <p className="text-[11px] text-[#736b5b]">
               Use ↑ ↓ para navegar · Enter para abrir · Esc para fechar
             </p>
           </div>

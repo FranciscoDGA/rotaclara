@@ -13,6 +13,7 @@ import { getDestinationStats } from "@/data/destinations";
 
 const PRODUCT_LINKS = [
   { href: "/destinos", label: "Descobrir destinos" },
+  { href: "/diagnostico", label: "Diagnóstico de viagem" },
   { href: "/planejador", label: "Planejador inteligente" },
   { href: "/calculadora", label: "Calculadora de viagem" },
   { href: "/comparador", label: "Comparador de destinos" },
@@ -96,9 +97,9 @@ export function Footer() {
         {/* Aviso de estimativas e afiliados */}
         <div className="grid gap-6 border-b border-white/10 py-8 md:grid-cols-2">
           <div>
-            <h3 className="text-sm font-semibold text-[#dfb45c]">
+            <h2 className="text-sm font-semibold text-[#dfb45c]">
               Sobre nossos valores
-            </h3>
+            </h2>
             <p className="mt-2 text-xs leading-relaxed text-white/60">
               Os valores exibidos em ferramentas de cálculo são estimativas de
               planejamento com metodologia e data de referência visíveis. Não
@@ -107,9 +108,9 @@ export function Footer() {
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-[#dfb45c]">
+            <h2 className="text-sm font-semibold text-[#dfb45c]">
               Transparência comercial
-            </h3>
+            </h2>
             <p className="mt-2 text-xs leading-relaxed text-white/60">
               A RotaClara pode receber comissão de parceiros quando você acessa
               um link marcado como afiliado. Isso não altera o preço que você
@@ -159,7 +160,7 @@ interface FooterColumnProps {
 function FooterColumn({ title, links }: FooterColumnProps) {
   return (
     <div>
-      <h3 className="text-sm font-semibold text-white">{title}</h3>
+      <h2 className="text-sm font-semibold text-white">{title}</h2>
       <ul className="mt-3 space-y-2.5">
         {links.map((link) => (
           <li key={link.href}>

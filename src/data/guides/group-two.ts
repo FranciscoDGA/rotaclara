@@ -21,9 +21,13 @@ export const guidesGroupTwo: Guide[] = [
         id: "apresentacao",
         heading: "Apresentação do destino",
         paragraphs: [
-          "Gramado é um município de serra no Vale dos Vinhedos, no Rio Grande " +
-            "do Sul, conhecido pelo clima frio, pela arquitetura de inspiração " +
-            "europeia e por uma agenda cultural constante ao longo do ano.",
+          "Gramado é um município de serra na Serra Gaúcha, no Rio Grande " +
+            "do Sul, conhecido pelo clima frio, pela arquitetura de " +
+            "inspiração europeia e por uma agenda cultural constante ao " +
+            "longo do ano. Fica a uma curta viagem do Vale dos Vinhedos — " +
+            "região vitivinícola de Bento Gonçalves, Garibaldi e Monte Belo " +
+            "do Sul —, que é um passeio entre localidades distintas, não " +
+            "parte do município.",
           "O destaque nacional é o Natal Luz, programação natalina de longa " +
             "duração. Fora dele, a cidade mantém oferta de museus, parques e " +
             "gastronomia da serra gaúcha.",
@@ -87,7 +91,7 @@ export const guidesGroupTwo: Guide[] = [
         heading: "Como chegar",
         paragraphs: [
           "Não há aeroporto em Gramado: o acesso é por rodovia. A partir de " +
-            "Porto Alegre, pela Aeroporto Salgado Filho (POA), são cerca de 2 " +
+            "Porto Alegre, pelo Aeroporto Salgado Filho (POA), são cerca de 2 " +
             "horas de carro ou ônibus.",
           "Há terminal rodoviário com conexões de outras cidades da serra, o " +
             "que permite combinar Gramado com cidades vizinhas.",
@@ -121,14 +125,16 @@ export const guidesGroupTwo: Guide[] = [
           "Ficar no centro ou na Rua Coberta garante tudo a pé, com variedade " +
             "de serviços, mas é a opção de maior valor diário.",
           "Bairro Planalto e a zona norte oferecem valor inferior com mais " +
-            "calma, exigindo transporte. Cidades vizinhas como Bento Gonçalves, " +
-            "Canela e Praia do Lino são bases alternativas no mesmo vale, com " +
-            "menor custo e acesso às vinícolas.",
+            "calma, exigindo transporte. Cidades vizinhas como Bento " +
+            "Gonçalves e Garibaldi são bases alternativas no Vale dos " +
+            "Vinhedos — outra localidade, a uma curta viagem de Gramado —, " +
+            "com menor custo e acesso às vinícolas. Canela, na Rota " +
+            "Romântica, fica fora do vale.",
         ],
         bullets: [
           "Centro e Rua Coberta: conveniência total, maior valor.",
           "Planalto e zona norte: mais calma e menor valor.",
-          "Cidades vizinhas: alternativa acessível no mesmo vale.",
+          "Cidades vizinhas: alternativa acessível em outra localidade da região.",
         ],
       },
       {
@@ -712,7 +718,7 @@ export const guidesGroupTwo: Guide[] = [
         paragraphs: [
           "Indicado para viajantes de natureza e cultura, com interesse em " +
             "floresta, rios e história regional. Também atende famílias, com " +
-            "excursões adaptadas e museus",
+            "excursões adaptadas e museus.",
           "Menos indicado para quem busca praia, vida noturna intensa ou " +
             "viagens muito curtas: a logística de excursões demanda dias.",
         ],
@@ -835,9 +841,9 @@ export const guidesGroupTwo: Guide[] = [
         id: "cuidados",
         heading: "Cuidados e informações importantes",
         paragraphs: [
-          "A umidade é alta o ano todo: leve roupa leve, respirável e " +
-            "impermeável. Em dias de chuva forte, ruas podem alagar e o fluxo " +
-            "de barcos é alterado.",
+          "A umidade é alta o ano todo: leve roupa leve e respirável, com " +
+            "impermeável para dias de chuva. Em dias de chuva forte, ruas " +
+            "podem alagar e o fluxo de barcos é alterado.",
           "Excursões fluviais dependem de nível de rio, clima e horário de " +
             "navegação — confirme com o operador antes de pagar. Use repelente " +
             "adequado e siga as orientações do operador em áreas de floresta.",
@@ -893,7 +899,7 @@ export const guidesGroupTwo: Guide[] = [
       },
       {
         name: "Instituto Nacional de Pesquisas da Amazônia (INPA)",
-        url: "https://www.inpa.gov.br/",
+        url: "https://www.gov.br/inpa/pt-br",
         consultedAt: UPDATED_AT,
         supports: "Contexto de pesquisa e visitação na floresta.",
       },
