@@ -57,7 +57,36 @@ describe("motor de artigos — integridade", () => {
     }
   });
 
-  it("lote 1 cobre os quatro arquétipos", () => {
+  it("datas editoriais são únicas — nenhum artigo repete a data de outro", () => {
+    const dates = allArticles.map((a) => a.updatedAt);
+    expect(new Set(dates).size, `datas repetidas: ${dates.join(", ")}`).toBe(
+      dates.length,
+    );
+    // A data do artigo nunca pode ser anterior às datas que ele mesmo cita
+    // no texto ("15 de novembro de 2026" — formato de formatDateISO).
+    const MONTHS_PT = [
+      "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro",
+    ];
+    for (const article of allArticles) {
+      const text = JSON.stringify(article);
+      const cited = [...text.matchAll(/(\d{1,2}) de ([a-zç]+) de (20\d{2})/g)]
+        .map((m) => {
+          const month = MONTHS_PT.indexOf(m[2] ?? "");
+          if (month < 0 || !m[1] || !m[3]) return null;
+          return `${m[3]}-${String(month + 1).padStart(2, "0")}-${String(Number(m[1])).padStart(2, "0")}`;
+        })
+        .filter((d): d is string => d !== null && !Number.isNaN(Date.parse(d)));
+      for (const c of cited) {
+        expect(
+          article.updatedAt >= c,
+          `"${article.slug}" (${article.updatedAt}) cita data posterior "${c}"`,
+        ).toBe(true);
+      }
+    }
+  });
+
+  it("a cobertura de artigos inclui os quatro arquétipos", () => {
     const archetypes = new Set(allArticles.map((a) => a.archetype));
     expect([...archetypes].sort()).toEqual([
       "comparativo",
@@ -143,6 +172,52 @@ describe("motor de artigos — números derivados da base", () => {
     expect(body).toContain(`R$ ${rio.cost.minPerDayBRL}`);
     expect(body).toContain(`R$ ${sp.cost.minPerDayBRL}`);
     expect(article.destinationSlugs).toEqual([rio.slug, sp.slug]);
+  });
+
+  it("artigo de custo de Noronha usa a faixa diária da base", () => {
+    const article = getArticle("quanto-custa-fernando-de-noronha");
+    const noronha = getDestination("fernando-de-noronha");
+    expect(article).toBeDefined();
+    expect(noronha).toBeDefined();
+    if (!article || !noronha) return;
+
+    const body = JSON.stringify(article.sections);
+    expect(body).toContain(`R$ ${noronha.cost.minPerDayBRL}`);
+    expect(body).toContain(`R$ ${noronha.cost.maxPerDayBRL}`);
+    expect(body).toContain(noronha.cost.referenceDate.slice(0, 4));
+    // As taxas obrigatórias (TPA e ingresso do parque) estão no artigo.
+    expect(body).toContain(noronha.warnings[0]);
+  });
+
+  it("roteiro de Salvador usa as 6 atrações mapeadas na base", () => {
+    const article = getArticle("roteiro-3-dias-salvador");
+    const salvador = getDestination("salvador");
+    expect(article).toBeDefined();
+    expect(salvador).toBeDefined();
+    if (!article || !salvador) return;
+
+    const bullets = article.sections.flatMap((s) => s.bullets ?? []).join("\n");
+    for (const attraction of salvador.attractions) {
+      expect(
+        bullets,
+        `atração "${attraction.name}" não aparece no roteiro`,
+      ).toContain(attraction.name);
+    }
+    // Duração mínima do destino = nº de dias do roteiro.
+    expect(
+      article.sections.filter((s) => s.id.startsWith("dia-")),
+    ).toHaveLength(salvador.recommendedDays.min);
+  });
+
+  it("artigo de época de Florianópolis lista os 12 meses do clima", () => {
+    const article = getArticle("melhor-epoca-florianopolis");
+    const floripa = getDestination("florianopolis");
+    expect(article).toBeDefined();
+    expect(floripa).toBeDefined();
+    if (!article || !floripa) return;
+
+    const climaSection = article.sections.find((s) => s.id === "clima-mes-a-mes");
+    expect(climaSection?.bullets).toHaveLength(floripa.climateByMonth.length);
   });
 
   it("nenhum artigo publica placeholder óbvio de dado quebrado", () => {

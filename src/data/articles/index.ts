@@ -2,10 +2,16 @@
  * =====================================================================
  * RotaClara — Motor de artigos de cauda longa
  * ---------------------------------------------------------------------
- * Lote 1 (4 artigos, um por arquétipo). Todos os números vêm da base
- * de destinos auditada via `getDestination()` — se um destino mudar,
- * o artigo muda junto; se um slug sumir, o build falha em alto e bom
- * som (revisão editorial obrigatória, nunca "undefined" publicado).
+ * Lotes 1 e 2 (7 artigos). Todos os números vêm da base de destinos
+ * auditada via `getDestination()` — se um destino mudar, o artigo muda
+ * junto; se um slug sumir, o build falha em alto e bom som (revisão
+ * editorial obrigatória, nunca "undefined" publicado).
+ *
+ * DATAS: cada artigo carrega a SUA data editorial (`updatedAt`), sempre
+ * única — o leitor nunca vê a mesma data em dois artigos (isso transmitia
+ * atualização automática/falsidade). Regras: ≥ toda data de referência
+ * citada no próprio texto, e ≤ data de publicação. A unicidade é garantida
+ * por teste em `tests/articles.test.ts`.
  * =====================================================================
  */
 
@@ -108,6 +114,9 @@ const gramado = dest("gramado");
 const lencois = dest("lencois-maranhenses");
 const rio = dest("rio-de-janeiro");
 const saoPaulo = dest("sao-paulo");
+const noronha = dest("fernando-de-noronha");
+const florianopolis = dest("florianopolis");
+const salvador = dest("salvador");
 
 /* =====================================================================
    01 — Custo: quanto custa ir a Gramado
@@ -126,7 +135,8 @@ const custoGramado: Article = {
     "Quanto custa ir a Gramado? Faixa diária por pessoa, total para a duração recomendada, o que não inclui e como calcular o orçamento — com fonte e data.",
   archetype: "custo",
   destinationSlugs: [gramado.slug],
-  updatedAt: gramado.updatedAt,
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-13",
   sections: [
     {
       id: "por-dia",
@@ -199,7 +209,8 @@ const epocaLencois: Article = {
     "Melhor época para ir aos Lençóis Maranhenses: meses com mais lagoas, clima mês a mês com temperatura e chuva, e o que considerar em cada período.",
   archetype: "epoca",
   destinationSlugs: [lencois.slug],
-  updatedAt: lencois.updatedAt,
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-15",
   sections: [
     {
       id: "melhores-meses",
@@ -270,10 +281,8 @@ const comparativo: Article = {
     "Rio ou São Paulo: comparativo de custo por dia, melhor época, perfil de cada cidade e duração sugerida para decidir qual combina com o seu roteiro.",
   archetype: "comparativo",
   destinationSlugs: [rio.slug, saoPaulo.slug],
-  updatedAt:
-    new Date(rio.updatedAt) > new Date(saoPaulo.updatedAt)
-      ? rio.updatedAt
-      : saoPaulo.updatedAt,
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-14",
   sections: [
     {
       id: "custo",
@@ -416,7 +425,8 @@ const roteiroRio: Article = {
     "Roteiro de 4 dias no Rio de Janeiro com as 8 atrações da nossa base: o que fazer dia a dia, tempo em cada visita, entradas e dicas de deslocamento.",
   archetype: "roteiro",
   destinationSlugs: [rio.slug],
-  updatedAt: rio.updatedAt,
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-16",
   sections: [
     {
       id: "antes-de-comecar",
@@ -459,6 +469,290 @@ const roteiroRio: Article = {
 };
 
 /* =====================================================================
+   05 — Custo: quanto custa Fernando de Noronha (lote 2)
+   ===================================================================== */
+
+const noronhaDays = noronha.recommendedDays;
+const noronhaTotalLow = noronhaDays.min * noronha.cost.minPerDayBRL;
+const noronhaTotalHigh = noronhaDays.max * noronha.cost.maxPerDayBRL;
+
+const custoNoronha: Article = {
+  slug: "quanto-custa-fernando-de-noronha",
+  title: "Quanto custa ir a Fernando de Noronha: por dia, total e fontes",
+  deck:
+    "Faixa diária premium por pessoa, total para a duração sugerida, as taxas obrigatórias que mudam a conta e o que a estimativa não inclui — cada número com metodologia e data.",
+  description:
+    "Quanto custa ir a Fernando de Noronha? Faixa diária, total para a duração sugerida, taxas que mudam a conta e limites de cada número — com fonte e data.",
+  archetype: "custo",
+  destinationSlugs: [noronha.slug],
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-17",
+  sections: [
+    {
+      id: "por-dia",
+      heading: "Quanto custa por dia",
+      paragraphs: [
+        `A estimativa diária em ${noronha.name} vai de R$ ${noronha.cost.minPerDayBRL} a R$ ${noronha.cost.maxPerDayBRL} por pessoa — a faixa mais alta da nossa base, coerente com um destino isolado e de acesso controlado. O valor cobre os itens habituais de uma viagem: hospedagem, alimentação, transporte local e passeios.`,
+        noronha.cost.methodology,
+        `A data de referência desta faixa é ${formatDateISO(noronha.cost.referenceDate)} e a confiança atribuída à estimativa é ${confidenceLabel(noronha.cost.confidence)}. A página do destino mantém a revisão visível para qualquer visitante.`,
+        noronha.cost.limitations,
+      ],
+    },
+    {
+      id: "total",
+      heading: "Total para a viagem inteira",
+      paragraphs: [
+        `A duração sugerida para ${noronha.name} é de ${noronhaDays.min} a ${noronhaDays.max} dias. Pela faixa diária, o custo estimado por pessoa fica entre R$ ${noronhaTotalLow} (${noronhaDays.min} dias no perfil econômico) e R$ ${noronhaTotalHigh} (${noronhaDays.max} dias no perfil confortável) — sem passagem aérea e sem as taxas obrigatórias de entrada, que são cobradas à parte.`,
+        "É ordem de grandeza para planejar quanto guardar, com método declarado — não uma cobrança prevista por ninguém.",
+      ],
+    },
+    {
+      id: "o-que-pesa",
+      heading: "O que mais pesa no bolso",
+      paragraphs: [
+        noronha.warnings[0] ?? "",
+        noronha.warnings[2] ?? "",
+        noronha.howToArrive,
+        noronha.localTransport,
+        noronha.food,
+        noronha.referenceFromSaoPaulo
+          ? `De São Paulo, a referência de deslocamento é de ${noronha.referenceFromSaoPaulo.distanceKm} km — ${noronha.referenceFromSaoPaulo.notes}`
+          : "",
+      ].filter(Boolean),
+    },
+    {
+      id: "calcule",
+      heading: "Como calcular o seu caso",
+      paragraphs: [
+        "A faixa é genérica por definição — o seu grupo tem composição e estilo próprios. A Calculadora soma transporte, hospedagem e passeios com os seus números; o Diagnóstico cruza o orçamento do grupo com as diárias dos destinos; e o Planejador monta a estrutura de dias com estimativa declarada.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Os valores desta página são preços reais?",
+      answer:
+        "Não. São faixas de referência para planejamento, com metodologia e data de consulta públicas — nunca cotação em tempo real. Confirme sempre com os provedores antes de reservar.",
+    },
+    {
+      question: "De quando são os valores?",
+      answer: `A data de referência desta estimativa é ${formatDateISO(noronha.cost.referenceDate)} e a última revisão editorial do destino foi em ${formatDateISO(noronha.updatedAt)}.`,
+    },
+    {
+      question: "Quais taxas obrigatórias a faixa não inclui?",
+      answer: `${noronha.warnings[0] ?? ""} ${noronha.warnings[1] ?? ""}`.trim(),
+    },
+    {
+      question: "O que a faixa não inclui?",
+      answer: noronha.cost.limitations,
+    },
+  ],
+};
+
+/* =====================================================================
+   06 — Época: melhor época para Florianópolis (lote 2)
+   ===================================================================== */
+
+const floripaRainy = monthIndexesWhere(
+  florianopolis,
+  (c) => c.rainfall === "chuvoso",
+);
+const floripaDry = monthIndexesWhere(
+  florianopolis,
+  (c) => c.rainfall === "seco",
+);
+const july = florianopolis.climateByMonth[6];
+if (!july) {
+  throw new Error(
+    "Base climática de Florianópolis sem o mês de julho — revise o conteúdo editorial.",
+  );
+}
+
+const epocaFlorianopolis: Article = {
+  slug: "melhor-epoca-florianopolis",
+  title: "Melhor época para ir a Florianópolis",
+  deck:
+    "Dezembro a março para praia quente, abril e maio para ilha tranquila — e o que o verão cobra em trânsito. Clima mês a mês com temperatura e chuva para escolher a data.",
+  description:
+    "Melhor época para Florianópolis: meses de praia, o trânsito do verão, clima mês a mês com temperatura e chuva e o que considerar em cada período.",
+  archetype: "epoca",
+  destinationSlugs: [florianopolis.slug],
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-18",
+  sections: [
+    {
+      id: "melhores-meses",
+      heading: "Melhores meses para ir",
+      paragraphs: [
+        `Para conhecer ${florianopolis.name}, ${formatMonths(florianopolis.bestMonths)} são a janela indicada. ${florianopolis.bestTimeNotes}`,
+        `A duração sugerida para o destino é de ${florianopolis.recommendedDays.min} a ${florianopolis.recommendedDays.max} dias — folga para dias de chuva e para o traslado de ${florianopolis.referenceFromSaoPaulo?.distanceKm ?? "—"} km a partir de São Paulo.`,
+        florianopolis.warnings[0] ?? "",
+      ].filter(Boolean),
+    },
+    {
+      id: "clima-mes-a-mes",
+      heading: "Clima mês a mês",
+      paragraphs: [
+        `Na nossa base climática, ${formatMonths(floripaRainy)} são os meses mais chuvosos e ${formatMonths(floripaDry)} os mais secos — o inverno da ilha combina mar mais agitado e temperaturas mais baixas.`,
+      ],
+      bullets: florianopolis.climateByMonth.map(
+        (c, i) =>
+          `${monthName(i)}: ${c.temperatureC.min}–${c.temperatureC.max} °C · ${rainLabel(c.rainfall)}`,
+      ),
+    },
+    {
+      id: "deslocamento",
+      heading: "Como chegar e se deslocar",
+      paragraphs: [
+        florianopolis.howToArrive,
+        florianopolis.localTransport,
+        florianopolis.referenceFromSaoPaulo?.notes ?? "",
+      ].filter(Boolean),
+    },
+    {
+      id: "planejar",
+      heading: "Planejar a viagem",
+      paragraphs: [
+        "Escolhida a data, o Planejador monta a estrutura de dias com estimativa de custo declarada e o Diagnóstico avisa se o orçamento do grupo comporta o destino — sem cadastro e sem preço inventado.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Quando é a melhor época para ir?",
+      answer: florianopolis.bestTimeNotes,
+    },
+    {
+      question: "Posso ir em julho?",
+      answer: `Julho aparece na base como ${rainLabel(july.rainfall)} com temperaturas de ${july.temperatureC.min} a ${july.temperatureC.max} °C — o mês mais frio do ano. É escolha para quem quer a ilha fora da alta temporada; para praia com calor, a janela indicada é ${formatMonths(florianopolis.bestMonths)}.`,
+    },
+    {
+      question: "Quantos dias preciso?",
+      answer: `A duração sugerida para Florianópolis é de ${florianopolis.recommendedDays.min} a ${florianopolis.recommendedDays.max} dias — a ilha tem mais de 40 praias em mais de 50 km, e o tempo evita correria entre regiões.`,
+    },
+    {
+      question: "O trânsito do verão é mesmo ruim?",
+      answer: florianopolis.warnings[0] ?? "",
+    },
+  ],
+};
+
+/* =====================================================================
+   07 — Roteiro: 3 dias em Salvador (lote 2)
+   ===================================================================== */
+
+interface SalvadorDayPlan {
+  title: string;
+  attractionIds: string[];
+  /** Nota editorial opcional (deslocamento/dia específico). */
+  note?: string;
+}
+
+/* Agrupamento editorial por geografia — sempre a partir dos ids reais
+   da base; se um id sumir, o build falha e força revisão. */
+const SALVADOR_DAY_PLANS: SalvadorDayPlan[] = [
+  {
+    title: "Dia 1 — Pelourinho e Centro Histórico",
+    attractionIds: ["ssa-pelourinho", "ssa-elevador-lacerda"],
+  },
+  {
+    title: "Dia 2 — Santo Antônio e Rio Vermelho",
+    attractionIds: ["ssa-igreja-sao-francisco", "ssa-teatro-bahia"],
+  },
+  {
+    title: "Dia 3 — Barra e Praia do Forte",
+    attractionIds: ["ssa-farol-da-barra", "ssa-praia-do-forte"],
+    note: salvador.warnings[3] ?? undefined,
+  },
+];
+
+function salvadorDaySection(
+  plan: SalvadorDayPlan,
+  index: number,
+): ArticleSection {
+  const atts = plan.attractionIds.map((id) => attraction(salvador, id));
+  const total = atts.reduce((sum, a) => sum + a.suggestedMinutes, 0);
+  return {
+    id: `dia-${index + 1}`,
+    heading: plan.title,
+    paragraphs: [
+      `Soma das visitas do dia: ${duration(total)} — sem contar deslocamentos entre os bairros.`,
+      ...(plan.note ? [plan.note] : []),
+    ],
+    bullets: atts.map(
+      (a) =>
+        `${a.name} — ${duration(a.suggestedMinutes)} · ${feeLabel(a)} · ${a.area}`,
+    ),
+  };
+}
+
+const salvadorTotalMinutes = SALVADOR_DAY_PLANS.reduce(
+  (sum, plan) =>
+    sum +
+    plan.attractionIds.reduce(
+      (s, id) => s + attraction(salvador, id).suggestedMinutes,
+      0,
+    ),
+  0,
+);
+
+const roteiroSalvador: Article = {
+  slug: "roteiro-3-dias-salvador",
+  title: "Roteiro de 3 dias em Salvador: o que fazer dia a dia",
+  deck:
+    "Três dias com as seis atrações mapeadas na nossa base — Pelourinho e Cidade Alta, patrimônio sacro e Rio Vermelho, Barra e litoral — com tempo em cada visita, entradas e ritmo declarado.",
+  description:
+    "Roteiro de 3 dias em Salvador com as 6 atrações da nossa base: o que fazer dia a dia, tempo em cada visita, entradas e dicas de deslocamento.",
+  archetype: "roteiro",
+  destinationSlugs: [salvador.slug],
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-19",
+  sections: [
+    {
+      id: "antes-de-comecar",
+      heading: "Antes de começar",
+      paragraphs: [
+        `O destino recomenda de ${salvador.recommendedDays.min} a ${salvador.recommendedDays.max} dias. Este roteiro usa o mínimo — ${SALVADOR_DAY_PLANS.length} dias — para caber em uma viagem curta sem pular o essencial.`,
+        `Os tempos e as entradas vêm das ${salvador.attractions.length} atrações mapeadas em nossa base, cada uma com fonte oficial e data de consulta. Soma total das visitas: ${duration(salvadorTotalMinutes)} espalhados em ${SALVADOR_DAY_PLANS.length} dias.`,
+      ],
+    },
+    ...SALVADOR_DAY_PLANS.map(salvadorDaySection),
+    {
+      id: "ritmo",
+      heading: "Tempo, ritmo e deslocamentos",
+      paragraphs: [
+        `Os deslocamentos não entram na soma dos dias: ${salvador.localTransport}`,
+        `Cuidado com o essencial — ${salvador.warnings[0] ?? ""}`,
+        `Antes de visitar igrejas e casas de cultura: ${salvador.warnings[salvador.warnings.length - 1] ?? ""}`,
+      ].filter(Boolean),
+    },
+    {
+      id: "custo",
+      heading: "Custo de referência",
+      paragraphs: [
+        `Para ${SALVADOR_DAY_PLANS.length} dias no perfil econômico, a base indica cerca de R$ ${SALVADOR_DAY_PLANS.length * salvador.cost.minPerDayBRL} por pessoa; no perfil confortável, até R$ ${SALVADOR_DAY_PLANS.length * salvador.cost.maxPerDayBRL}. ${salvador.cost.limitations}`,
+        `Data de referência das estimativas: ${formatDateISO(salvador.cost.referenceDate)}.`,
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Por que exatamente 3 dias?",
+      answer: `Porque é a duração mínima sugerida para Salvador (${salvador.recommendedDays.min} a ${salvador.recommendedDays.max} dias na nossa base). Com mais tempo, use o dia extra para a Costa do Cacau ou para as praias — os dias deste roteiro estão montados em blocos geográficos que se substituem.`,
+    },
+    {
+      question: "Os ingressos do roteiro estão garantidos?",
+      answer:
+        "Não. As entradas exibidas são faixas consultadas nas fontes oficiais na data indicada — não reservamos nem vendemos ingressos. Confirme valor e horário no site oficial de cada atração antes de sair.",
+    },
+    {
+      question: "Como me deslocar entre os pontos?",
+      answer: salvador.localTransport,
+    },
+  ],
+};
+
+/* =====================================================================
    Acessores
    ===================================================================== */
 
@@ -467,6 +761,9 @@ export const allArticles: readonly Article[] = [
   epocaLencois,
   comparativo,
   roteiroRio,
+  custoNoronha,
+  epocaFlorianopolis,
+  roteiroSalvador,
 ];
 
 export function getArticle(slug: string): Article | undefined {

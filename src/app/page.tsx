@@ -19,8 +19,11 @@ import {
   getDestinationStats,
   getFeaturedDestinations,
 } from "@/data/destinations";
+import { allArticles } from "@/data/articles";
 import { allGuides } from "@/data/guides";
-import { buildMetadata } from "@/lib/seo/seo";
+import { ARCHETYPE_LABEL } from "@/lib/domain/articles";
+import { formatDateISO } from "@/lib/format/format";
+import { buildMetadata, faqJsonLd } from "@/lib/seo/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "RotaClara — Viajar melhor começa com decisões melhores",
@@ -30,6 +33,44 @@ export const metadata: Metadata = buildMetadata({
     "sobre o Brasil.",
   path: "/",
 });
+
+/**
+ * FAQ da homepage (acordeão nativo + FAQPage JSON-LD).
+ * Só respostas factuais: sem preço inventado, sem cadastro obrigatório,
+ * com divulgação de afiliados como ela é.
+ */
+const HOME_FAQ: { question: string; answer: string }[] = [
+  {
+    question: "Os valores mostrados são preços reais?",
+    answer:
+      "Não. São faixas de estimativa para planejamento, com metodologia e data " +
+      "de consulta visíveis em cada página. Nenhuma passagem, hospedagem ou " +
+      "passeio é vendido ou reservado por aqui — confirme sempre com o provedor " +
+      "antes de comprar.",
+  },
+  {
+    question: "Preciso criar conta para usar as ferramentas?",
+    answer:
+      "Não. Diagnóstico, Calculadora, Comparador, Planejador e Roteiro " +
+      "funcionam direto no navegador, sem cadastro e sem login.",
+  },
+  {
+    question: "De onde vêm os números dos destinos e artigos?",
+    answer:
+      "Cada página lista as fontes oficiais consultadas, a data da consulta e a " +
+      "data da última revisão editorial. Se um valor mudar na base, as páginas " +
+      "que o usam mudam junto.",
+  },
+  {
+    question: "Os links para hospedagem e passeios são afiliados?",
+    answer:
+      "Alguns sim. Quando você acessa um link de parceiro, a RotaClara pode " +
+      "receber uma comissão — sem nenhum custo adicional para você. A " +
+      "divulgação fica visível no rodapé de todas as páginas.",
+  },
+];
+
+const homeFaqJsonLd = faqJsonLd(HOME_FAQ);
 
 /** Perfis de viagem em destaque na homepage. */
 const PROFILES = [
@@ -114,6 +155,9 @@ const BENEFITS = [
 export default function HomePage() {
   const stats = getDestinationStats();
   const featured = getFeaturedDestinations(6);
+  const recentArticles = [...allArticles]
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+    .slice(0, 3);
 
   const byProfile = (tag: (typeof PROFILES)[number]["tag"]) =>
     allDestinations.filter((d) => d.tags.includes(tag)).slice(0, 3);
@@ -125,6 +169,13 @@ export default function HomePage() {
 
   return (
     <>
+      {homeFaqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd) }}
+        />
+      )}
+
       {/* ============================================================
           HERO
           ============================================================ */}
@@ -167,7 +218,7 @@ export default function HomePage() {
                 Plataforma brasileira de planejamento de viagens
               </span>
 
-              <h1 className="mt-6 text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+              <h1 className="mt-6 text-4xl leading-[1.05] sm:text-5xl lg:text-7xl">
                 Viajar melhor começa com{" "}
                 <span className="text-[#dfb45c]">decisões melhores</span>
               </h1>
@@ -270,6 +321,10 @@ export default function HomePage() {
                   <MiniStat
                     label="Guias com fonte e data"
                     value={`${allGuides.length} publicados`}
+                  />
+                  <MiniStat
+                    label="Artigos com números da base"
+                    value={`${allArticles.length} publicados`}
                   />
                   <MiniStat
                     label="Ferramentas funcionando"
@@ -583,6 +638,113 @@ export default function HomePage() {
               </p>
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* ============================================================
+          ARTIGOS RECENTES
+          ============================================================ */}
+      <section
+        className="border-y border-[#e8e3d8] bg-white py-20 sm:py-24"
+        aria-labelledby="artigos-recentes"
+      >
+        <div className="rc-container">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-xl">
+              <Eyebrow index="06">Ler</Eyebrow>
+              <h2
+                id="artigos-recentes"
+                className="mt-3 text-3xl text-[#0a1628] sm:text-4xl"
+              >
+                Artigos para decidir com números
+              </h2>
+              <p className="mt-3 text-base text-[#16304f]/80">
+                Quanto custa, quando ir, o que fazer — cada pergunta respondida
+                com os mesmos números auditados das páginas de destino.
+              </p>
+            </div>
+            <ButtonLink href="/artigos" variant="secondary">
+              Ver todos os artigos
+            </ButtonLink>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {recentArticles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/artigos/${article.slug}`}
+                className="rc-card rc-card-hover group flex h-full flex-col focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+              >
+                <span className="flex items-start justify-between gap-3">
+                  <Badge tone="gold">
+                    {ARCHETYPE_LABEL[article.archetype]}
+                  </Badge>
+                  <span className="text-[11px] whitespace-nowrap text-[#736b5b]">
+                    <time dateTime={article.updatedAt}>
+                      {formatDateISO(article.updatedAt)}
+                    </time>
+                  </span>
+                </span>
+
+                <h3 className="mt-3 text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
+                  {article.title}
+                </h3>
+                <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-[#736b5b]">
+                  {article.deck}
+                </p>
+                <p className="mt-4 text-xs font-medium text-[#0f6f69]">
+                  Ler artigo →
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          FAQ (acordeão nativo — sem JavaScript)
+          ============================================================ */}
+      <section className="rc-container py-20 sm:py-24" aria-labelledby="faq-home">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-14">
+          <div className="max-w-md">
+            <Eyebrow>Dúvidas frequentes</Eyebrow>
+            <h2
+              id="faq-home"
+              className="mt-3 text-3xl text-[#0a1628] sm:text-4xl"
+            >
+              Perguntas antes de começar
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[#16304f]/80">
+              Resposta direta: sem preço inventado, sem cadastro obrigatório e
+              com a divulgação de afiliados à vista.
+            </p>
+          </div>
+
+          <div className="divide-y divide-[#e8e3d8] border-y border-[#e8e3d8]">
+            {HOME_FAQ.map((item) => (
+              <details key={item.question} className="group py-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-[#0a1628] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden">
+                  {item.question}
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                    className="shrink-0 text-[#8f6417] transition-transform duration-200 group-[open]:rotate-45"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </summary>
+                <p className="mt-3 pr-8 text-sm leading-relaxed text-[#16304f]/80">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 

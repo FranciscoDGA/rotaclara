@@ -32,9 +32,9 @@ const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
 };
 
 const BUTTON_SIZES: Record<ButtonSize, string> = {
-  sm: "h-9 px-3.5 text-sm rounded-lg gap-1.5",
-  md: "h-11 px-5 text-sm rounded-lg gap-2",
-  lg: "h-13 px-7 text-base rounded-lg gap-2.5",
+  sm: "h-9 px-3.5 text-sm rounded-full gap-1.5",
+  md: "h-11 px-5 text-sm rounded-full gap-2",
+  lg: "h-13 px-7 text-base rounded-full gap-2.5",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
