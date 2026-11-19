@@ -59,6 +59,14 @@ export function Footer() {
               viagens. Ajudamos você a decidir para onde ir, quanto gastar e
               como organizar melhor o seu tempo.
             </p>
+            <p className="mt-3">
+              <Link
+                href="/contato"
+                className="text-sm font-medium text-[#dfb45c] underline decoration-[#dfb45c]/50 underline-offset-4 transition-colors hover:text-white focus-visible:outline-3 focus-visible:outline-[#4fcdd6] rounded"
+              >
+                Fale com a gente →
+              </Link>
+            </p>
             <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
               <div>
                 <dt className="text-xs uppercase tracking-wider text-white/50">

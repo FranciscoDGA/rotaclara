@@ -165,6 +165,32 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
                 ))}
               </div>
 
+              {/* Selo de transparência — confiança antes da decisão */}
+              <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/70">
+                <Link
+                  href="/metodologia"
+                  className="underline decoration-[#dfb45c]/70 underline-offset-4 transition-colors hover:text-white focus-visible:outline-3 focus-visible:outline-[#4fcdd6] rounded"
+                >
+                  Custos com metodologia aberta
+                </Link>
+                <span aria-hidden="true" className="text-[#dfb45c]">
+                  ·
+                </span>
+                <a
+                  href="#fontes"
+                  className="underline decoration-[#dfb45c]/70 underline-offset-4 transition-colors hover:text-white focus-visible:outline-3 focus-visible:outline-[#4fcdd6] rounded"
+                >
+                  Fontes consultadas com data
+                </a>
+                <span aria-hidden="true" className="text-[#dfb45c]">
+                  ·
+                </span>
+                <span>
+                  Atualizado em{" "}
+                  <time dateTime={d.updatedAt}>{formatDateISO(d.updatedAt)}</time>
+                </span>
+              </p>
+
               <div className="mt-7 flex flex-wrap gap-3">
                 <ButtonLink
                   href="/planejador"
