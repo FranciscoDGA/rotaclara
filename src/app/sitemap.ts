@@ -9,6 +9,7 @@
  */
 
 import type { MetadataRoute } from "next";
+import { allArticles } from "@/data/articles";
 import { allDestinations } from "@/data/destinations";
 import { allGuides } from "@/data/guides";
 import { absoluteUrl } from "@/lib/seo/seo";
@@ -26,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { path: "/destinos", priority: 0.9, changefreq: "weekly" },
       { path: "/diagnostico", priority: 0.9, changefreq: "weekly" },
       { path: "/guias", priority: 0.8, changefreq: "weekly" },
+      { path: "/artigos", priority: 0.8, changefreq: "weekly" },
       { path: "/comparador", priority: 0.8, changefreq: "monthly" },
       { path: "/planejador", priority: 0.8, changefreq: "monthly" },
       { path: "/calculadora", priority: 0.8, changefreq: "monthly" },
@@ -61,5 +63,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  return [...staticRoutes, ...destinationRoutes];
+  /* Artigos de cauda longa — `lastmod` = data editorial real. */
+  const articleRoutes: MetadataRoute.Sitemap = allArticles.map((a) => ({
+    url: absoluteUrl(`/artigos/${a.slug}`),
+    lastModified: new Date(a.updatedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...destinationRoutes, ...articleRoutes];
 }

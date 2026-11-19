@@ -8,6 +8,8 @@
  */
 
 import type { Metadata } from "next";
+import type { Article } from "@/lib/domain/articles";
+import { ARCHETYPE_LABEL } from "@/lib/domain/articles";
 import type { Destination, Guide } from "@/lib/domain/types";
 
 /** URL base do site. Usa env; fallback em localhost para desenvolvimento. */
@@ -219,6 +221,46 @@ export function articleJsonLd(guide: Guide, destinationName: string) {
     author: { "@type": "Organization", name: getSiteName() },
     publisher: { "@type": "Organization", name: getSiteName() },
     mainEntityOfPage: absoluteUrl(`/destinos/${guide.slug}`),
+  });
+}
+
+/** JSON-LD de artigo de cauda longa (BlogPosting + BreadcrumbList). */
+export function blogPostJsonLd(article: Article) {
+  return sanitize({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${absoluteUrl(`/artigos/${article.slug}`)}#artigo`,
+        headline: article.title,
+        description: article.description,
+        datePublished: article.updatedAt,
+        dateModified: article.updatedAt,
+        inLanguage: "pt-BR",
+        articleSection: ARCHETYPE_LABEL[article.archetype],
+        author: { "@type": "Organization", name: getSiteName() },
+        publisher: { "@type": "Organization", name: getSiteName() },
+        mainEntityOfPage: absoluteUrl(`/artigos/${article.slug}`),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Início", item: absoluteUrl("/") },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Artigos",
+            item: absoluteUrl("/artigos"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: article.title,
+            item: absoluteUrl(`/artigos/${article.slug}`),
+          },
+        ],
+      },
+    ],
   });
 }
 

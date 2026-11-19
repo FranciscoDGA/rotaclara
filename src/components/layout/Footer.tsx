@@ -22,6 +22,7 @@ const PRODUCT_LINKS = [
 ] as const;
 
 const CONTENT_LINKS = [
+  { href: "/artigos", label: "Artigos de viagem" },
   { href: "/guias", label: "Guias de destinos" },
   { href: "/destinos", label: "Todos os destinos" },
   { href: "/destinos?perfil=economico", label: "Viagens econômicas" },
