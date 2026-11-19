@@ -42,11 +42,11 @@ export const destinationsGroupThree: Destination[] = [
     tagline: "Uma das grandes maravilhas naturais do planeta na fronteira trinacional.",
     image: {
       src: "/destinations/foz-do-iguacu.jpg",
-      alt: "Quedas majestosas das Cataratas do Iguaçu com arco-íris",
+      alt: "Visitantes na passarela diante das Cataratas do Iguaçu",
       credit: {
-        author: "Victor He",
+        author: "Christhian Gruhn",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/foz-do-iguacu",
+        sourceUrl: "https://unsplash.com/photos/pessoas-em-pe-na-ponte-de-madeira-sobre-cachoeiras-durante-o-dia-WtRxmuOxc4k",
         license: "Unsplash License",
       },
     },
@@ -229,11 +229,11 @@ export const destinationsGroupThree: Destination[] = [
     tagline: "A Ilha da Magia: praias de todos os estilos, vilas açorianas e natureza preservada.",
     image: {
       src: "/destinations/florianopolis.jpg",
-      alt: "Praia e lagoa da Ilha de Santa Catarina em Florianópolis",
+      alt: "Vista aérea da orla e das praias de Florianópolis",
       credit: {
-        author: "Bailey Zindel",
+        author: "Paulo Kopzinski",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/florianopolis",
+        sourceUrl: "https://unsplash.com/photos/uma-vista-panoramica-de-uma-praia-e-oceano-yCFvgBQd7C8",
         license: "Unsplash License",
       },
     },
@@ -537,11 +537,11 @@ export const destinationsGroupThree: Destination[] = [
     tagline: "O deserto de dunas brancas entremeado por milhares de lagoas de água doce cristalina.",
     image: {
       src: "/destinations/lencois-maranhenses.jpg",
-      alt: "Dunas de areia branca e lagoas cristalinas dos Lençóis Maranhenses",
+      alt: "Dunas de areia branca e lagoa cristalina dos Lençóis Maranhenses",
       credit: {
-        author: "Jeremy Bishop",
+        author: "Léo Castro",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/lencois-maranhenses",
+        sourceUrl: "https://unsplash.com/photos/um-corpo-de-agua-cercado-por-dunas-de-areia-s0EKwK7xzT8",
         license: "Unsplash License",
       },
     },
@@ -683,11 +683,11 @@ export const destinationsGroupThree: Destination[] = [
     tagline: "O ápice do barroco brasileiro, arte colonial e culinária mineira em ladeiras históricas.",
     image: {
       src: "/destinations/ouro-preto.jpg",
-      alt: "Igreja barroca colonial e montanhas históricas de Ouro Preto",
+      alt: "Rua de paralelepípedos com casario colonial em Ouro Preto",
       credit: {
-        author: "Clayton Malquist",
+        author: "Mario Gogh",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/ouro-preto",
+        sourceUrl: "https://unsplash.com/photos/um-grupo-de-pessoas-andando-por-uma-rua-de-paralelepipedos-XMEqcNJQkWg",
         license: "Unsplash License",
       },
     },

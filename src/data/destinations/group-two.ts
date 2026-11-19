@@ -39,11 +39,11 @@ export const destinationsGroupTwo: Destination[] = [
     tagline: "Serra, clima frio e agenda gastronômica o ano inteiro.",
     image: {
       src: "/destinations/gramado.jpg",
-      alt: "Lago Negro e pinheiros na Serra Gaúcha em Gramado",
+      alt: "Fachada iluminada de igreja no centro de Gramado à noite",
       credit: {
-        author: "Felipe Tofani",
+        author: "Edson Junior",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/gramado",
+        sourceUrl: "https://unsplash.com/photos/um-edificio-com-uma-torre-e-um-relogio-sobre-ele-CWGGSi5FEhc",
         license: "Unsplash License",
       },
     },
@@ -558,12 +558,12 @@ export const destinationsGroupTwo: Destination[] = [
     tagline: "Cachoeiras altas, cânions e trilhas no planalto baiano.",
     image: {
       src: "/destinations/chapada-diamantina.jpg",
-      alt: "Vista panorâmica dos cânions e chapadas ao pôr do sol",
+      alt: "Chapada dourada do Morro Pai Inácio na Chapada Diamantina",
       credit: {
-        author: "Austin Schmid",
-        source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/chapada-diamantina",
-        license: "Unsplash License",
+        author: "TontiTonti",
+        source: "Wikimedia Commons",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Chapada_Diamantina_Pai_Inacio.jpg",
+        license: "CC BY-SA 3.0",
       },
     },
     intro:
@@ -802,11 +802,11 @@ export const destinationsGroupTwo: Destination[] = [
     tagline: "Encontro das águas, floresta urbana e teatro histórico.",
     image: {
       src: "/destinations/manaus.jpg",
-      alt: "O Teatro Amazonas sob céu iluminado no centro de Manaus",
+      alt: "Barco sobre rio da Amazônia cercado de floresta em Manaus",
       credit: {
-        author: "Nathalia Segato",
+        author: "gustavo nacht",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/manaus",
+        sourceUrl: "https://unsplash.com/photos/um-homem-em-um-barco-vermelho-e-branco-em-um-rio-4qft5c4rtvU",
         license: "Unsplash License",
       },
     },

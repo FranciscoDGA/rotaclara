@@ -36,7 +36,7 @@ export function DestinationCard({
       {/* Imagem é o link; badges ficam FORA do link (irmãos) para que o
           texto visível deles não entre em conflito com o aria-label
           — regra label-content-name-mismatch. */}
-      <div className="relative aspect-[16/9] overflow-hidden rounded-t-xl">
+      <div className="relative aspect-[16/9] overflow-hidden rounded-t-lg">
         <Link
           href={`/destinos/${d.slug}`}
           className="focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 absolute inset-0 z-10"
@@ -138,9 +138,9 @@ export function DestinationCard({
             <p className="text-[11px] uppercase tracking-wide text-[#736b5b]">
               Estimativa diária
             </p>
-            <p className="text-sm font-semibold text-[#0a1628]">
+            <p className="font-display text-sm font-medium text-[#0a1628]">
               R$ {d.cost.minPerDayBRL}–{d.cost.maxPerDayBRL}
-              <span className="text-xs font-normal text-[#736b5b]"> /dia</span>
+              <span className="font-sans text-xs font-normal text-[#736b5b]"> /dia</span>
             </p>
           </div>
           <span className="inline-flex items-center gap-1 text-sm font-medium text-[#0f6f69]">

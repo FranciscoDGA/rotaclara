@@ -136,9 +136,14 @@ export default function HomePage() {
             src={allDestinations[0].image.src}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-15 blur-2xl scale-110"
+            className="pointer-events-none absolute inset-0 h-full w-full scale-105 object-cover opacity-50"
           />
         )}
+        {/* Scrim navy — homogeneiza a foto e garante contraste do texto */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/94 to-[#0a1628]/70"
+        />
         {/* Padrão de linhas discretas */}
         <div
           aria-hidden="true"
@@ -150,7 +155,7 @@ export default function HomePage() {
           }}
         />
 
-        <div className="rc-container relative py-16 sm:py-20 lg:py-28">
+        <div className="rc-container relative py-20 sm:py-24 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/85">
@@ -161,7 +166,7 @@ export default function HomePage() {
                 Plataforma brasileira de planejamento de viagens
               </span>
 
-              <h1 className="mt-6 text-4xl font-semibold leading-[1.06] tracking-tight sm:text-5xl lg:text-6xl">
+              <h1 className="mt-6 text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
                 Viajar melhor começa com{" "}
                 <span className="text-[#dfb45c]">decisões melhores</span>
               </h1>
@@ -238,7 +243,7 @@ export default function HomePage() {
                     <Badge tone="gold">Destino em destaque</Badge>
                   </div>
                   <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xl font-bold text-white drop-shadow-sm">
+                    <p className="font-display text-xl font-medium text-white drop-shadow-sm">
                       {allDestinations[0].name}
                     </p>
                     <p className="text-xs text-white/80">
@@ -289,12 +294,12 @@ export default function HomePage() {
       {/* ============================================================
           DESTAQUE DAS FERRAMENTAS
           ============================================================ */}
-      <section className="rc-container py-16 sm:py-20" aria-labelledby="ferramentas">
+      <section className="rc-container py-20 sm:py-24" aria-labelledby="ferramentas">
         <div className="max-w-2xl">
-          <Eyebrow>Como funciona</Eyebrow>
+          <Eyebrow index="01">Como funciona</Eyebrow>
           <h2
             id="ferramentas"
-            className="mt-3 text-3xl font-semibold tracking-tight text-[#0a1628] sm:text-4xl"
+            className="mt-3 text-3xl text-[#0a1628] sm:text-4xl"
           >
             Quatro decisões, uma plataforma
           </h2>
@@ -341,16 +346,16 @@ export default function HomePage() {
           DESCUBRA POR PERFIL
           ============================================================ */}
       <section
-        className="border-y border-[#e8e3d8] bg-white py-16 sm:py-20"
+        className="border-y border-[#e8e3d8] bg-white py-20 sm:py-24"
         aria-labelledby="perfis"
       >
         <div className="rc-container">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-xl">
-              <Eyebrow>Descobrir</Eyebrow>
+              <Eyebrow index="02">Descobrir</Eyebrow>
               <h2
                 id="perfis"
-                className="mt-3 text-3xl font-semibold tracking-tight text-[#0a1628] sm:text-4xl"
+                className="mt-3 text-3xl text-[#0a1628] sm:text-4xl"
               >
                 Destinos por perfil
               </h2>
@@ -435,13 +440,13 @@ export default function HomePage() {
       {/* ============================================================
           DESTAQUE
           ============================================================ */}
-      <section className="rc-container py-16 sm:py-20" aria-labelledby="destaques">
+      <section className="rc-container py-20 sm:py-24" aria-labelledby="destaques">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-xl">
-            <Eyebrow>Em destaque</Eyebrow>
+            <Eyebrow index="03">Em destaque</Eyebrow>
             <h2
               id="destaques"
-              className="mt-3 text-3xl font-semibold tracking-tight text-[#0a1628] sm:text-4xl"
+              className="mt-3 text-3xl text-[#0a1628] sm:text-4xl"
             >
               Destinos com guia completo
             </h2>
@@ -466,16 +471,16 @@ export default function HomePage() {
           GUIAS EDITORIAIS
           ============================================================ */}
       <section
-        className="border-y border-[#e8e3d8] bg-white py-16 sm:py-20"
+        className="border-y border-[#e8e3d8] bg-white py-20 sm:py-24"
         aria-labelledby="guias"
       >
         <div className="rc-container">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-xl">
-              <Eyebrow>Aprender</Eyebrow>
+              <Eyebrow index="04">Aprender</Eyebrow>
               <h2
                 id="guias"
-                className="mt-3 text-3xl font-semibold tracking-tight text-[#0a1628] sm:text-4xl"
+                className="mt-3 text-3xl text-[#0a1628] sm:text-4xl"
               >
                 Guias para decidir antes de ir
               </h2>
@@ -538,12 +543,12 @@ export default function HomePage() {
       {/* ============================================================
           BENEFÍCIOS
           ============================================================ */}
-      <section className="rc-container py-16 sm:py-20" aria-labelledby="beneficios">
+      <section className="rc-container py-20 sm:py-24" aria-labelledby="beneficios">
         <div className="max-w-2xl">
-          <Eyebrow>Por que a RotaClara</Eyebrow>
+          <Eyebrow index="05">Por que a RotaClara</Eyebrow>
           <h2
             id="beneficios"
-            className="mt-3 text-3xl font-semibold tracking-tight text-[#0a1628] sm:text-4xl"
+            className="mt-3 text-3xl text-[#0a1628] sm:text-4xl"
           >
             Confiança antes, durante e depois da viagem
           </h2>
@@ -587,7 +592,7 @@ export default function HomePage() {
         <div className="rc-grain relative overflow-hidden rounded-3xl bg-[#0a1628] px-6 py-14 text-center text-white sm:px-12">
           <h2
             id="cta-final"
-            className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl"
+            className="mx-auto max-w-2xl text-3xl sm:text-4xl"
           >
             Comece pelo orçamento. O resto fica mais fácil.
           </h2>
@@ -636,7 +641,7 @@ export default function HomePage() {
 function Stat({ value, label }: { value: number; label: string }) {
   return (
     <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3.5">
-      <p className="text-3xl font-semibold tracking-tight text-[#dfb45c]">
+      <p className="font-display text-3xl font-medium tracking-tight text-[#dfb45c]">
         {value}
       </p>
       <p className="mt-0.5 text-xs text-white/60">{label}</p>
@@ -678,10 +683,11 @@ interface ToolCardProps {
 function ToolCard({ number, title, description, href, hrefLabel }: ToolCardProps) {
   return (
     <div className="rc-card rc-card-hover flex h-full flex-col p-6">
-      <span className="text-xs font-semibold tracking-widest text-[#8f6417]">
+      <span className="font-display text-2xl leading-none font-medium tracking-[0.06em] text-[#8f6417]">
         {number}
       </span>
-      <h3 className="mt-3 text-lg font-semibold text-[#0a1628]">{title}</h3>
+      <span aria-hidden="true" className="mt-3.5 block h-px w-9 bg-[#dfb45c]" />
+      <h3 className="mt-3.5 text-lg font-semibold text-[#0a1628]">{title}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-[#736b5b]">
         {description}
       </p>

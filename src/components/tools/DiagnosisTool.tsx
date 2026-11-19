@@ -336,7 +336,7 @@ export function DiagnosisTool({ destinations }: DiagnosisToolProps) {
               <h3 id="diag-riscos" className="text-base font-semibold text-[#9a6206]">
                 Despesas críticas que podem comprometer a viagem
               </h3>
-              <p className="mt-1 text-xs text-[#9a6206]/85">
+              <p className="mt-1 text-xs text-[#9a6206]">
                 Custos frequentemente esquecidos no planejamento inicial:
               </p>
               <div className="mt-4 space-y-3">

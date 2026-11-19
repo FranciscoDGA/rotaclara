@@ -38,9 +38,9 @@ export default function DiagnosticoPage() {
         </p>
       </header>
 
-      <main className="mt-8">
+      <div className="mt-8">
         <DiagnosisTool destinations={allDestinations} />
-      </main>
+      </div>
     </div>
   );
 }

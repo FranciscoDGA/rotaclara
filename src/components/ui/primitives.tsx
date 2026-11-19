@@ -20,7 +20,9 @@ type ButtonSize = "sm" | "md" | "lg";
 
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    "bg-[#0a1628] text-white hover:bg-[#0f2138] active:bg-[#050d1a] shadow-[0_1px_2px_rgb(10_22_40/0.2)]",
+    "bg-[#0a1628] text-white hover:bg-[#0f2138] active:bg-[#050d1a] " +
+    "shadow-[0_1px_2px_rgb(10_22_40/0.2)] " +
+    "hover:shadow-[inset_0_0_0_1px_rgb(201_149_47/0.45),0_2px_6px_rgb(10_22_40/0.22)]",
   secondary:
     "bg-white text-[#0a1628] border border-[#e8e3d8] hover:border-[#d6cfc0] hover:bg-[#faf8f4]",
   ghost:
@@ -31,8 +33,8 @@ const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
 
 const BUTTON_SIZES: Record<ButtonSize, string> = {
   sm: "h-9 px-3.5 text-sm rounded-lg gap-1.5",
-  md: "h-11 px-5 text-sm rounded-xl gap-2",
-  lg: "h-13 px-7 text-base rounded-xl gap-2.5",
+  md: "h-11 px-5 text-sm rounded-lg gap-2",
+  lg: "h-13 px-7 text-base rounded-lg gap-2.5",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -179,11 +181,22 @@ export function Badge({ children, tone = "default", className }: BadgeProps) {
 
 interface EyebrowProps {
   children: ReactNode;
+  /** Numeração editorial da seção (ex.: "01"). Decorativa. */
+  index?: string;
   className?: string;
 }
 
-export function Eyebrow({ children, className }: EyebrowProps) {
-  return <p className={cn("rc-eyebrow", className)}>{children}</p>;
+export function Eyebrow({ children, index, className }: EyebrowProps) {
+  return (
+    <p className={cn("rc-eyebrow", className)}>
+      {index && (
+        <span aria-hidden="true" className="rc-eyebrow-index">
+          {index}
+        </span>
+      )}
+      {children}
+    </p>
+  );
 }
 
 /* =====================================================================

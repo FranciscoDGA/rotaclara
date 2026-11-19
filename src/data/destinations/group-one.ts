@@ -626,11 +626,11 @@ export const destinationsGroupOne: Destination[] = [
     tagline: "Centro histórico, cultura afro-brasileira e orla atlântica.",
     image: {
       src: "/destinations/salvador.jpg",
-      alt: "Centro Histórico do Pelourinho com casario colorido em Salvador",
+      alt: "Torres de igreja e casario colonial do centro histórico de Salvador",
       credit: {
-        author: "Raphael Nogueira",
+        author: "José Maldonado",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/salvador",
+        sourceUrl: "https://unsplash.com/photos/rua-de-paralelepipedos-e-igreja-em-salvador-cBCA8qjKIXs",
         license: "Unsplash License",
       },
     },
@@ -900,11 +900,11 @@ export const destinationsGroupOne: Destination[] = [
     tagline: "Cidade colonial em morro, com arte, ofícios e vista para o mar.",
     image: {
       src: "/destinations/olinda.jpg",
-      alt: "Casario colonial histórico e ladeiras do Alto da Sé em Olinda",
+      alt: "Casas coloniais coloridas em rua de paralelepípedos no centro histórico de Olinda",
       credit: {
-        author: "Carlos Fabal",
+        author: "Secret Travel Guide",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/olinda",
+        sourceUrl: "https://unsplash.com/photos/casas-de-concreto-azuis-amarelas-e-vermelhas-sob-nuvens-brancas-durante-o-dia-DPrvrpPijkU",
         license: "Unsplash License",
       },
     },
@@ -1139,11 +1139,11 @@ export const destinationsGroupOne: Destination[] = [
     tagline: "Centro colonial intacto, cachoeiras e baía de ilhas.",
     image: {
       src: "/destinations/paraty.jpg",
-      alt: "Casas coloniais com portas coloridas no centro histórico de Paraty",
+      alt: "Ruas de paralelepípedos e casas brancas do centro histórico de Paraty",
       credit: {
-        author: "Marcos Paulo Prado",
+        author: "Charles Assunção",
         source: "Unsplash",
-        sourceUrl: "https://unsplash.com/photos/paraty",
+        sourceUrl: "https://unsplash.com/photos/uma-rua-de-paralelepipedos-alinhada-com-edificios-brancos-L5KATEUSQtw",
         license: "Unsplash License",
       },
     },

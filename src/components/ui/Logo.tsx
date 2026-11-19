@@ -88,7 +88,7 @@ export function Logo({
       {!markOnly && (
         <span className="flex flex-col leading-none">
           <span
-            className={`${textColor} font-semibold tracking-tight`}
+            className={`${textColor} font-display font-semibold tracking-[-0.01em]`}
             style={{ fontSize: size * 0.5 }}
           >
             RotaClara
