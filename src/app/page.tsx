@@ -136,6 +136,7 @@ export default function HomePage() {
             src={allDestinations[0].image.src}
             alt=""
             aria-hidden="true"
+            fetchPriority="high"
             className="pointer-events-none absolute inset-0 h-full w-full scale-105 object-cover opacity-50"
           />
         )}

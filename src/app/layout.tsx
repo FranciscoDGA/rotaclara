@@ -56,7 +56,8 @@ export const metadata: Metadata = {
     url: getSiteUrl(),
     images: [
       {
-        url: "/og-default.svg",
+        // PNG: WhatsApp/Twitter/Facebook não renderizam SVG na prévia do link.
+        url: "/og-default.png",
         width: 1200,
         height: 630,
         alt: siteName,

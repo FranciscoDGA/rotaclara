@@ -53,11 +53,11 @@ Verificado no código em 16/11/2026:
 
 | # | Item | Risco se ficar assim | Estado |
 | --- | --- | --- | --- |
-| T1 | OG image é **SVG** (`og-default.svg`) | WhatsApp/Twitter/Facebook **não renderizam SVG** → link compartilhado aparece sem imagem = cara de site quebrado | 🔴 Pendente |
-| T2 | **Não existe favicon** (nenhum `icon.*`/`apple-icon.*` no App Router) | Aba sem ícone = amadorismo imediato no primeiro contato | 🔴 Pendente |
-| T3 | `NEXT_PUBLIC_SITE_URL` ausente em produção | canonicals/OG apontando para `localhost:3000` → dados estruturados e compartilhamentos inválidos | 🔴 Pendente (CRÍT-1 já conhecido) |
+| T1 | OG image é **SVG** (`og-default.svg`) | WhatsApp/Twitter/Facebook **não renderizam SVG** → link compartilhado aparece sem imagem = cara de site quebrado | ✅ 16/11/2026 — `og-default.png` 1200×630 gerado e referências (`layout.tsx`, `seo.ts`) atualizadas |
+| T2 | **Não existe favicon** (nenhum `icon.*`/`apple-icon.*` no App Router) | Aba sem ícone = amadorismo imediato no primeiro contato | ✅ 16/11/2026 — `icon.svg` + `icon.png` 32 + `apple-icon.png` 180 emitidos no build |
+| T3 | `NEXT_PUBLIC_SITE_URL` ausente em produção | canonicals/OG apontando para `localhost:3000` → dados estruturados e compartilhamentos inválidos | 🔴 Pendente — ação no painel da Vercel (fora do repo) |
 | T4 | Sem medida de uso real (GSC/GA4) | Decidir no escuro; não detectar queda de performance | 🟡 v1.1 |
-| T5 | Hero sem `fetchPriority="lazy"/"eager"` | LCP mais lento que o necessário em 4G | 🟡 Baixo |
+| T5 | Hero sem `fetchPriority` | LCP mais lento que o necessário em 4G | ✅ 16/11/2026 — `fetchPriority="high"` na foto do hero |
 | T6 | JSON-LD nunca validado no Rich Results Test | Erro silencioso em rich results | 🟡 Pós-deploy |
 | T7 | Contato/identidade existem (`/sobre`, `/contato`) mas são "escondidos" no rodapé | Usuário desconfia quando não acha como falar com alguém | 🟡 Revisar visibilidade |
 | — | Transparência de afiliados rotulada, metodologia pública, fontes datadas, 404 com saídas, 178 testes, axe 0 violações | Contramedidas **já ativas** | ✅ |
@@ -78,12 +78,12 @@ Verificado no código em 16/11/2026:
 
 ### Fase 0 — Percepção de legitimidade (pequeno, desbloqueia o resto)
 
-| Item | Esforço |
-| --- | --- |
-| Gerar `og-default.png` 1200×630 (nítido, marca+promessa) e apontar metadata OG | Pequeno |
-| Criar ícones (PNG 32/180 + `icon.svg`) e ligar no `layout.tsx` | Pequeno |
-| Definir `NEXT_PUBLIC_SITE_URL` no ambiente de produção | Minúsculo (env) |
-| `fetchPriority` na imagem do hero | Minúsculo |
+| Item | Esforço | Estado |
+| --- | --- | --- |
+| Gerar `og-default.png` 1200×630 (nítido, marca+promessa) e apontar metadata OG | Pequeno | ✅ 16/11/2026 |
+| Criar ícones (PNG 32/180 + `icon.svg`) e ligar no `layout.tsx` | Pequeno | ✅ 16/11/2026 (App Router detecta por arquivo) |
+| Definir `NEXT_PUBLIC_SITE_URL` no ambiente de produção | Minúsculo (env) | 🔴 Pendente — painel da Vercel |
+| `fetchPriority` na imagem do hero | Minúsculo | ✅ 16/11/2026 |
 
 **Critério de saída:** link compartilhado no WhatsApp mostra imagem; aba tem
 ícone; canonicals apontam ao domínio real.

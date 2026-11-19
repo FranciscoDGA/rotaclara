@@ -81,8 +81,9 @@ exibe preço, o dados estruturados não declara `price`.
 
 ## 6. Social / Open Graph
 
-- `public/og-default.svg` (1200×630) como imagem padrão — marca navy +
-  dourado, promessa de valor, domínio.
+- `public/og-default.png` (1200×630, gerado de `og-default.svg`) como imagem
+  padrão — marca navy + dourado, promessa de valor, domínio. PNG porque
+  redes sociais não renderizam SVG na prévia do link.
 - Cada página de destino pode sobrescrever a imagem; `buildMetadata`
   garante URL absoluta (`NEXT_PUBLIC_SITE_URL`).
 - Títulos ≤ 60 caracteres e descriptions ≤ 160, escritos à mão por página.
