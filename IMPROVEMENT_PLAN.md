@@ -1,6 +1,6 @@
 # Plano de Gestão de Melhorias — RotaClara
 
-> Data: 16/11/2026. Vive após a ETAPA 2 (`e8bb7be`).
+> Data: 19/11/2026. Vive após a ETAPA 2 (`e8bb7be`).
 > Regra: nada aqui é executado sem autorização; nada é marcado ✅ antes de
 > `npm run verify` passar.
 
@@ -49,15 +49,15 @@ reserva. Qualquer tentativa de competir nesses eixos é gasto perdido.
 
 ## 2. Confiança — o que faz o usuário desconfiar e o estado atual
 
-Verificado no código em 16/11/2026:
+Verificado no código em 19/11/2026:
 
 | # | Item | Risco se ficar assim | Estado |
 | --- | --- | --- | --- |
-| T1 | OG image é **SVG** (`og-default.svg`) | WhatsApp/Twitter/Facebook **não renderizam SVG** → link compartilhado aparece sem imagem = cara de site quebrado | ✅ 16/11/2026 — `og-default.png` 1200×630 gerado e referências (`layout.tsx`, `seo.ts`) atualizadas |
-| T2 | **Não existe favicon** (nenhum `icon.*`/`apple-icon.*` no App Router) | Aba sem ícone = amadorismo imediato no primeiro contato | ✅ 16/11/2026 — `icon.svg` + `icon.png` 32 + `apple-icon.png` 180 emitidos no build |
+| T1 | OG image é **SVG** (`og-default.svg`) | WhatsApp/Twitter/Facebook **não renderizam SVG** → link compartilhado aparece sem imagem = cara de site quebrado | ✅ 19/11/2026 — `og-default.png` 1200×630 gerado e referências (`layout.tsx`, `seo.ts`) atualizadas |
+| T2 | **Não existe favicon** (nenhum `icon.*`/`apple-icon.*` no App Router) | Aba sem ícone = amadorismo imediato no primeiro contato | ✅ 19/11/2026 — `icon.svg` + `icon.png` 32 + `apple-icon.png` 180 emitidos no build |
 | T3 | `NEXT_PUBLIC_SITE_URL` ausente em produção | canonicals/OG apontando para `localhost:3000` → dados estruturados e compartilhamentos inválidos | 🔴 Pendente — ação no painel da Vercel (fora do repo) |
 | T4 | Sem medida de uso real (GSC/GA4) | Decidir no escuro; não detectar queda de performance | 🟡 v1.1 |
-| T5 | Hero sem `fetchPriority` | LCP mais lento que o necessário em 4G | ✅ 16/11/2026 — `fetchPriority="high"` na foto do hero |
+| T5 | Hero sem `fetchPriority` | LCP mais lento que o necessário em 4G | ✅ 19/11/2026 — `fetchPriority="high"` na foto do hero |
 | T6 | JSON-LD nunca validado no Rich Results Test | Erro silencioso em rich results | 🟡 Pós-deploy |
 | T7 | Contato/identidade existem (`/sobre`, `/contato`) mas são "escondidos" no rodapé | Usuário desconfia quando não acha como falar com alguém | 🟡 Revisar visibilidade |
 | — | Transparência de afiliados rotulada, metodologia pública, fontes datadas, 404 com saídas, 178 testes, axe 0 violações | Contramedidas **já ativas** | ✅ |
@@ -80,10 +80,10 @@ Verificado no código em 16/11/2026:
 
 | Item | Esforço | Estado |
 | --- | --- | --- |
-| Gerar `og-default.png` 1200×630 (nítido, marca+promessa) e apontar metadata OG | Pequeno | ✅ 16/11/2026 |
-| Criar ícones (PNG 32/180 + `icon.svg`) e ligar no `layout.tsx` | Pequeno | ✅ 16/11/2026 (App Router detecta por arquivo) |
+| Gerar `og-default.png` 1200×630 (nítido, marca+promessa) e apontar metadata OG | Pequeno | ✅ 19/11/2026 |
+| Criar ícones (PNG 32/180 + `icon.svg`) e ligar no `layout.tsx` | Pequeno | ✅ 19/11/2026 (App Router detecta por arquivo) |
 | Definir `NEXT_PUBLIC_SITE_URL` no ambiente de produção | Minúsculo (env) | 🔴 Pendente — painel da Vercel |
-| `fetchPriority` na imagem do hero | Minúsculo | ✅ 16/11/2026 |
+| `fetchPriority` na imagem do hero | Minúsculo | ✅ 19/11/2026 |
 
 **Critério de saída:** link compartilhado no WhatsApp mostra imagem; aba tem
 ícone; canonicals apontam ao domínio real.

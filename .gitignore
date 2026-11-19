@@ -37,3 +37,7 @@ next-env.d.ts
 # material de referência do proprietário (capturas de tela) — não versionar
 /Captura de tela*.png
 /img/Captura de tela*.png
+
+.vercel
+.env*
+!.env.example
