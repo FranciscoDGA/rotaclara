@@ -101,6 +101,7 @@ Verificado no código em 16/11/2026:
 
 | Item | Esforço |
 | --- | --- |
+| Motor de artigos: 4 arquétipos (custo/época/comparativo/roteiro) a partir dos dados auditados — ver §5 | Contínuo (2/semana) |
 | Busca na homepage com sugestões → `/destinos?q=` | Médio |
 | +5 destinos e guias na cauda longa (Jalapão, Tiradentes, Chapada dos Veadeiros...) com fontes datadas | Grande (por destino: pequeno) |
 | Página-ferramenta indexada: `/calculadora` reforçada como landing de "calculadora de viagem" | Pequeno |
@@ -119,7 +120,73 @@ Verificado no código em 16/11/2026:
 | GA4 ou Plausible via env (consentimento LGPD primeiro) | Pequeno |
 | Primeira leitura de CWV reais após 2–4 semanas | Contínuo |
 
-## 5. Fora de escopo permanente (mantido do ROADMAP)
+## 5. Tráfego orgânico e monetização (Stay22)
+
+> Resposta à pergunta: "como trazer tráfego orgânico se não há blog com
+> artigos otimizados?"
+
+### 5.1 O site já tem a matéria-prima — falta o motor de artigos
+
+Não é "site sem conteúdo": existem **15 páginas de destino (pilares)**,
+**15 guias datados** e **5 páginas-ferramenta** indexáveis. O que falta é o
+**motor de artigos de cauda longa** que alimenta esses pilares — o item
+"Blog/editorial com artigos de baixa concorrência" já previsto em
+`SEO_STRATEGY.md` §9.
+
+### 5.2 O funil — 4 passos
+
+**Passo 0 — Medir antes de publicar.** Fase 0 (OG/favicon/SITE_URL) +
+verificar Search Console. Sem isso, todo artigo publicado é invisível.
+
+**Passo 1 — Reforçar os pilares.** Cada `/destinos/[slug]` revisa title
+(≤60), description (≤160), H1 único, FAQ espelhando o JSON-LD. Intenção
+"[cidade] o que fazer / quando ir" já coberta.
+
+**Passo 2 — Motor de artigos (o "blog").** Quatro arquétipos que usam dados
+**já auditados no repo** — nada inventado:
+
+| Arquétipo | Exemplo | Fonte interna |
+| --- | --- | --- |
+| Custo | "Quanto custa ir a Gramado" | `destinations` + `COST_METHODOLOGY.md` |
+| Época | "Melhor época para ir aos Lençóis Maranhenses" | `climate.ts` (clima mensal) |
+| Comparativo | "Gramado ou Canela: qual vale mais a pena" | `comparador` (critérios) |
+| Roteiro | "Roteiro de 3 dias em Ouro Preto" | `guides` + `planejador` |
+
+Mais pautas sazonais de baixa disputa: "onde ir em julho", "férias com
+R$ 2.000", "feriados prolongados para onde ir".
+
+- **Cadência:** 2 artigos/semana, constância > volume.
+- **Cada artigo linka:** pilar do destino + ferramenta contextual + seção
+  "onde ficar" (Stay22).
+- **Regra anti-spam (§7 do SEO_STRATEGY):** nada de página doorway com keyword
+  trocada por cidade; cada artigo precisa de ângulo e dado próprio.
+
+**Passo 3 — Link interno e distribuição.** Hub destino ↔ guia ↔ artigo ↔
+ferramenta; compartilhamento (WhatsApp/redes) — a Fase 0 (OG PNG) faz o link
+viralizado renderizar imagem.
+
+### 5.3 Stay22 no funil — tráfego primeiro, comissão depois
+
+| Ponto de inserção | Contexto |
+| --- | --- |
+| Seção "onde ficar" das páginas de destino (já existe) | Pilar com custos e clima → decisão de hospedagem |
+| CTA contextual no fim de cada guia/artigo novo | "Onde ficar em X" após ler o roteiro |
+| Após a Calculadora/Diagnóstico | usuário acabou de fechar orçamento → intenção alta |
+| Comparador (3 destinos) | escolheu o destino → hospedagem |
+
+Regras mantidas: rótulo de afiliado visível, `rel="sponsored"`, fallback
+editorial sem credenciais (`MONETIZATION_AUDIT.md`), **sem preço
+inventado** — Stay22/Booking exibem o preço real, não nós.
+
+### 5.4 Expectativa realista
+
+- Indexação dos pilares: dias a semanas após GSC + deploy.
+- Primeiros cliques orgânicos: 4–8 semanas após publicar artigos.
+- Tráfego relevante: 4–6 meses de cadência constante.
+- Medição: impressões e CTR por query no GSC → decide quais pautas publicar
+  a seguir (dados, não palpite).
+
+## 6. Fora de escopo permanente (mantido do ROADMAP)
 
 - Reservas/pagamentos; ranking sem critério; preço inventado; cadastro
   obrigatório — mais: depoimento inventado, urgência falsa, pop-up de saída.
