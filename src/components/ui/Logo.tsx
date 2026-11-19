@@ -67,6 +67,8 @@ interface LogoProps {
   variant?: "light" | "dark";
   /** Oculta o texto, apenas o símbolo. */
   markOnly?: boolean;
+  /** Classe aplicada ao slogan (ex.: ocultá-lo em telas estreitas). */
+  taglineClassName?: string;
   className?: string;
 }
 
@@ -75,6 +77,7 @@ export function Logo({
   size = 36,
   variant = "dark",
   markOnly = false,
+  taglineClassName,
   className,
 }: LogoProps) {
   const textColor =
@@ -94,7 +97,7 @@ export function Logo({
             RotaClara
           </span>
           <span
-            className={`${subColor} tracking-wide`}
+            className={`${subColor} tracking-wide ${taglineClassName ?? ""}`}
             style={{ fontSize: Math.max(8, size * 0.24) }}
           >
             VIAJAR MELHOR COMEÇA COM DECISÕES MELHORES

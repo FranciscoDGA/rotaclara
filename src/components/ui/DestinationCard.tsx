@@ -72,26 +72,24 @@ export function DestinationCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="text-lg font-semibold leading-tight text-[#0a1628]">
-              <Link
-                href={`/destinos/${d.slug}`}
-                className="rounded transition-colors hover:text-[#0f6f69] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
-              >
-                {d.name}
-              </Link>
-            </h3>
-            <p className="mt-0.5 text-sm text-[#736b5b]">{d.state}</p>
-          </div>
-          <div className="shrink-0 text-right">
-            <p className="text-xs uppercase tracking-wide text-[#736b5b]">
-              Melhor época
-            </p>
-            <p className="text-xs font-medium text-[#16304f]">
-              {formatMonthsShort(d.bestMonths)}
-            </p>
-          </div>
+        <div>
+          <h3 className="text-lg font-semibold leading-tight text-[#0a1628]">
+            <Link
+              href={`/destinos/${d.slug}`}
+              className="rounded transition-colors hover:text-[#0f6f69] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+            >
+              {d.name}
+            </Link>
+          </h3>
+          <p className="mt-0.5 text-sm text-[#736b5b]">{d.state}</p>
+          {/* Linha em largura total: o título nunca é espremido nem os
+              meses são recortados pelo overflow do card. */}
+          <p className="mt-1.5 text-xs leading-relaxed text-[#16304f]">
+            <span className="uppercase tracking-wide text-[#736b5b]">
+              Melhor época:{" "}
+            </span>
+            {formatMonthsShort(d.bestMonths)}
+          </p>
         </div>
 
         <p className="mt-3 text-sm leading-relaxed text-[#16304f]/85">

@@ -70,11 +70,11 @@ export function Header() {
           href="/"
           className="shrink-0 rounded-lg focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
         >
-          <Logo size={34} />
+          <Logo size={34} taglineClassName="hidden min-[1440px]:block" />
         </Link>
 
         {/* Navegação desktop */}
-        <nav aria-label="Navegação principal" className="hidden lg:block">
+        <nav aria-label="Navegação principal" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
               const active =
@@ -106,7 +106,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2 shrink-0">
+        <div className="hidden xl:flex items-center gap-2 shrink-0">
           <Link
             href="/sobre"
             className="rounded-lg px-3 py-2 text-sm font-medium text-[#16304f]/75 transition-colors hover:text-[#0a1628] hover:bg-[#f4f1ea] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
@@ -128,7 +128,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls={menuId}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#e8e3d8] bg-white text-[#0a1628] transition-colors hover:bg-[#f4f1ea] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#e8e3d8] bg-white text-[#0a1628] transition-colors hover:bg-[#f4f1ea] focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2 xl:hidden"
         >
           <svg
             width="20"
@@ -160,7 +160,7 @@ export function Header() {
       <div
         id={menuId}
         hidden={!open}
-        className="border-t border-[#e8e3d8] bg-white lg:hidden"
+        className="border-t border-[#e8e3d8] bg-white xl:hidden"
       >
         <nav aria-label="Navegação principal (móvel)" className="rc-container py-4">
           <ul className="flex flex-col gap-1">
