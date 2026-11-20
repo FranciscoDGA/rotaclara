@@ -12,13 +12,11 @@ import type { Article } from "@/lib/domain/articles";
 import { ARCHETYPE_LABEL } from "@/lib/domain/articles";
 import type { Destination, Guide } from "@/lib/domain/types";
 
-/** URL base do site. Usa env; em produção na Vercel usa domínio do projeto antes do fallback canônico. */
+/** URL base do site. Usa env; em produção usa o alias principal antes do domínio próprio. */
 export function getSiteUrl(): string {
   const prodFallback =
     process.env.NODE_ENV === "production"
-      ? process.env.VERCEL_PROJECT_PRODUCTION_URL
-        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-        : "https://rotaclara-theta.vercel.app"
+      ? "https://rotaclara-theta.vercel.app"
       : "http://localhost:3000";
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim() || prodFallback;
   try {
