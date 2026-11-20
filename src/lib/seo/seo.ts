@@ -12,16 +12,21 @@ import type { Article } from "@/lib/domain/articles";
 import { ARCHETYPE_LABEL } from "@/lib/domain/articles";
 import type { Destination, Guide } from "@/lib/domain/types";
 
-/** URL base do site. Usa env; fallback em localhost para desenvolvimento. */
+/** URL base do site. Usa env; em produção na Vercel usa domínio do projeto antes do fallback canônico. */
 export function getSiteUrl(): string {
-  const raw =
-    process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
+  const prodFallback =
+    process.env.NODE_ENV === "production"
+      ? process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "https://rotaclara-theta.vercel.app"
+      : "http://localhost:3000";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim() || prodFallback;
   try {
     const url = new URL(raw);
     // Remove barra final para concatenação previsível.
     return url.origin;
   } catch {
-    return "http://localhost:3000";
+    return prodFallback;
   }
 }
 

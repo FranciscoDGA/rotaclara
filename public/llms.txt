@@ -1,0 +1,33 @@
+# RotaClara
+
+> Planejamento inteligente de viagens com custos diários reais, clima, roteiros e comparativos de destinos.
+
+Portal brasileiro de planejamento de viagens baseado em dados auditados: calculadora de orçamento diário por perfil de viajante, comparador de destinos, melhor época climática e roteiros práticos. Domínio canônico: https://rotaclara-theta.vercel.app. Última atualização: 2026-11-20.
+
+## Ferramentas e Calculadoras de Viagem
+
+- [Calculadora de viagem · RotaClara](https://rotaclara-theta.vercel.app/calculadora): Calcule o total da viagem, o valor por pessoa, a distribuição por categoria e quanto guardar por mês — estimativas a partir dos seus próprios valores.
+- [Diagnóstico inteligente de viagem — Descubra o que cabe no orçamento · RotaClara](https://rotaclara-theta.vercel.app/diagnostico): Descubra quais destinos cabem de verdade no seu orçamento, quais despesas podem comprometer seu plano e quais ajustes reduzem custos com transparência.
+- [Planejador inteligente de viagem · RotaClara](https://rotaclara-theta.vercel.app/planejador): Monte a estrutura da viagem: duração, distribuição de orçamento, sugestão de atrações e alertas de transparência, com metodologia e data de referência visíveis.
+- [Construtor de roteiro · RotaClara](https://rotaclara-theta.vercel.app/roteiro): Monte seu roteiro dia a dia: atividades por período, tempos estimados, custos e alertas de sobrecarga. Salvo só no seu navegador, com exportação em texto.
+
+## Guias de Destinos e Artigos de Custo
+
+- [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
+- [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos?busca=Bonito): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
+- [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos?busca=fam%C3%ADlia): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
+- [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos?busca=Gramado): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
+- [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos?busca=praia): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
+- [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos?busca=Salvador): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
+- [Rio de Janeiro — guia de viagem · RotaClara](https://rotaclara-theta.vercel.app/destinos/rio-de-janeiro): Montanha, mar e urbanidade no mesmo horizonte. Guia completo com época, custos, atrações, transporte e fontes.
+- [Guias editoriais · RotaClara](https://rotaclara-theta.vercel.app/guias): Índice dos guias de viagem da RotaClara: seções completas, perguntas frequentes, fontes consultadas e data de atualização de cada destino.
+
+## Páginas Principais
+
+- [RotaClara — Viajar melhor começa com decisões melhores](https://rotaclara-theta.vercel.app/): Descubra destinos adequados ao seu perfil e orçamento, compare custos, monte roteiros e calcule o gasto da viagem. Estimativas transparentes sobre o Brasil.
+- [Comparar destinos · RotaClara](https://rotaclara-theta.vercel.app/comparador): Compare até 3 destinos lado a lado por custo, distância, época, duração, clima e perfil — com critérios transparentes e nenhuma lista de ranking inventada.
+- [Hospedagens e experiências · RotaClara](https://rotaclara-theta.vercel.app/hospedagens): Vitrine editorial de áreas para se hospedar no Brasil. Sem preço falso nem disponibilidade inventada — apenas perfil relativo, contexto e links rotulados.
+
+## Optional
+
+- [Sobre a RotaClara](https://rotaclara-theta.vercel.app/sobre): O que é a RotaClara, como trabalhamos com estimativas transparentes e por que não mostramos preços inventados.
