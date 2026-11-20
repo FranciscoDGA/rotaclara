@@ -20,6 +20,7 @@ Portal brasileiro de planejamento de viagens baseado em dados auditados: calcula
 - [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos?busca=praia): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
 - [Descobrir destinos · RotaClara](https://rotaclara-theta.vercel.app/destinos?busca=Salvador): Explore destinos do Brasil por perfil, região, estado, orçamento diário, duração da viagem e época do ano. Estimativas de planejamento com metodologia visível.
 - [Rio de Janeiro — guia de viagem · RotaClara](https://rotaclara-theta.vercel.app/destinos/rio-de-janeiro): Montanha, mar e urbanidade no mesmo horizonte. Guia completo com época, custos, atrações, transporte e fontes.
+- [Quanto custa ir aos Lençóis Maranhenses: por dia, total e fontes · RotaClara](https://rotaclara-theta.vercel.app/artigos/quanto-custa-lencois-maranhenses): Faixa diária por pessoa, total para 3 a 6 dias, passeios 4x4 e diferenças entre Barreirinhas e Atins com metodologia e data de consulta.
 - [Guias editoriais · RotaClara](https://rotaclara-theta.vercel.app/guias): Índice dos guias de viagem da RotaClara: seções completas, perguntas frequentes, fontes consultadas e data de atualização de cada destino.
 
 ## Páginas Principais

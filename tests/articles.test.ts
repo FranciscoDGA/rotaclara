@@ -220,6 +220,19 @@ describe("motor de artigos — números derivados da base", () => {
     expect(climaSection?.bullets).toHaveLength(floripa.climateByMonth.length);
   });
 
+  it("artigo de custo dos Lençóis Maranhenses usa a faixa diária da base", () => {
+    const article = getArticle("quanto-custa-lencois-maranhenses");
+    const lencois = getDestination("lencois-maranhenses");
+    expect(article).toBeDefined();
+    expect(lencois).toBeDefined();
+    if (!article || !lencois) return;
+
+    const body = JSON.stringify(article.sections);
+    expect(body).toContain(`R$ ${lencois.cost.minPerDayBRL}`);
+    expect(body).toContain(`R$ ${lencois.cost.maxPerDayBRL}`);
+    expect(body).toContain(lencois.cost.referenceDate.slice(0, 4));
+  });
+
   it("nenhum artigo publica placeholder óbvio de dado quebrado", () => {
     const body = JSON.stringify(allArticles);
     for (const bad of ["undefined", "NaN", "[object Object]", "null dias"]) {

@@ -753,6 +753,102 @@ const roteiroSalvador: Article = {
 };
 
 /* =====================================================================
+   08 — Custo: quanto custa ir aos Lençóis Maranhenses (lote 3)
+   ===================================================================== */
+
+const lencoisDays = lencois.recommendedDays;
+const lencoisTotalLow = lencoisDays.min * lencois.cost.minPerDayBRL;
+const lencoisTotalHigh = lencoisDays.max * lencois.cost.maxPerDayBRL;
+
+const custoLencois: Article = {
+  slug: "quanto-custa-lencois-maranhenses",
+  title: "Quanto custa ir aos Lençóis Maranhenses: por dia, total e fontes",
+  deck:
+    "Faixa diária por pessoa, total estimado para 3 a 6 dias, impacto dos passeios 4x4 e diferenças entre Barreirinhas e Atins — com metodologia e data de consulta.",
+  description:
+    "Quanto custa viajar para os Lençóis Maranhenses? Faixa diária, total para 3 a 6 dias, passeios 4x4, Barreirinhas vs Atins e o que não entra — com fonte.",
+  archetype: "custo",
+  destinationSlugs: [lencois.slug],
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-20",
+  sections: [
+    {
+      id: "por-dia",
+      heading: "Quanto custa por dia",
+      paragraphs: [
+        `A estimativa diária nos ${lencois.name} vai de R$ ${lencois.cost.minPerDayBRL} a R$ ${lencois.cost.maxPerDayBRL} por pessoa — faixa ${costLevelLabel(lencois.costLevel)} que cobre os itens habituais de viagem no destino: hospedagem, alimentação, deslocamento local e passeios.`,
+        lencois.cost.methodology,
+        `A data de referência desta faixa é ${formatDateISO(lencois.cost.referenceDate)} e a confiança atribuída à estimativa é ${confidenceLabel(lencois.cost.confidence)}. A página do destino mantém a revisão visível para qualquer visitante.`,
+        lencois.cost.limitations,
+      ],
+    },
+    {
+      id: "total",
+      heading: "Total estimado para a viagem inteira",
+      paragraphs: [
+        `A duração recomendada para ${lencois.name} é de ${lencoisDays.min} a ${lencoisDays.max} dias. Pela faixa diária da base, o gasto estimado por pessoa fica entre R$ ${lencoisTotalLow} (${lencoisDays.min} dias no perfil econômico) e R$ ${lencoisTotalHigh} (${lencoisDays.max} dias no perfil confortável) — antes da passagem aérea ou do traslado desde São Luís.`,
+        "O orçamento diário varia bastante conforme a época escolhida e a quantidade de passeios em veículo 4x4 credenciado ou voadeira pelo Rio Preguiças.",
+      ],
+    },
+    {
+      id: "passeios-e-bases",
+      heading: "Passeios credenciados e escolha da base",
+      paragraphs: [
+        "Nos Lençóis Maranhenses, a logística pesa tanto quanto a diária de pousada: veículos comuns não circulam nas dunas, e a escolha entre Barreirinhas e Atins altera o tempo de deslocamento e o estilo da viagem:",
+      ],
+      bullets: [
+        ...lencois.lodgingAreas.map(
+          (area) => `Base em ${area.name} (${area.profile}): ${area.pros} Atenção: ${area.cons}`,
+        ),
+        ...lencois.attractions.map(
+          (attr) =>
+            `${attr.name} (${attr.area}, duração sugerida ${duration(attr.suggestedMinutes)}, ${feeLabel(attr)}): ${attr.description}${attr.notes ? ` — ${attr.notes}` : ""}`,
+        ),
+      ],
+    },
+    {
+      id: "o-que-pesa",
+      heading: "O que mais pesa no orçamento",
+      paragraphs: [
+        lencois.howToArrive,
+        lencois.localTransport,
+        lencois.food,
+        lencois.referenceFromSaoPaulo
+          ? `A partir de São Paulo, a referência de deslocamento é de ${lencois.referenceFromSaoPaulo.distanceKm} km — ${lencois.referenceFromSaoPaulo.notes}`
+          : "",
+        `Atenção antes de fechar a data: ${lencois.warnings[0] ?? ""}`,
+      ].filter(Boolean),
+    },
+    {
+      id: "calcule",
+      heading: "Como simular com os seus números",
+      paragraphs: [
+        "Como o valor da passagem aérea, do traslado entre São Luís e Barreirinhas (ou Santo Amaro) e da pousada muda por temporada, a faixa acima serve como ordem de grandeza inicial. Na Calculadora você soma transporte, diárias e passeios reais do seu grupo; no Comparador, pode confrontar os Lençóis Maranhenses com outros destinos do Nordeste usando os mesmos critérios.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Quanto tempo vale ficar nos Lençóis Maranhenses?",
+      answer: `Nossa base recomenda de ${lencoisDays.min} a ${lencoisDays.max} dias no destino — tempo suficiente para combinar o circuito de lagoas de 4x4 com o passeio fluvial pelo Rio Preguiças sem corrida no traslado desde São Luís.`,
+    },
+    {
+      question: "A entrada no Parque Nacional dos Lençóis Maranhenses é paga?",
+      answer:
+        "O acesso ao parque nacional em si tem entrada gratuita conforme registrado na base, mas o visitante arca com os passeios em veículos 4x4 credenciados, voadeiras e guias autorizados — que respondem por boa parte do gasto diário.",
+    },
+    {
+      question: "Quando ir para não encontrar as lagoas secas?",
+      answer: `${lencois.bestTimeNotes} ${lencois.warnings[0] ?? ""}`.trim(),
+    },
+    {
+      question: "Qual a data de referência dessas estimativas?",
+      answer: `A faixa diária de R$ ${lencois.cost.minPerDayBRL} a R$ ${lencois.cost.maxPerDayBRL} por pessoa tem referência de ${formatDateISO(lencois.cost.referenceDate)}. ${lencois.cost.limitations}`,
+    },
+  ],
+};
+
+/* =====================================================================
    Acessores
    ===================================================================== */
 
@@ -764,6 +860,7 @@ export const allArticles: readonly Article[] = [
   custoNoronha,
   epocaFlorianopolis,
   roteiroSalvador,
+  custoLencois,
 ];
 
 export function getArticle(slug: string): Article | undefined {
