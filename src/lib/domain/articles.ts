@@ -60,6 +60,10 @@ export interface Article {
   destinationSlugs: string[];
   /** Data editorial em ISO (YYYY-MM-DD). */
   updatedAt: string;
+  /** Caminho da foto principal do artigo em `public/` (ex.: `/images/artigos/...`). */
+  image?: string;
+  /** Texto alternativo descritivo da foto principal. */
+  imageAlt?: string;
   sections: ArticleSection[];
   faq: FaqItem[];
 }

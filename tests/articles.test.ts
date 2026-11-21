@@ -233,6 +233,20 @@ describe("motor de artigos — números derivados da base", () => {
     expect(body).toContain(lencois.cost.referenceDate.slice(0, 4));
   });
 
+  it("artigo de custo 2026 de Fernando de Noronha possui imagem real e tabela de custos", () => {
+    const article = getArticle("quanto-custa-viajar-para-fernando-de-noronha-2026");
+    expect(article).toBeDefined();
+    if (!article) return;
+
+    expect(article.image).toBe(
+      "/images/artigos/quanto-custa-viajar-para-fernando-de-noronha-2026.jpg",
+    );
+    expect(article.imageAlt?.length).toBeGreaterThan(20);
+    expect(article.sections.some((s) => s.table && s.table.rows.length > 0)).toBe(
+      true,
+    );
+  });
+
   it("nenhum artigo publica placeholder óbvio de dado quebrado", () => {
     const body = JSON.stringify(allArticles);
     for (const bad of ["undefined", "NaN", "[object Object]", "null dias"]) {

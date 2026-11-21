@@ -41,12 +41,16 @@ export async function generateMetadata({
   const article = getArticle(slug);
   if (!article) return {};
 
+  const primaryDest = getDestination(article.destinationSlugs[0] ?? "");
+  const ogImage = article.image ?? primaryDest?.image?.src;
+
   return buildMetadata({
     title: article.title,
     description: article.description,
     path: `/artigos/${slug}`,
     type: "article",
     modifiedAt: article.updatedAt,
+    ...(ogImage ? { image: ogImage } : {}),
   });
 }
 
@@ -59,6 +63,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const destinations = a.destinationSlugs
     .map((s) => getDestination(s))
     .filter((d): d is NonNullable<typeof d> => d !== undefined);
+
+  const heroImage = a.image ?? destinations[0]?.image?.src;
+  const heroImageAlt =
+    a.imageAlt ?? destinations[0]?.image?.alt ?? a.title;
 
   const jsonLd = blogPostJsonLd(a);
   const faq = faqJsonLd(a.faq);
@@ -80,6 +88,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           Cabeçalho
           ============================================================ */}
       <section className="rc-grain relative overflow-hidden bg-[#0a1628] text-white">
+        {heroImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={heroImage}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 blur-2xl scale-110"
+          />
+        )}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -100,56 +117,74 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             />
           </div>
 
-          <div className="mt-6 max-w-3xl">
-            <div className="flex flex-wrap gap-2">
-              <Badge tone="gold">{ARCHETYPE_LABEL[a.archetype]}</Badge>
-              {destinations.map((d) => (
-                <Link key={d.slug} href={`/destinos/${d.slug}`}>
-                  <Badge tone="teal" className="transition-opacity hover:opacity-80">
-                    {d.name}
-                  </Badge>
+          <div className="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+            <div>
+              <div className="flex flex-wrap gap-2">
+                <Badge tone="gold">{ARCHETYPE_LABEL[a.archetype]}</Badge>
+                {destinations.map((d) => (
+                  <Link key={d.slug} href={`/destinos/${d.slug}`}>
+                    <Badge tone="teal" className="transition-opacity hover:opacity-80">
+                      {d.name}
+                    </Badge>
+                  </Link>
+                ))}
+              </div>
+
+              <h1 className="mt-4 text-3xl leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
+                {a.title}
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+                {a.deck}
+              </p>
+
+              <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/70">
+                <span>
+                  Atualizado em{" "}
+                  <time dateTime={a.updatedAt}>{formatDateISO(a.updatedAt)}</time>
+                </span>
+                <span aria-hidden="true" className="text-[#dfb45c]">
+                  ·
+                </span>
+                <Link
+                  href="/metodologia"
+                  className="underline decoration-[#dfb45c]/70 underline-offset-4 transition-colors hover:text-white focus-visible:outline-3 focus-visible:outline-[#4fcdd6] rounded"
+                >
+                  Números com metodologia aberta
                 </Link>
-              ))}
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <ButtonLink
+                  href="/planejador"
+                  className="bg-[#c9952f] text-[#0a1628] hover:bg-[#dfb45c]"
+                >
+                  Planejar minha viagem
+                </ButtonLink>
+                <ButtonLink
+                  href="/calculadora"
+                  variant="secondary"
+                  className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40"
+                >
+                  Calcular meu orçamento
+                </ButtonLink>
+              </div>
             </div>
 
-            <h1 className="mt-4 text-3xl leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
-              {a.title}
-            </h1>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-              {a.deck}
-            </p>
-
-            <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/70">
-              <span>
-                Atualizado em{" "}
-                <time dateTime={a.updatedAt}>{formatDateISO(a.updatedAt)}</time>
-              </span>
-              <span aria-hidden="true" className="text-[#dfb45c]">
-                ·
-              </span>
-              <Link
-                href="/metodologia"
-                className="underline decoration-[#dfb45c]/70 underline-offset-4 transition-colors hover:text-white focus-visible:outline-3 focus-visible:outline-[#4fcdd6] rounded"
-              >
-                Números com metodologia aberta
-              </Link>
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-3">
-              <ButtonLink
-                href="/planejador"
-                className="bg-[#c9952f] text-[#0a1628] hover:bg-[#dfb45c]"
-              >
-                Planejar minha viagem
-              </ButtonLink>
-              <ButtonLink
-                href="/calculadora"
-                variant="secondary"
-                className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40"
-              >
-                Calcular meu orçamento
-              </ButtonLink>
-            </div>
+            {heroImage && (
+              <figure className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/15 bg-[#16304f] shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={heroImage}
+                  alt={heroImageAlt}
+                  className="h-full w-full object-cover"
+                />
+                {a.imageAlt && (
+                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent px-4 pt-6 pb-3 text-xs text-white/90">
+                    {a.imageAlt}
+                  </figcaption>
+                )}
+              </figure>
+            )}
           </div>
         </div>
       </section>

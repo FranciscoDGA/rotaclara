@@ -237,6 +237,7 @@ export function blogPostJsonLd(article: Article) {
         "@id": `${absoluteUrl(`/artigos/${article.slug}`)}#artigo`,
         headline: article.title,
         description: article.description,
+        ...(article.image ? { image: [absoluteUrl(article.image)] } : {}),
         datePublished: article.updatedAt,
         dateModified: article.updatedAt,
         inLanguage: "pt-BR",

@@ -103,43 +103,61 @@ export default function ArtigosPage() {
           </p>
 
           <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {group.items.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/artigos/${article.slug}`}
-                className="rc-card rc-card-hover group flex h-full flex-col focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
-              >
-                <span className="flex items-start justify-between gap-3">
-                  <span className="text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
-                    {article.title}
-                  </span>
-                  <Badge tone="gold">{String(index + 1).padStart(2, "0")}</Badge>
-                </span>
+            {group.items.map((article) => {
+              const primaryDest = getDestination(article.destinationSlugs[0] ?? "");
+              const cardImage = article.image ?? primaryDest?.image?.src;
+              const cardImageAlt =
+                article.imageAlt ?? primaryDest?.image?.alt ?? article.title;
 
-                <span className="mt-3 flex-1 text-sm leading-relaxed text-[#16304f]/85">
-                  {article.deck}
-                </span>
-
-                <span className="mt-4 block border-t border-[#f4f1ea] pt-3.5 text-xs text-[#736b5b]">
-                  {article.destinationSlugs
-                    .map((slug) => getDestination(slug)?.name)
-                    .filter(Boolean)
-                    .join(" · ")}
-                </span>
-
-                <span className="mt-2 flex items-center justify-between">
-                  <span className="text-[11px] text-[#736b5b]">
-                    Atualizado em{" "}
-                    <time dateTime={article.updatedAt}>
-                      {formatDateISO(article.updatedAt)}
-                    </time>
+              return (
+                <Link
+                  key={article.slug}
+                  href={`/artigos/${article.slug}`}
+                  className="rc-card rc-card-hover group flex h-full flex-col focus-visible:outline-3 focus-visible:outline-[#2fb8c4] focus-visible:outline-offset-2"
+                >
+                  {cardImage && (
+                    <span className="-mx-6 -mt-6 mb-4 block aspect-[16/9] overflow-hidden rounded-t-2xl bg-[#16304f]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={cardImage}
+                        alt={cardImageAlt}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </span>
+                  )}
+                  <span className="flex items-start justify-between gap-3">
+                    <span className="text-base font-semibold text-[#0a1628] group-hover:text-[#0f6f69]">
+                      {article.title}
+                    </span>
+                    <Badge tone="gold">{String(index + 1).padStart(2, "0")}</Badge>
                   </span>
-                  <span className="text-xs font-medium text-[#0f6f69]">
-                    Ler artigo →
+
+                  <span className="mt-3 flex-1 text-sm leading-relaxed text-[#16304f]/85">
+                    {article.deck}
                   </span>
-                </span>
-              </Link>
-            ))}
+
+                  <span className="mt-4 block border-t border-[#f4f1ea] pt-3.5 text-xs text-[#736b5b]">
+                    {article.destinationSlugs
+                      .map((slug) => getDestination(slug)?.name)
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+
+                  <span className="mt-2 flex items-center justify-between">
+                    <span className="text-[11px] text-[#736b5b]">
+                      Atualizado em{" "}
+                      <time dateTime={article.updatedAt}>
+                        {formatDateISO(article.updatedAt)}
+                      </time>
+                    </span>
+                    <span className="text-xs font-medium text-[#0f6f69]">
+                      Ler artigo →
+                    </span>
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </section>
       ))}

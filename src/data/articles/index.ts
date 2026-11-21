@@ -868,6 +868,9 @@ const custoNoronha2026: Article = {
   destinationSlugs: [noronha.slug],
   /* Data editorial própria do artigo (única no catálogo). */
   updatedAt: "2026-11-21",
+  image: "/images/artigos/quanto-custa-viajar-para-fernando-de-noronha-2026.jpg",
+  imageAlt:
+    "Morro Dois Irmãos e águas cristalinas da Baía dos Porcos em Fernando de Noronha, Pernambuco",
   sections: [
     {
       id: "resposta-direta",
