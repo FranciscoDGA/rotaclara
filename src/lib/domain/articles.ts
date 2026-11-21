@@ -31,12 +31,19 @@ export const ARCHETYPE_SUMMARY: Record<ArticleArchetype, string> = {
   roteiro: "O que fazer dia a dia, com tempo e entradas.",
 };
 
+export interface ArticleTable {
+  headers: string[];
+  rows: string[][];
+}
+
 export interface ArticleSection {
   id: string;
   heading: string;
   paragraphs: string[];
   /** Lista de pontos (dias do roteiro, meses do clima etc.). */
   bullets?: string[];
+  /** Tabela opcional para detalhamento de custos ou comparativos. */
+  table?: ArticleTable;
 }
 
 export interface Article {

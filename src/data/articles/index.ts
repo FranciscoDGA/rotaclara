@@ -849,6 +849,168 @@ const custoLencois: Article = {
 };
 
 /* =====================================================================
+   09 — Custo 2026: quanto custa viajar para Fernando de Noronha em 2026
+   ===================================================================== */
+
+const noronhaFiveDaysEco = 5 * noronha.cost.minPerDayBRL;
+const noronhaFiveDaysMid = 5 * Math.round((noronha.cost.minPerDayBRL + noronha.cost.maxPerDayBRL) / 2);
+const noronhaFiveDaysComfort = 5 * noronha.cost.maxPerDayBRL;
+
+const custoNoronha2026: Article = {
+  slug: "quanto-custa-viajar-para-fernando-de-noronha-2026",
+  title:
+    "Quanto Custa Viajar para Fernando de Noronha em 2026? Orçamento Completo Dia a Dia",
+  deck:
+    "Resposta direta para 5 dias em perfil econômico, intermediário e conforto, somando taxas obrigatórias (TPA e PARNAMAR), passagens, pousadas, alimentação e passeios — com metodologia aberta.",
+  description:
+    "Quanto custa viajar para Fernando de Noronha em 2026? Veja orçamento completo de 5 dias, TPA, ingresso do PARNAMAR, tabela de custos e como economizar.",
+  archetype: "custo",
+  destinationSlugs: [noronha.slug],
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-21",
+  sections: [
+    {
+      id: "resposta-direta",
+      heading: "Resumo rápido: quanto custa 5 dias em Fernando de Noronha em 2026",
+      paragraphs: [
+        `Para uma viagem de 5 dias em ${noronha.name} em 2026, o gasto estimado por pessoa na ilha (hospedagem, alimentação, transporte local e passeios) parte de R$ ${noronhaFiveDaysEco} no perfil econômico, fica em torno de R$ ${noronhaFiveDaysMid} no perfil intermediário e chega a R$ ${noronhaFiveDaysComfort} no perfil conforto — refletindo a faixa auditada de R$ ${noronha.cost.minPerDayBRL} a R$ ${noronha.cost.maxPerDayBRL} por dia.`,
+        "Somando as taxas obrigatórias de permanência e parque (TPA para 5 dias + ingresso do PARNAMAR) e uma passagem aérea de ida e volta partindo do Sudeste com conexão em Recife (REC) ou Natal (NAT), o orçamento total realista por pessoa em 2026 fica nas seguintes faixas:",
+      ],
+      bullets: [
+        `Perfil econômico (5 dias completos): R$ ${noronhaFiveDaysEco + 2300} a R$ ${noronhaFiveDaysEco + 3200} por pessoa — pousada domiciliar simples, ônibus na BR-367, pratos feitos/lanches e 1 ou 2 passeios essenciais.`,
+        `Perfil intermediário (5 dias completos): R$ ${noronhaFiveDaysMid + 2700} a R$ ${noronhaFiveDaysMid + 3800} por pessoa — pousada bem localizada na Vila dos Remédios ou Floresta Nova, restaurantes tradicionais, Ilha Tour, passeio de barco e táxis pontuais.`,
+        `Perfil conforto (5 dias completos): R$ ${noronhaFiveDaysComfort + 3500} a R$ ${noronhaFiveDaysComfort + 5500}+ por pessoa — pousada de charme, aluguel de buggy, jantares gastronômicos, mergulho com cilindro e passeios privativos.`,
+      ],
+    },
+    {
+      id: "taxas-obrigatorias",
+      heading: "Taxas obrigatórias em Noronha em 2026: TPA e ingresso do PARNAMAR",
+      paragraphs: [
+        "Antes mesmo de escolher a pousada, duas cobranças oficiais entram obrigatoriamente na conta de quem visita o arquipélago. Elas não estão incluídas na faixa diária de hospedagem e alimentação:",
+        noronha.warnings[0] ?? "",
+        noronha.warnings[1] ?? "",
+        "Em 2026, a recomendação prática é pagar a TPA pela internet (site oficial da Administração de Noronha) antes do embarque para evitar filas no desembarque no Aeroporto de Fernando de Noronha (FEN), e comprar o ingresso do Parque Nacional Marinho (PARNAMAR) antecipadamente pelo portal oficial do ICMBio/concessionária.",
+      ].filter(Boolean),
+      bullets: [
+        "TPA (Taxa de Preservação Ambiental): cobrada por dia de permanência por pessoa pelo Governo de Pernambuco (valor reajustado anualmente; como referência de planejamento, reserve cerca de R$ 100 por dia, totalizando ~R$ 500 para 5 dias).",
+        "Ingresso do PARNAMAR (Parque Nacional Marinho): taxa única com validade de 10 dias corridos, obrigatória para acessar praias como Baía do Sancho, Praia do Sueste e Praia do Leão (referência de ~R$ 186 para brasileiros e ~R$ 373 para estrangeiros; confirme o valor vigente no site oficial antes de viajar).",
+      ],
+    },
+    {
+      id: "tabela-custos",
+      heading: "Tabela detalhada de custos estimados em Fernando de Noronha (2026)",
+      paragraphs: [
+        `A tabela abaixo organiza os principais grupos de despesa para 5 dias em ${noronha.name} por pessoa, considerando a data de referência de ${formatDateISO(noronha.cost.referenceDate)} e confiança ${confidenceLabel(noronha.cost.confidence)}. Os valores são faixas de planejamento — confirme tarifas atualizadas antes de reservar.`,
+      ],
+      table: {
+        headers: ["Categoria", "Econômico", "Intermediário", "Conforto"],
+        rows: [
+          [
+            "Passagem aérea (ida e volta)",
+            "R$ 1.600 – R$ 2.300",
+            "R$ 2.000 – R$ 2.900",
+            "R$ 2.800 – R$ 4.200",
+          ],
+          [
+            "Hospedagem (5 diárias / pessoa)",
+            "R$ 1.250 – R$ 1.750 (pousada domiciliar)",
+            "R$ 2.200 – R$ 3.400 (pousada turística)",
+            "R$ 4.000 – R$ 6.500+ (pousada de charme)",
+          ],
+          [
+            "Alimentação (5 dias)",
+            "R$ 650 – R$ 900",
+            "R$ 1.100 – R$ 1.600",
+            "R$ 1.800 – R$ 2.800",
+          ],
+          [
+            "Passeios (Ilha Tour, barco, mergulho)",
+            "R$ 450 – R$ 700",
+            "R$ 950 – R$ 1.400",
+            "R$ 1.600 – R$ 2.500",
+          ],
+          [
+            "Transporte interno (ônibus, táxi, buggy)",
+            "R$ 80 – R$ 150 (ônibus + caminhadas)",
+            "R$ 300 – R$ 550 (táxis + 1 dia buggy)",
+            "R$ 900 – R$ 1.500 (buggy todos os dias)",
+          ],
+          [
+            "Taxas obrigatórias (TPA 5 dias + PARNAMAR)",
+            "~R$ 685 – R$ 750",
+            "~R$ 685 – R$ 750",
+            "~R$ 685 – R$ 750",
+          ],
+        ],
+      },
+    },
+    {
+      id: "orcamento-dia-a-dia",
+      heading: "Orçamento dia a dia: como o dinheiro se distribui em 5 dias",
+      paragraphs: [
+        "Os custos em Noronha não são iguais todos os dias: o primeiro dia concentra traslados e compras de mercado, enquanto os dias de passeio de barco, Ilha Tour ou mergulho puxam a média para cima. Veja uma distribuição prática para 5 dias:",
+        noronha.food,
+      ],
+      bullets: [
+        "Dia 1 (Chegada, Vila dos Remédios e Praia do Cachorro/Meio): gasto mais leve com passeios (praias gratuitas próximas ao centro histórico), almoço e jantar na vila — foco em aclimatação e validação do ingresso do PARNAMAR.",
+        "Dia 2 (Ilha Tour completo): um dos dias de maior investimento em passeio (~R$ 300–R$ 400 por pessoa em veículo 4x4 compartilhado), percorrendo mirantes, Baía do Sancho, Baía dos Porcos e pôr do sol no Boldró.",
+        "Dia 3 (Passeio de barco + mergulho livre): saída matinal pelo Mar de Dentro com chance de avistar golfinhos-rotadores (~R$ 300–R$ 450 por pessoa) e tarde livre na Praia da Conceição ou Cacimba do Padre.",
+        "Dia 4 (Parque Nacional Marinho — Baía do Sancho e Sueste): aproveitamento do ingresso já pago do PARNAMAR, com custo concentrado em transporte (ônibus na BR-367 ou táxi), aluguel opcional de snorkel/colete e alimentação.",
+        "Dia 5 (Mergulho com cilindro ou trilha + retorno): quem inclui batismo ou mergulho credenciado soma R$ 550–R$ 900 neste dia; quem prefere economizar faz a Praia do Boldró ou Cacimba do Padre antes do voo de volta.",
+      ],
+    },
+    {
+      id: "melhor-epoca-e-economia",
+      heading: "Melhor época para ir e como economizar de verdade em Noronha",
+      paragraphs: [
+        `Na nossa base climática, ${formatMonths(noronha.bestMonths)} formam a janela principal para visitar ${noronha.name}. ${noronha.bestTimeNotes}`,
+        `Sobre o deslocamento: ${noronha.howToArrive} ${noronha.localTransport} ${noronha.warnings[2] ?? ""}`,
+        "Para reduzir o orçamento sem perder o essencial do arquipélago, algumas escolhas fazem diferença real na ponta do lápis:",
+      ],
+      bullets: [
+        "Escolha pousada domiciliar na Vila dos Remédios ou Floresta Nova: ficar perto do centro histórico permite ir a pé à Praia do Cachorro, Praia do Meio e restaurantes, cortando gastos diários com táxi e buggy.",
+        "Use o ônibus regular da BR-367: a ilha tem apenas uma rodovia principal; o ônibus cruza Noronha de ponta a ponta por uma fração do preço de táxis ou da diária de buggy.",
+        "Leve sua própria máscara, snorkel e garrafa térmica: o aluguel diário de equipamentos nas praias pesa no orçamento de 5 dias, e água/bebidas na ilha têm frete elevado.",
+        "Viaje fora de feriados prolongados, julho e Réveillon: abril a junho (meses mais chuvosos) e início de agosto costumam ter tarifas aéreas e diárias de pousada mais competitivas.",
+        "Emissão aérea com antecedência ou milhas: como o trecho Recife (REC) → Noronha (FEN) tem oferta controlada, comprar com 60 a 120 dias de antecedência costuma gerar a maior economia da viagem.",
+      ],
+    },
+    {
+      id: "ferramentas-rotaclara",
+      heading: "Como calcular o seu orçamento exato no RotaClara",
+      paragraphs: [
+        `A faixa de R$ ${noronha.cost.minPerDayBRL} a R$ ${noronha.cost.maxPerDayBRL} por dia serve como ponto de partida auditado (${noronha.cost.limitations}). Para fechar a conta com o número de viajantes, datas e estilo do seu grupo, use as ferramentas gratuitas do RotaClara ao lado: a Calculadora soma passagens, diárias, taxas e passeios; o Planejador organiza os dias; o Diagnóstico testa se o destino cabe no seu teto; e o Comparador coloca Fernando de Noronha lado a lado com outros destinos do Nordeste.`,
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Quanto custa viajar para Fernando de Noronha por 5 dias em 2026?",
+      answer: `Considerando hospedagem, alimentação, transporte interno, passeios, passagem aérea e taxas obrigatórias (TPA + PARNAMAR), uma viagem de 5 dias em 2026 custa em média de R$ ${noronhaFiveDaysEco + 2300} a R$ ${noronhaFiveDaysEco + 3200} por pessoa no perfil econômico, R$ ${noronhaFiveDaysMid + 2700} a R$ ${noronhaFiveDaysMid + 3800} no intermediário e acima de R$ ${noronhaFiveDaysComfort + 3500} no perfil conforto.`,
+    },
+    {
+      question: "Quais são as taxas obrigatórias para entrar em Fernando de Noronha?",
+      answer:
+        "Todo visitante paga a TPA (Taxa de Preservação Ambiental), cobrada por dia de permanência pelo Governo de Pernambuco. Além dela, quem visita praias do Parque Nacional Marinho (como Baía do Sancho, Sueste e Leão) precisa do ingresso do PARNAMAR, válido por 10 dias corridos.",
+    },
+    {
+      question: "Qual a diferença entre pousada domiciliar e pousada de charme em Noronha?",
+      answer:
+        "Pousadas domiciliares são hospedagens familiares mais simples e econômicas (muitas vezes quartos adaptados na casa de moradores), ideais para quem passa o dia nas praias. Pousadas de charme oferecem estrutura completa de hotel boutique, piscina, café da manhã elaborado e vista privilegiada, com diárias bem mais altas.",
+    },
+    {
+      question: "Qual é a época mais barata para ir a Fernando de Noronha?",
+      answer:
+        "Os meses de abril a junho concentram mais chuvas e menor demanda turística, trazendo diárias de pousada e passagens aéreas mais em conta. Para equilibrar clima seco, mar calmo e preço razoável, evite Réveillon, Carnaval e feriados prolongados, priorizando agosto, setembro ou novembro fora de feriados.",
+    },
+    {
+      question: "Os valores deste guia são cotações em tempo real?",
+      answer: `Não. São faixas de referência auditadas para planejamento, com data de referência de ${formatDateISO(noronha.cost.referenceDate)}. ${noronha.cost.limitations}`,
+    },
+  ],
+};
+
+/* =====================================================================
    Acessores
    ===================================================================== */
 
@@ -861,6 +1023,7 @@ export const allArticles: readonly Article[] = [
   epocaFlorianopolis,
   roteiroSalvador,
   custoLencois,
+  custoNoronha2026,
 ];
 
 export function getArticle(slug: string): Article | undefined {

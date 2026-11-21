@@ -191,6 +191,43 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                     ))}
                   </ul>
                 )}
+                {section.table && section.table.rows.length > 0 && (
+                  <div className="mt-4 overflow-x-auto rounded-xl border border-[#e8e3d8]">
+                    <table className="w-full border-collapse text-left text-sm">
+                      <thead className="bg-[#faf8f4] text-xs font-semibold uppercase tracking-wide text-[#0a1628]">
+                        <tr>
+                          {section.table.headers.map((header) => (
+                            <th
+                              key={header}
+                              scope="col"
+                              className="border-b border-[#e8e3d8] px-3.5 py-2.5"
+                            >
+                              {header}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#e8e3d8] bg-white text-[#16304f]">
+                        {section.table.rows.map((row, rowIdx) => (
+                          <tr key={rowIdx} className="hover:bg-[#faf8f4]/60">
+                            {row.map((cell, cellIdx) => (
+                              <td
+                                key={cellIdx}
+                                className={
+                                  cellIdx === 0
+                                    ? "px-3.5 py-2.5 font-medium text-[#0a1628]"
+                                    : "px-3.5 py-2.5"
+                                }
+                              >
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </Card>
             ))}
           </div>

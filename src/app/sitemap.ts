@@ -15,7 +15,7 @@ import { allGuides } from "@/data/guides";
 import { absoluteUrl } from "@/lib/seo/seo";
 
 /** Data de referência editorial (atualizar a cada revisão de conteúdo). */
-const EDITORIAL_DATE = "2026-11-20";
+const EDITORIAL_DATE = "2026-11-21";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date(EDITORIAL_DATE);
