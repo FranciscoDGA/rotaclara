@@ -1017,6 +1017,91 @@ const custoNoronha2026: Article = {
    Acessores
    ===================================================================== */
 
+
+/* =====================================================================
+   10 — Custo 2026: quanto custa viajar para Gramado em 2026
+   ===================================================================== */
+
+const gramadoFourDaysEco = 4 * gramado.cost.minPerDayBRL;
+const gramadoFourDaysMid = 4 * Math.round((gramado.cost.minPerDayBRL + gramado.cost.maxPerDayBRL) / 2);
+const gramadoFourDaysComfort = 4 * gramado.cost.maxPerDayBRL;
+
+const custoGramado2026: Article = {
+  slug: "quanto-custa-viajar-para-gramado-2026",
+  title:
+    "Quanto Custa Viajar para Gramado em 2026? Orçamento Completo Dia a Dia",
+  deck:
+    "Planejamento financeiro realista para 4 dias na Serra Gaúcha em 2026 nos perfis econômico, moderado e conforto, detalhando hospedagem, fondues, passeios e transporte.",
+  description:
+    "Quanto custa viajar para Gramado em 2026? Veja gastos por dia, hotéis, passeios clássicos, alimentação e dicas para economizar na Serra Gaúcha.",
+  archetype: "custo",
+  destinationSlugs: [gramado.slug],
+  /* Data editorial própria do artigo (única no catálogo). */
+  updatedAt: "2026-11-23",
+  image: "/images/artigos/quanto-custa-viajar-para-gramado-2026.jpg",
+  imageAlt:
+    "Rua Coberta e centro iluminado de Gramado na Serra Gaúcha, Rio Grande do Sul",
+  sections: [
+    {
+      id: "resposta-direta",
+      heading: "Resumo do orçamento: quanto custa viajar para Gramado em 2026",
+      paragraphs: [
+        `Para uma viagem clássica de 4 dias em ${gramado.name} em 2026, o gasto estimado no destino (hospedagem, alimentação, passeios e deslocamento local) varia entre R$ ${gramadoFourDaysEco} no perfil econômico, R$ ${gramadoFourDaysMid} no perfil moderado e R$ ${gramadoFourDaysComfort} no perfil conforto — refletindo a faixa auditada de R$ ${gramado.cost.minPerDayBRL} a R$ ${gramado.cost.maxPerDayBRL} por dia por pessoa.`,
+        "Adicionando o transporte entre Porto Alegre (POA) ou Caxias do Sul (CXJ) e a Serra Gaúcha (transfer ou carro alugado), o orçamento completo realista por pessoa fica nas seguintes faixas:",
+      ],
+      bullets: [
+        `Perfil econômico (4 dias): R$ ${gramadoFourDaysEco + 500} a R$ ${gramadoFourDaysEco + 900} por pessoa — pousadas simples em Canela ou bairros residenciais, almoço executivo/buffet a quilo, transporte por aplicativo e passeios gratuitos (Lago Negro, Rua Torta e Praça das Etnias).`,
+        `Perfil moderado (4 dias): R$ ${gramadoFourDaysMid + 700} a R$ ${gramadoFourDaysMid + 1300} por pessoa — hotel confortável perto do centro de Gramado, sequência de fondue tradicional, Snowland ou Parque da Ferradura e carro alugado compartilhado.`,
+        `Perfil conforto / luxo (4 dias): R$ ${gramadoFourDaysComfort + 1500} a R$ ${gramadoFourDaysComfort + 3000}+ por pessoa — hotéis boutique com spa, jantares em bistrôs autorais, tour exclusivo pelos vinhedos do Vale dos Vinhedos e transfer privativo.`,
+      ],
+    },
+    {
+      id: "hospedagem-gramado-canela",
+      heading: "Hospedagem: a diferença entre ficar em Gramado ou em Canela",
+      paragraphs: [
+        "Ficar no centro de Gramado permite fazer grande parte das atividades noturnas a pé (Rua Coberta, Palácio dos Festivais e restaurantes da Borges de Medeiros), mas cobra diárias mais altas — em média R$ 380 a R$ 850 para quartos de casal bem avaliados.",
+        "Uma alternativa clássica para quem deseja economizar até 35% na hospedagem é hospedar-se na vizinha Canela (a apenas 7 km de distância). A cidade oferece pousadas charmosas com excelente custo-benefício e trânsito muito mais tranquilo.",
+      ],
+    },
+    {
+      id: "gastronomia-e-fondues",
+      heading: "Alimentação: fondues, cafés coloniais e como evitar armadilhas",
+      paragraphs: [
+        "A gastronomia é uma das atrações mais prazerosas de Gramado, mas também o item que mais estoura o orçamento se não for planejado. Uma sequência de fondue completa (queijo, carnes na pedra e chocolate) custa de R$ 90 a R$ 250 por pessoa dependendo da casa.",
+        "Para o almoço, há ótimos restaurantes de buffet por quilo e galeterias típicas no centro com valores entre R$ 45 e R$ 80 por pessoa com bebida. Reserve a experiência do fondue para uma das noites e evite cair em promoções agressivas de abordagem na rua.",
+      ],
+    },
+    {
+      id: "estrategias-de-economia",
+      heading: "5 estratégias testadas para economizar na viagem em 2026",
+      paragraphs: [
+        "Com pequenas decisões inteligentes antes do embarque, você reduz significativamente o custo total da viagem sem abrir mão do conforto:",
+      ],
+      bullets: [
+        "Compre ingressos de atrações (Snowland, Mini Mundo, Acquamotion) com antecedência pela internet para garantir descontos de até 20%.",
+        "Utilize cupons em aplicativos de gastronomia e clubes de desconto de Gramado (como Prime Gourmet) — em mesas para duas pessoas, um prato principal sai de graça em diversos restaurantes parceiros.",
+        "Evite feriados prolongados e a alta temporada de julho e dezembro (Natal Luz) se o objetivo for economia; os meses de março, abril, maio, setembro e outubro oferecem clima agradável e preços muito mais baixos.",
+        "Se estiver em casal ou grupo de amigos, alugar um carro em Porto Alegre costuma sair mais barato do que pagar dois transfers ida e volta mais corridas diárias de aplicativo na serra.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Quanto custa um almoço médio em Gramado em 2026?",
+      answer: "Um almoço executivo ou buffet por quilo no centro de Gramado ou Canela varia de R$ 40 a R$ 75 por pessoa. Já refeições completas em cantinas italianas, galeterias e fondues variam de R$ 90 a R$ 220 por pessoa.",
+    },
+    {
+      question: "Vale mais a pena alugar carro ou andar de aplicativo em Gramado?",
+      answer: "Para quem fica apenas no centrinho de Gramado, caminhada e aplicativo funcionam bem. Para quem deseja visitar Canela, o Vale dos Vinhedos ou as cascatas da região, o aluguel de carro em Porto Alegre proporciona muito mais autonomia e economia.",
+    },
+    {
+      question: "Qual a melhor época para viajar barato para Gramado?",
+      answer: "Os meses de baixa temporada (março, abril, maio, setembro e outubro, excetuando feriados como Páscoa e Tiradentes) têm as menores tarifas de hotéis e clima ameno muito agradável.",
+    },
+  ],
+};
+
+
 export const allArticles: readonly Article[] = [
   custoGramado,
   epocaLencois,
@@ -1027,6 +1112,7 @@ export const allArticles: readonly Article[] = [
   roteiroSalvador,
   custoLencois,
   custoNoronha2026,
+  custoGramado2026,
 ];
 
 export function getArticle(slug: string): Article | undefined {
